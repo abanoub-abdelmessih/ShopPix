@@ -44,7 +44,7 @@ export const SigninForm = () => {
     },
     onError: (error: Error) => {
       toast({
-        title: "Error",
+        title: "Failed",
         description: error.message || "Error during sign-in",
         variant: "destructive",
       });
@@ -106,11 +106,14 @@ export const SigninForm = () => {
           )}
         />
 
-        <Button type="submit" className="w-full mt-4" disabled={isPending}>
+        <Button type="submit" className="w-full" disabled={isPending}>
           {isPending ? <Loader /> : "Sign In"}
         </Button>
+        <Button variant={"outline"} className="w-full" asChild>
+          <Link href={"/forgotPassword"}>Forgot Password ?</Link>
+        </Button>
 
-        <p className="text-gray-500 text-base text-center">
+        <p className="text-gray-500 text-sm text-center">
           Don&apos;t have an account ?
           <Link href={"/sign-up"} className="underline ms-1 text-black">
             Sign Up

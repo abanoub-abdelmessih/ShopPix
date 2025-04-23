@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const publicPaths = ["/sign-in", "/sign-up"];
+const publicPaths = ["/sign-in", "/sign-up", "/forgotPassword"];
 
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico|images|fonts|audio).*)"],

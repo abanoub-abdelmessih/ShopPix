@@ -50,7 +50,7 @@ export const SignupForm = () => {
     },
     onError: (error: Error) => {
       toast({
-        title: "Error",
+        title: "Failed",
         description: error.message || "Error during sign-up",
         variant: "destructive",
       });
@@ -206,7 +206,7 @@ export const SignupForm = () => {
           {isPending ? <Loader /> : "Sign Up"}
         </Button>
 
-        <p className="text-gray-500 text-base text-center">
+        <p className="text-gray-500 text-sm text-center">
           Already have an account?
           <Link href="/sign-in" className="underline ms-1 text-black">
             Login

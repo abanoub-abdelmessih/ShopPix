@@ -2,6 +2,11 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { SignUpSchema } from "@/schemas/signupSchema";
 import { SignInSchema } from "@/schemas/signinSchema";
+import {
+  EmailSchema,
+  NewPasswordSchema,
+  ResetCodeSchema,
+} from "@/schemas/ForgotPasswordSchema";
 
 // SIGN UP
 export async function signUpFunction(data: SignUpSchema) {
@@ -62,4 +67,87 @@ export async function signInFunction(data: SignInSchema) {
       throw new Error("An unexpected error occurred.");
     }
   }
+}
+
+// FORGOT PASSWORD EMAIL
+export async function SendResetCodeFunction(data: EmailSchema) {
+  try {
+    const response = await axios.post(
+      "https://ecommerce.routemisr.com/api/v1/auth/forgotPasswords",
+      data
+    );
+
+    if (response.data.statusMsg === "success") {
+      Cookies.set("email", data.email);
+      return response.data;
+    } else {
+      throw new Error(response.data.message);
+    }
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const message =
+        error?.response?.data?.message || "An unexpected error occurred";
+      throw new Error(message);
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
+  }
+}
+
+// FORGOT PASSWORD CODE
+export async function VerifyResetCodeFunction(data: ResetCodeSchema) {
+  try {
+    const response = await axios.post(
+      "https://ecommerce.routemisr.com/api/v1/auth/verifyResetCode",
+      data
+    );
+    if (response.data.status === "Success") {
+      return response.data;
+    } else {
+      throw new Error(response.data.message || "An error occurred");
+    }
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const message =
+        error?.response?.data?.message || `Axios error: ${error.message}`;
+      throw new Error(message);
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
+  }
+}
+
+// FORGOT PASSWORD NEW PASS
+export async function ResetPasswordFunction(data: NewPasswordSchema) {
+  try {
+    const response = await axios.put(
+      "https://ecommerce.routemisr.com/api/v1/auth/resetPassword",
+      data
+    );
+    console.log(data);
+
+    if (response.data.token) {
+      Cookies.set("token", response.data.token);
+      Cookies.remove("email");
+      window.location.href = "/";
+      return response.data;
+    } else {
+      throw new Error(response.data.message || "An error occurred");
+    }
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const message =
+        error?.response?.data?.message || `Axios error: ${error.message}`;
+      throw new Error(message);
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
+  }
+}
+
+// LOGOUT
+export function logoutFunction() {
+  Cookies.remove("token");
+  Cookies.remove("user");
+  window.location.href = "/sign-in";
 }

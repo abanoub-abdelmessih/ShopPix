@@ -44,6 +44,7 @@ export const SwiperCarousel = ({
       slidesPerView={1}
       pagination={paginationConfig}
       loop={loop}
+      slidesPerGroup={1}
       navigation={navigation}
       modules={[Autoplay, Pagination, Navigation]}
       className="w-full h-full"
