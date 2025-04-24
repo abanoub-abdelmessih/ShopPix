@@ -1,4 +1,12 @@
 import { SigninForm } from "@/components/shared/auth/signinForm";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 export const metadata = {
   title: "Login",
@@ -6,20 +14,18 @@ export const metadata = {
 
 const SignIn = () => {
   return (
-    <section className="w-full py-10">
-      {/* Welcome Text */}
-      <div className="text-center mb-3">
-        <h2 className="text-3xl lg:text-4xl tracking-wide mb-2 font-semibold">
-          Welcome Back to Shoppix.
-        </h2>
-        <p className="text-gray-600 text-lg">
+    <Card className="w-full max-w-xl mx-auto shadow-xl">
+      <CardHeader className="text-center">
+        <CardTitle className="text-2xl">Welcome Back to Shoppix.</CardTitle>
+        <CardDescription>
           Please log in or sign up to continue using our app.
-        </p>
-      </div>
-
-      {/* Form */}
-      <SigninForm />
-    </section>
+        </CardDescription>
+      </CardHeader>
+      <Separator />
+      <CardContent>
+        <SigninForm />
+      </CardContent>
+    </Card>
   );
 };
 export default SignIn;

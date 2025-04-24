@@ -71,7 +71,13 @@ export const SendResetCode = ({ onSuccess }: { onSuccess: () => void }) => {
           id="email"
         />
         <Button type="submit" className="w-full mt-5" disabled={isPending}>
-          {isPending ? <Loader /> : "Send Code"}
+          {isPending ? (
+            <>
+              <Loader /> Please Wait
+            </>
+          ) : (
+            "Send Code"
+          )}
         </Button>
       </form>
     </Form>
@@ -143,7 +149,13 @@ export const VerifyResetCode = ({ onSuccess }: { onSuccess: () => void }) => {
           Please enter the 5 or 6-digit code sent to your email.
         </p>
         <Button type="submit" className="w-full" disabled={isPending}>
-          {isPending ? <Loader /> : "Verify Code"}
+          {isPending ? (
+            <>
+              <Loader /> Please Wait
+            </>
+          ) : (
+            "Verify Code"
+          )}
         </Button>
       </form>
     </Form>
@@ -194,7 +206,13 @@ export const ResetPassword = () => {
           id="newPassword"
         />
         <Button type="submit" className="w-full mt-5" disabled={isPending}>
-          {isPending ? <Loader /> : "Send Code"}
+          {isPending ? (
+            <>
+              <Loader /> Please Wait
+            </>
+          ) : (
+            "Reset Password"
+          )}
         </Button>
       </form>
     </Form>

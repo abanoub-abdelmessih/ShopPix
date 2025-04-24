@@ -61,7 +61,7 @@ export const SigninForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4 w-full px-3 border-t mt-2 pt-3"
+        className="space-y-4 w-full px-3 mt-1 pt-3"
       >
         {/* Email Field */}
         <FormInput
@@ -107,7 +107,13 @@ export const SigninForm = () => {
         />
 
         <Button type="submit" className="w-full" disabled={isPending}>
-          {isPending ? <Loader /> : "Sign In"}
+          {isPending ? (
+            <>
+              <Loader /> Please Wait
+            </>
+          ) : (
+            "Sign In"
+          )}
         </Button>
         <Button variant={"outline"} className="w-full" asChild>
           <Link href={"/forgotPassword"}>Forgot Password ?</Link>

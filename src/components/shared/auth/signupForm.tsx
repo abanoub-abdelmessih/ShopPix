@@ -67,12 +67,12 @@ export const SignupForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4 w-full px-3 border-t mt-2 pt-3"
+        className="space-y-4 w-full px-3 mt-1 pt-3"
       >
         {/* Name Field */}
         <FormInput
           control={form.control}
-          label="Full Name"
+          label="Name"
           name="name"
           placeholder="Enter your name"
           autoComplete="username"
@@ -203,13 +203,19 @@ export const SignupForm = () => {
         />
 
         <Button type="submit" className="w-full mt-4" disabled={isPending}>
-          {isPending ? <Loader /> : "Sign Up"}
+          {isPending ? (
+            <>
+              <Loader /> Please Wait
+            </>
+          ) : (
+            "Sign Up"
+          )}
         </Button>
 
         <p className="text-gray-500 text-sm text-center">
           Already have an account?
           <Link href="/sign-in" className="underline ms-1 text-black">
-            Login
+            Sign In
           </Link>
         </p>
       </form>

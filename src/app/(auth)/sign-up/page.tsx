@@ -1,4 +1,12 @@
 import { SignupForm } from "@/components/shared/auth/signupForm";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 export const metadata = {
   title: "Register",
@@ -7,16 +15,18 @@ export const metadata = {
 const SignUp = () => {
   return (
     <section className="w-full py-10">
-      {/* Welcome Text */}
-      <div className="text-center mb-3">
-        <h2 className="text-3xl lg:text-4xl tracking-wide mb-2 font-semibold">
-          Welcome to Shoppix !
-        </h2>
-        <p className="text-gray-600 text-lg">Create a new account</p>
-      </div>
-
-      {/* Form */}
-      <SignupForm />
+      <Card className="w-full max-w-xl mx-auto shadow-xl">
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl">Welcome to Shoppix !</CardTitle>
+          <CardDescription>
+            Let&apos;s get you started with your new account
+          </CardDescription>
+        </CardHeader>
+        <Separator />
+        <CardContent>
+          <SignupForm />
+        </CardContent>
+      </Card>
     </section>
   );
 };
