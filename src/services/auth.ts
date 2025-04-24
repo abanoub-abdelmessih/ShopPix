@@ -146,7 +146,7 @@ export async function ResetPasswordFunction(data: NewPasswordSchema) {
 }
 
 // LOGOUT
-export function logoutFunction() {
+export function LogoutFunction() {
   Cookies.remove("token");
   Cookies.remove("user");
   window.location.href = "/sign-in";
