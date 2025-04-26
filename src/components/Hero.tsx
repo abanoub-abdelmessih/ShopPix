@@ -19,8 +19,8 @@ export const Hero = () => {
 
       {/* Hero Content */}
       <div className="relative z-10 max-w-2xl space-y-6">
-        <h1 className="text-4xl sm:text-5xl font-medium font-poppins tracking-wide text-nowrap">
-          Upgrade Your Style with <br /> Trendy Fashion
+        <h1 className="text-3xl sm:text-5xl font-medium font-poppins tracking-wide">
+          Upgrade Your Style with Trendy Fashion
         </h1>
 
         {/* Paragraph */}
