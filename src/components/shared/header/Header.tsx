@@ -5,7 +5,7 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export const Header = () => {
   return (
-    <header className="shadow-md py-3 px-5 font-poppins">
+    <header className="shadow-md py-4 px-5 font-poppins">
       <nav
         className="flex items-center justify-between"
         role="navigation"
@@ -18,7 +18,7 @@ export const Header = () => {
 
         {/* Navigation menu */}
         <HeaderLinks />
-        <div className="hidden lg:flex">
+        <div className="hidden lg:flex items-center gap-3">
           {/* Theme menu */}
           <ThemeSwitcher />
           {/* User menu */}

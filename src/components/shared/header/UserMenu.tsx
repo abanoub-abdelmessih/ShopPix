@@ -11,8 +11,11 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogoutFunction } from "@/services/auth";
 import { Edit, Edit2, ListOrderedIcon, LogOut } from "lucide-react";
+import Cookies from "js-cookie";
 
 export const UserMenu = () => {
+  const userStorage = Cookies.get("user");
+  const user = userStorage ? JSON.parse(userStorage) : null;
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="cursor-pointer">
@@ -23,7 +26,8 @@ export const UserMenu = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 mx-2">
         <DropdownMenuLabel className="text-muted-foreground">
-          Welcome back
+          Welcome back :
+          <span className="ml-2 text-black dark:text-white">{user.name}</span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
 

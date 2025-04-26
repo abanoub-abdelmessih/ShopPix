@@ -101,7 +101,7 @@ export const SigninForm = () => {
                   </button>
                 </div>
               </FormControl>
-              <FormMessage className="border p-2 rounded-md shadow" />
+              <FormMessage className="border p-2 rounded-md shadow dark:text-red-400 dark:border-gray-300" />
             </FormItem>
           )}
         />
@@ -118,13 +118,6 @@ export const SigninForm = () => {
         <Button variant={"outline"} className="w-full" asChild>
           <Link href={"/forgotPassword"}>Forgot Password ?</Link>
         </Button>
-
-        <p className="text-gray-500 text-sm text-center">
-          Don&apos;t have an account ?
-          <Link href={"/sign-up"} className="underline ms-1 text-black">
-            Sign Up
-          </Link>
-        </p>
       </form>
     </Form>
   );

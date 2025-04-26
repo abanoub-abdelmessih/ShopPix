@@ -15,7 +15,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import Link from "next/link";
 import { FormInput } from "./FormInput";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useMutation } from "@tanstack/react-query";
@@ -132,7 +131,7 @@ export const SignupForm = () => {
                   </button>
                 </div>
               </FormControl>
-              <FormMessage className="border p-2 rounded-md shadow" />
+              <FormMessage className="border p-2 rounded-md shadow dark:text-red-400 dark:border-gray-300" />
             </FormItem>
           )}
         />
@@ -170,7 +169,7 @@ export const SignupForm = () => {
                   </button>
                 </div>
               </FormControl>
-              <FormMessage className="border p-2 rounded-md shadow" />
+              <FormMessage className="border p-2 rounded-md shadow dark:text-red-400 dark:border-gray-300" />
             </FormItem>
           )}
         />
@@ -197,7 +196,7 @@ export const SignupForm = () => {
                   <span className="underline">terms and conditions</span>.
                 </FormLabel>
               </FormItem>
-              <FormMessage className="border p-2 rounded-md shadow" />
+              <FormMessage className="border p-2 rounded-md shadow dark:text-red-400 dark:border-gray-300" />
             </>
           )}
         />
@@ -211,13 +210,6 @@ export const SignupForm = () => {
             "Sign Up"
           )}
         </Button>
-
-        <p className="text-gray-500 text-sm text-center">
-          Already have an account?
-          <Link href="/sign-in" className="underline ms-1 text-black">
-            Sign In
-          </Link>
-        </p>
       </form>
     </Form>
   );

@@ -9,7 +9,16 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { LogOut, Menu } from "lucide-react";
+import {
+  Barcode,
+  Heart,
+  Home,
+  LogOut,
+  Menu,
+  ShoppingCart,
+  Smartphone,
+  Users,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -19,34 +28,53 @@ import { Button } from "@/components/ui/button";
 import { LogoutFunction } from "@/services/auth";
 
 const navLinks = [
-  { path: "/", name: "Home" },
-  { path: "/products", name: "Products" },
-  { path: "/cart", name: "Cart" },
-  { path: "/wishlist", name: "Wishlist" },
-  { path: "/about", name: "About us" },
-  { path: "/blog", name: "Blog" },
+  { path: "/", name: "Home", icon: <Home /> },
+  { path: "/products", name: "Products", icon: <Barcode /> },
+  { path: "/cart", name: "Cart", icon: <ShoppingCart /> },
+  { path: "/wishlist", name: "Wishlist", icon: <Heart /> },
+  { path: "/about", name: "About  us", icon: <Users /> },
+  { path: "/blog", name: "Blog", icon: <Smartphone /> },
 ];
 
-const NavLinksList = ({ className }: { className: string }) => {
+const NavLinksList = ({
+  className,
+  icons = false,
+  closeSheetOnClick = false,
+}: {
+  className: string;
+  icons?: boolean;
+  closeSheetOnClick?: boolean;
+}) => {
   const pathName = usePathname();
 
   return (
     <ul className={className} role="list">
-      {navLinks.map((link) => (
-        <li key={link.path} role="listitem">
+      {navLinks.map((link) => {
+        const LinkComponent = (
           <Link
             href={link.path}
             className={cn(
-              "text-sm font-medium px-4 py-2 rounded-md transition-colors duration-300 block w-full",
+              "text-sm font-medium px-4 py-2 rounded-md transition-colors duration-300 w-full flex gap-3 items-center",
               pathName === link.path
-                ? "bg-black text-white"
-                : "hover:bg-gray-100"
+                ? "bg-black text-white dark:bg-white dark:text-black"
+                : "hover:bg-gray-100 dark:hover:bg-gray-300 dark:hover:text-black"
             )}
           >
+            {icons && link.icon}
             {link.name}
           </Link>
-        </li>
-      ))}
+        );
+
+        return (
+          <li key={link.path} role="listitem">
+            {closeSheetOnClick ? (
+              <SheetClose asChild>{LinkComponent}</SheetClose>
+            ) : (
+              LinkComponent
+            )}
+          </li>
+        );
+      })}
     </ul>
   );
 };
@@ -70,7 +98,11 @@ export const HeaderLinks = () => {
             </div>
             <ThemeSwitcher />
           </SheetHeader>
-          <NavLinksList className="mt-3 flex flex-col gap-2 flex-1" />
+          <NavLinksList
+            className="mt-3 flex flex-col gap-2 flex-1"
+            icons
+            closeSheetOnClick
+          />
           <SheetFooter>
             <SheetClose asChild>
               <Button

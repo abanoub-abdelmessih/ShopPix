@@ -44,7 +44,7 @@ export const FormInput = ({
               autoComplete={autoComplete}
             />
           </FormControl>
-          <FormMessage className="border p-2 rounded-md shadow" />
+          <FormMessage className="border p-2 rounded-md shadow dark:text-red-400 dark:border-gray-300" />
         </FormItem>
       )}
     />
