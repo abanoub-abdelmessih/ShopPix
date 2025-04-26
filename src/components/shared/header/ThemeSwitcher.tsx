@@ -44,7 +44,7 @@ export const ThemeSwitcher = () => {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="focus-visible:ring-0 focus-visible:ring-offset-0"
+          className="focus-visible:ring-0 focus-visible:ring-offset-0 !mt-0"
         >
           {getIcon()}
         </Button>

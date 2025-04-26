@@ -32,8 +32,8 @@ const navLinks = [
   { path: "/products", name: "Products", icon: <Barcode /> },
   { path: "/cart", name: "Cart", icon: <ShoppingCart /> },
   { path: "/wishlist", name: "Wishlist", icon: <Heart /> },
-  { path: "/about", name: "About  us", icon: <Users /> },
-  { path: "/blog", name: "Blog", icon: <Smartphone /> },
+  { path: "/about", name: "About us", icon: <Users /> },
+  { path: "/contactUs", name: "Contact us", icon: <Smartphone /> },
 ];
 
 const NavLinksList = ({
@@ -57,7 +57,7 @@ const NavLinksList = ({
               "text-sm font-medium px-4 py-2 rounded-md transition-colors duration-300 w-full flex gap-3 items-center",
               pathName === link.path
                 ? "bg-black text-white dark:bg-white dark:text-black"
-                : "hover:bg-gray-100 dark:hover:bg-gray-300 dark:hover:text-black"
+                : "hover:bg-gray-100 dark:hover:bg-slate-800"
             )}
           >
             {icons && link.icon}
@@ -90,8 +90,8 @@ export const HeaderLinks = () => {
         <SheetTrigger className="lg:hidden items-center flex">
           <Menu />
         </SheetTrigger>
-        <SheetContent className="flex flex-col justify-between">
-          <SheetHeader className="flex-row justify-between items-end mt-2">
+        <SheetContent className="flex flex-col justify-between px-3">
+          <SheetHeader className="flex-row justify-between items-center mt-2">
             <div className="flex items-end gap-3">
               <UserMenu />
               <SheetTitle className="">ShopPix Menu</SheetTitle>

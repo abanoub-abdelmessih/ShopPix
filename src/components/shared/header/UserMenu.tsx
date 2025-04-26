@@ -19,7 +19,7 @@ export const UserMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="cursor-pointer">
-        <Avatar>
+        <Avatar className="size-8">
           <AvatarImage src="/images/avatar.jpg" />
           <AvatarFallback>AA</AvatarFallback>
         </Avatar>
