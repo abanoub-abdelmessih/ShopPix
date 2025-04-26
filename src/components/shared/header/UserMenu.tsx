@@ -27,7 +27,9 @@ export const UserMenu = () => {
       <DropdownMenuContent className="w-56 mx-2">
         <DropdownMenuLabel className="text-muted-foreground">
           Welcome back :
-          <span className="ml-2 text-black dark:text-white">{user.name}</span>
+          <span className="ml-2 text-black dark:text-white">
+            {user ? user.name : "Guest"}
+          </span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
 
