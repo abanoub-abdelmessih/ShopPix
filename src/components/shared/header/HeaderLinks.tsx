@@ -57,7 +57,7 @@ const NavLinksList = ({
               "text-sm font-medium px-4 py-2 rounded-md transition-colors duration-300 w-full flex gap-3 items-center",
               pathName === link.path
                 ? "bg-black text-white dark:bg-white dark:text-black"
-                : "hover:bg-gray-100 dark:hover:bg-slate-800"
+                : "hover:bg-gray-100 dark:hover:bg-zinc-800"
             )}
           >
             {icons && link.icon}

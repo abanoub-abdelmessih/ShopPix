@@ -87,9 +87,9 @@ export const ForgotPasswordTabs = () => {
       </TabsContent>
       {tab !== "newPasswordTab" && (
         <Button asChild variant="outline" className="w-full mt-4">
-          <Link href="/login" className="text-gray-500">
+          <Link href="/login" className="text-gray-500 dark:text-gray-400">
             Remember your password?
-            <span className="text-black"> Sign in</span>
+            <span className="text-black  dark:text-white"> Sign in</span>
           </Link>
         </Button>
       )}
