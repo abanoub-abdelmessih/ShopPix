@@ -12,11 +12,12 @@ const Home = () => {
     <>
       <Hero />
       <Heading
-        title="Categories"
-        description="Explore our categories"
+        title="Browse Categories"
+        description="Find what you love across all our categories"
         id="categories"
       />
       <CategoriesCarousel />
+      <Hero />
     </>
   );
 };

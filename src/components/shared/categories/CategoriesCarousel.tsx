@@ -28,10 +28,10 @@ export const CategoriesCarousel: React.FC = () => {
   }
 
   return (
-    <Carousel slidesPerView={8}>
+    <Carousel slidesPerView={7} spaceBetween={15}>
       {categories.map((category) => (
         <SwiperSlide key={category._id} className="cursor-grab">
-          <div className="relative border-slate-900 border-2 w-44 h-44 rounded-full overflow-hidden dark:bg-gray-100 shadow-lg cursor-pointer">
+          <div className="relative border-slate-900 dark:border-white/70 border-2 w-44 h-44 rounded-full overflow-hidden dark:bg-gray-100 shadow-lg cursor-pointer mx-auto hover:scale-95 duration-300">
             <Image
               src={category.image}
               alt={category.name}
@@ -41,6 +41,9 @@ export const CategoriesCarousel: React.FC = () => {
               priority
             />
           </div>
+          <p className="text-center mt-3 font-semibold font-poppins uppercase">
+            {category.name}
+          </p>
         </SwiperSlide>
       ))}
     </Carousel>

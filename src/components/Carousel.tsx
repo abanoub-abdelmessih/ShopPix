@@ -54,7 +54,7 @@ export const Carousel: React.FC<CarouselProps> = ({
   const swiperRef = useRef<SwiperType | null>(null);
 
   return (
-    <div className="w-full flex items-center justify-between gap-14 px-14 py-8">
+    <div className="w-full flex items-center justify-between gap-14 px-5 lg:px-12 py-8">
       {/* Left Button */}
       <CarouselButton swiperRef={swiperRef} position="left" />
 
@@ -68,8 +68,11 @@ export const Carousel: React.FC<CarouselProps> = ({
         breakpoints={{
           320: { slidesPerView: 1 },
           640: { slidesPerView: 2 },
-          834: { slidesPerView: 3 },
-          1280: { slidesPerView: slidesPerView, spaceBetween: 20 },
+          780: { slidesPerView: 3 },
+          900: { slidesPerView: 4 },
+          1200: { slidesPerView: 5 },
+          1400: { slidesPerView: 6 },
+          1600: { slidesPerView: slidesPerView, spaceBetween: 20 },
         }}
         className="cursor-grab"
         onSwiper={(swiper) => (swiperRef.current = swiper)}
