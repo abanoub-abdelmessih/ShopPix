@@ -81,3 +81,6 @@ html {
 ::-webkit-scrollbar-track {
   background-color: #4c4d50;
 }
+.slick-slide {
+  margin: 0 10px;
+}

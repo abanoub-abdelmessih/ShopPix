@@ -90,8 +90,11 @@ export const HeaderLinks = () => {
         <SheetTrigger className="lg:hidden items-center flex">
           <Menu />
         </SheetTrigger>
-        <SheetContent className="flex flex-col justify-between px-3">
-          <SheetHeader className="flex-row justify-between items-center mt-2">
+        <SheetContent
+          className="flex flex-col justify-between px-3"
+          aria-describedby={undefined}
+        >
+          <SheetHeader className="flex-row justify-between items-center mt-5">
             <div className="flex items-end gap-3">
               <UserMenu />
               <SheetTitle className="">ShopPix Menu</SheetTitle>

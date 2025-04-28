@@ -1,18 +1,18 @@
 "use client";
-import { getAllCategories } from "@/services/categories";
-import { CategoriesType } from "@/types/categoriesType";
-import { useQuery } from "@tanstack/react-query";
+import { useCategories } from "@/hooks/useCategories";
 
 const Products = () => {
-  const {
-    data: categories,
-    isLoading,
-    isError,
-    error,
-  } = useQuery<CategoriesType[]>({
-    queryFn: getAllCategories,
-    queryKey: ["categories"],
-  });
+  // const {
+  //   data: categories,
+  //   isLoading,
+  //   isError,
+  //   error,
+  // } = useQuery<CategoriesType[]>({
+  //   queryFn: getAllCategories,
+  //   queryKey: ["categories"],
+  // });
+
+  const { data: categories, isLoading, isError, error } = useCategories();
 
   if (isLoading) {
     return <p>Loading categories...</p>;

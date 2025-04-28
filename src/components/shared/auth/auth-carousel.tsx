@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { SwiperCarousel } from "../../SwiperCarousel";
+import { SwiperCarousel } from "./SwiperAuthCarousel";
 
 export const AuthCarousel = () => {
   return (

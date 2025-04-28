@@ -1,5 +1,7 @@
+import { Heading } from "@/components/Heading";
 import { Hero } from "@/components/Hero";
-import Products from "./products/page";
+import { CategoriesCarousel } from "@/components/shared/categories/CategoriesCarousel";
+import React from "react";
 
 export const metadata = {
   title: "Home",
@@ -7,10 +9,15 @@ export const metadata = {
 
 const Home = () => {
   return (
-    <div>
+    <>
       <Hero />
-      <Products />
-    </div>
+      <Heading
+        title="Categories"
+        description="Explore our categories"
+        id="categories"
+      />
+      <CategoriesCarousel />
+    </>
   );
 };
 export default Home;

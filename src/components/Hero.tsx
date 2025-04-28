@@ -6,7 +6,7 @@ import { ChevronsDownIcon, ChevronsRightIcon } from "lucide-react";
 export const Hero = () => {
   const date = new Date();
   return (
-    <section className="relative h-screen flex items-center justify-start px-8 sm:px-16 text-white">
+    <section className="relative h-screen flex items-center justify-start px-5 sm:px-10 text-white">
       {/* Background image */}
       <Image
         src="/images/hero.jpg"
@@ -20,8 +20,8 @@ export const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 bg-black/40" />
 
       {/* Hero Content */}
-      <div className="relative z-10 max-w-2xl space-y-6">
-        <span className="uppercase backdrop-blur-3xl bg-white/10 border-2 border-slate-200 rounded-full p-3">
+      <div className="relative z-10 max-w-2xl flex flex-col gap-5 items-start justify-center">
+        <span className="uppercase backdrop-blur-3xl bg-white/15 border-2 border-slate-200 rounded-full p-3">
           new collection {date.getFullYear()}
         </span>
 
@@ -38,7 +38,7 @@ export const Hero = () => {
 
         <div className="flex gap-2">
           <Button variant="secondary" asChild>
-            <Link href={"/products"} className="group uppercase">
+            <Link href={"#categories"} className="group uppercase">
               Explore Collections
               <ChevronsDownIcon className="group-hover:mt-2 group-hover:ml-3 duration-300" />
             </Link>
