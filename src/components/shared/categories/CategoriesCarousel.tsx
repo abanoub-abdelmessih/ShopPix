@@ -1,9 +1,9 @@
 "use client";
 
-import { Carousel } from "@/components/Carousel";
 import { useCategories } from "@/hooks/useCategories";
 import Image from "next/image";
 import { SwiperSlide } from "swiper/react";
+import { Carousel } from "../../Carousel";
 
 export const CategoriesCarousel: React.FC = () => {
   const { data: categories, isLoading, isError, error } = useCategories();
@@ -30,7 +30,7 @@ export const CategoriesCarousel: React.FC = () => {
   return (
     <Carousel slidesPerView={7} spaceBetween={15}>
       {categories.map((category) => (
-        <SwiperSlide key={category._id} className="cursor-grab">
+        <SwiperSlide key={category._id}>
           <div className="relative border-slate-900 dark:border-white/70 border-2 w-44 h-44 rounded-full overflow-hidden dark:bg-gray-100 shadow-lg cursor-pointer mx-auto hover:scale-95 duration-300">
             <Image
               src={category.image}

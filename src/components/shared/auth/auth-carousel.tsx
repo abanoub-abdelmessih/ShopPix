@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { SwiperCarousel } from "./SwiperAuthCarousel";
+import { SwiperAuthCarousel } from "./SwiperAuthCarousel";
 
 export const AuthCarousel = () => {
   return (
-    <SwiperCarousel pagination autoplay loop spaceBetween={0}>
+    <SwiperAuthCarousel pagination autoplay loop spaceBetween={0}>
       <DivContainer
         imagePath="/images/auth/auth1.jpg"
         imagePosition="bottom"
@@ -22,7 +22,7 @@ export const AuthCarousel = () => {
         desc="Lorem ipsum dolor sit, amet consectetur adipisicing elit.
           Deleniti, aliquid?"
       />
-    </SwiperCarousel>
+    </SwiperAuthCarousel>
   );
 };
 const DivContainer = ({

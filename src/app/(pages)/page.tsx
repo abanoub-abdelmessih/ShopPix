@@ -1,5 +1,6 @@
 import { Heading } from "@/components/Heading";
 import { Hero } from "@/components/Hero";
+import { SaleCarousel } from "@/components/SaleCarousel";
 import { CategoriesCarousel } from "@/components/shared/categories/CategoriesCarousel";
 import React from "react";
 
@@ -17,6 +18,7 @@ const Home = () => {
         id="categories"
       />
       <CategoriesCarousel />
+      <SaleCarousel />
       <Hero />
     </>
   );

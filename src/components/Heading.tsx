@@ -5,7 +5,10 @@ interface headingProps {
 }
 export const Heading = ({ title, description, id }: headingProps) => {
   return (
-    <div id={id} className="text-center mb-5 pt-10 space-y-2 font-poppins px-5">
+    <div
+      id={id}
+      className="text-center md:mb-2 pt-10 space-y-2 font-poppins px-5"
+    >
       <h3 className="font-normal text-xl sm:text-2xl md:text-3xl text-zinc-600 dark:text-zinc-300">
         {title}
       </h3>

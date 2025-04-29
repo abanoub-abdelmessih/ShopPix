@@ -36,7 +36,7 @@ export const Hero = () => {
           comfort, style, and confidence for every occasion.
         </p>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           <Button variant="secondary" asChild>
             <Link href={"#categories"} className="group uppercase">
               Explore Collections

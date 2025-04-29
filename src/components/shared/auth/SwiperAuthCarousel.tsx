@@ -17,7 +17,7 @@ interface SwiperCarouselProps {
   direction?: "horizontal" | "vertical" | undefined;
 }
 
-export const SwiperCarousel = ({
+export const SwiperAuthCarousel = ({
   children,
   interval = 3000,
   loop = false,
