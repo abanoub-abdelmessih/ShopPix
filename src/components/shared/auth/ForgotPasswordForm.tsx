@@ -10,7 +10,6 @@ import { useMutation } from "@tanstack/react-query";
 
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
-import { Loader } from "@/components/Loader";
 import {
   InputOTP,
   InputOTPGroup,
@@ -27,6 +26,7 @@ import {
   SendResetCodeFunction,
   VerifyResetCodeFunction,
 } from "@/services/auth";
+import Loading from "@/app/loading";
 
 export const SendResetCode = ({ onSuccess }: { onSuccess: () => void }) => {
   const emailFromCookie = Cookies.get("email") || "";
@@ -73,7 +73,7 @@ export const SendResetCode = ({ onSuccess }: { onSuccess: () => void }) => {
         <Button type="submit" className="w-full mt-5" disabled={isPending}>
           {isPending ? (
             <>
-              <Loader /> Please Wait
+              <Loading /> Please Wait
             </>
           ) : (
             "Send Code"
@@ -151,7 +151,7 @@ export const VerifyResetCode = ({ onSuccess }: { onSuccess: () => void }) => {
         <Button type="submit" className="w-full" disabled={isPending}>
           {isPending ? (
             <>
-              <Loader /> Please Wait
+              <Loading /> Please Wait
             </>
           ) : (
             "Verify Code"
@@ -208,7 +208,7 @@ export const ResetPassword = () => {
         <Button type="submit" className="w-full mt-5" disabled={isPending}>
           {isPending ? (
             <>
-              <Loader /> Please Wait
+              <Loading /> Please Wait
             </>
           ) : (
             "Reset Password"

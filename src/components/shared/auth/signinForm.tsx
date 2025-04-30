@@ -20,7 +20,7 @@ import { FormInput } from "./FormInput";
 import { useMutation } from "@tanstack/react-query";
 import { signInFunction } from "@/services/auth";
 import { toast } from "@/hooks/use-toast";
-import { Loader } from "@/components/Loader";
+import Loading from "@/app/loading";
 
 export const SigninForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -109,7 +109,7 @@ export const SigninForm = () => {
         <Button type="submit" className="w-full" disabled={isPending}>
           {isPending ? (
             <>
-              <Loader /> Please Wait
+              <Loading /> Please Wait
             </>
           ) : (
             "Sign In"

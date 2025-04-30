@@ -20,7 +20,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useMutation } from "@tanstack/react-query";
 import { signUpFunction } from "@/services/auth";
 import { toast } from "@/hooks/use-toast";
-import { Loader } from "@/components/Loader";
+import Loading from "@/app/loading";
 
 export const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -204,7 +204,7 @@ export const SignupForm = () => {
         <Button type="submit" className="w-full mt-4" disabled={isPending}>
           {isPending ? (
             <>
-              <Loader /> Please Wait
+              <Loading /> Please Wait
             </>
           ) : (
             "Sign Up"

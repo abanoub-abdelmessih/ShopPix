@@ -4,12 +4,13 @@ import { useCategories } from "@/hooks/useCategories";
 import Image from "next/image";
 import { SwiperSlide } from "swiper/react";
 import { Carousel } from "../../Carousel";
+import Loading from "@/app/loading";
 
 export const CategoriesCarousel: React.FC = () => {
   const { data: categories, isLoading, isError, error } = useCategories();
 
   if (isLoading) {
-    return <div className="w-full py-8 text-center">Loading categories...</div>;
+    return <Loading />;
   }
 
   if (isError) {

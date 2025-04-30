@@ -14,12 +14,14 @@ import { cn } from "@/lib/utils";
 interface CarouselButtonsProps {
   swiperRef: React.RefObject<SwiperType | null>;
   position: "right" | "left";
+  buttonsClassName?: string;
 }
 
 // Navigation Button Component
 const CarouselButton: React.FC<CarouselButtonsProps> = ({
   swiperRef,
   position,
+  buttonsClassName,
 }) => {
   const handleClick = () => {
     if (!swiperRef.current) return;
@@ -33,7 +35,10 @@ const CarouselButton: React.FC<CarouselButtonsProps> = ({
   return (
     <button
       onClick={handleClick}
-      className="bg-gray-600 text-white p-1.5 md:p-2 lg:p-3 rounded-full hover:bg-gray-700 dark:hover:bg-slate-200 dark:bg-white dark:text-black hover:scale-95 transition shadow-xl z-10 border-2 border-slate-200 dark:border-slate-800"
+      className={cn(
+        "bg-gray-600 text-white p-1.5 md:p-2 lg:p-3 rounded-full hover:bg-gray-700 dark:hover:bg-slate-200 dark:bg-white dark:text-black hover:scale-95 transition shadow-xl z-10 border-2 border-slate-200 dark:border-slate-800",
+        buttonsClassName
+      )}
       aria-label={position === "right" ? "Next slide" : "Previous slide"}
     >
       {position === "right" ? <ChevronsRightIcon /> : <ChevronsLeftIcon />}
@@ -48,6 +53,8 @@ interface CarouselProps {
   className?: string;
   hasOverlay?: boolean;
   breakpoints?: boolean;
+  pagination?: boolean;
+  buttonsClassName?: string;
 }
 
 export const Carousel: React.FC<CarouselProps> = ({
@@ -57,8 +64,21 @@ export const Carousel: React.FC<CarouselProps> = ({
   className,
   hasOverlay = false,
   breakpoints = true,
+  pagination = false,
+  buttonsClassName,
 }) => {
   const swiperRef = useRef<SwiperType | null>(null);
+
+  const paginationConfig = pagination
+    ? {
+        clickable: true,
+        renderBullet: function (index: number, className: string) {
+          return `
+          <span class="${className} !bg-gray-200"></span>
+          `;
+        },
+      }
+    : false;
 
   const breakPointsObject = {
     320: { slidesPerView: 1 },
@@ -81,7 +101,11 @@ export const Carousel: React.FC<CarouselProps> = ({
         <div className="absolute inset-0 z-0 bg-black/50 dark:bg-black/60 pointer-events-none" />
       )}
 
-      <CarouselButton swiperRef={swiperRef} position="left" />
+      <CarouselButton
+        swiperRef={swiperRef}
+        position="left"
+        buttonsClassName={buttonsClassName}
+      />
 
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
@@ -90,13 +114,18 @@ export const Carousel: React.FC<CarouselProps> = ({
         autoplay={{ delay: 3000, disableOnInteraction: true }}
         loop={true}
         breakpoints={breakpoints ? breakPointsObject : undefined}
+        pagination={paginationConfig}
         className="cursor-grab h-full"
         onSwiper={(swiper) => (swiperRef.current = swiper)}
       >
         {children}
       </Swiper>
 
-      <CarouselButton swiperRef={swiperRef} position="right" />
+      <CarouselButton
+        swiperRef={swiperRef}
+        position="right"
+        buttonsClassName={buttonsClassName}
+      />
     </div>
   );
 };
