@@ -28,9 +28,7 @@ const Home = () => {
         title="Exclusive Offers!"
         description="Get them before they're gone!"
       />
-      <div className="max-w-[110rem] mx-auto">
-        <FlashSale />
-      </div>
+      <FlashSale />
       <Hero />
     </>
   );

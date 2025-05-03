@@ -14,6 +14,7 @@ import {
   TruckIcon,
   ZapIcon,
 } from "lucide-react";
+import Link from "next/link";
 
 export const SaleCarousel = () => {
   return (
@@ -38,9 +39,14 @@ export const SaleCarousel = () => {
             Don’t miss out!
           </p>
         </div>
-        <Button className="uppercase font-semibold rounded-full flex items-center gap-2">
-          <ShoppingBagIcon className="w-5 h-5" />
-          Shop Now
+        <Button
+          asChild
+          className="uppercase font-semibold rounded-full flex items-center gap-2"
+        >
+          <Link href={"/products"}>
+            <ShoppingBagIcon className="w-5 h-5" />
+            Shop Now
+          </Link>
         </Button>
       </SwiperSlide>
       <SwiperSlide className="!flex justify-center items-center flex-col gap-5 font-poppins text-center">
@@ -55,9 +61,14 @@ export const SaleCarousel = () => {
             time runs out!
           </p>
         </div>
-        <Button className="uppercase font-semibold rounded-full flex items-center gap-2">
-          <ShoppingCartIcon className="w-5 h-5" />
-          Grab Deal
+        <Button
+          asChild
+          className="uppercase font-semibold rounded-full flex items-center gap-2"
+        >
+          <Link href={"/products"}>
+            <ShoppingCartIcon className="w-5 h-5" />
+            Grab Deal
+          </Link>
         </Button>
       </SwiperSlide>
 
@@ -73,9 +84,14 @@ export const SaleCarousel = () => {
             <span className="font-bold underline">limited time</span>!
           </p>
         </div>
-        <Button className="uppercase font-semibold rounded-full flex items-center gap-2">
-          <MapPinIcon className="w-5 h-5" />
-          Check Now
+        <Button
+          asChild
+          className="uppercase font-semibold rounded-full flex items-center gap-2"
+        >
+          <Link href={"/products"}>
+            <MapPinIcon className="w-5 h-5" />
+            Check Now
+          </Link>
         </Button>
       </SwiperSlide>
     </Carousel>

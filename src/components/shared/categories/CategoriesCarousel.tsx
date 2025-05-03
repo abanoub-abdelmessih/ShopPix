@@ -5,9 +5,11 @@ import Image from "next/image";
 import { SwiperSlide } from "swiper/react";
 import { Carousel } from "../../Carousel";
 import Loading from "@/app/loading";
+import { useRouter } from "next/navigation";
 
 export const CategoriesCarousel: React.FC = () => {
   const { data: categories, isLoading, isError, error } = useCategories();
+  const router = useRouter();
 
   if (isLoading) {
     return <Loading />;
@@ -28,11 +30,18 @@ export const CategoriesCarousel: React.FC = () => {
     return <div className="w-full py-8 text-center">No categories found</div>;
   }
 
+  const handleCategoryClick = (categoryId: string) => {
+    router.push(`/products?category[in]=${categoryId}`);
+  };
+
   return (
     <Carousel slidesPerView={7} spaceBetween={15}>
       {categories.map((category) => (
         <SwiperSlide key={category._id}>
-          <div className="relative border-slate-900 dark:border-white/70 border-2 w-44 h-44 rounded-full overflow-hidden dark:bg-gray-100 shadow-lg cursor-pointer mx-auto hover:scale-95 duration-300">
+          <div
+            onClick={() => handleCategoryClick(category._id)}
+            className="relative border-slate-900 dark:border-white/70 border-2 w-44 h-44 rounded-full overflow-hidden dark:bg-gray-100 shadow-lg cursor-pointer mx-auto hover:scale-95 duration-300"
+          >
             <Image
               src={category.image}
               alt={category.name}

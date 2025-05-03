@@ -16,16 +16,16 @@ export const ProductCard = ({ product }: { product: ProductType }) => {
     : 0;
 
   return (
-    <div className="dark:bg-white text-white rounded-lg shadow-sm p-2 space-y-2 dark:text-slate-900 font-poppins bg-zinc-900">
+    <div className="dark:bg-neutral-400 h-fit w-80 text-white rounded-lg shadow-sm p-2 space-y-2 dark:text-slate-900 font-poppins bg-neutral-800">
       {/* Product Image */}
-      <div className="relative h-72 bg-slate-100 rounded-lg shadow-md">
+      <div className="relative h-72 bg-slate-100 rounded-lg shadow-md overflow-hidden">
         <Image src={imageCover} alt={title} layout="fill" objectFit="contain" />
         {hasDiscount && (
-          <div className="absolute bottom-2 left-2 bg-slate-800 text-white text-2xl font-normal px-3 py-2 rounded shadow-lg">
+          <div className="absolute bottom-2 left-2 bg-zinc-900 text-white text-2xl font-normal p-1 rounded shadow-lg">
             - {salePercentage}%
           </div>
         )}
-        <button className="absolute top-2 right-1 bg-slate-800 p-2 rounded-full text-white shadow-lg hover:scale-95 duration-300">
+        <button className="absolute top-2 right-1 bg-zinc-900 p-2 rounded-full text-white shadow-lg hover:scale-75 duration-300">
           <Heart />
         </button>
       </div>
@@ -34,7 +34,7 @@ export const ProductCard = ({ product }: { product: ProductType }) => {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <h3 className="text-2xl line-clamp-2">
+            <h3 className="text-2xl truncate">
               {title.split(" ").slice(0, 3).join(" ")}
             </h3>
           </TooltipTrigger>
@@ -64,7 +64,7 @@ export const ProductCard = ({ product }: { product: ProductType }) => {
         ) : (
           <span>${price}</span>
         )}
-        <button className="dark:bg-zinc-800 bg-zinc-600 text-white p-1 rounded-lg shadow-lg hover:scale-95 duration-300">
+        <button className="dark:bg-zinc-800 dark:text-white bg-white text-zinc-900 p-1 rounded-lg shadow-lg hover:scale-75 duration-300">
           <Plus />
         </button>
       </div>
