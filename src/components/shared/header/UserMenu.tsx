@@ -13,16 +13,23 @@ import { LogoutFunction } from "@/services/auth";
 import { Edit, Edit2, ListOrderedIcon, LogOut } from "lucide-react";
 import Cookies from "js-cookie";
 
-export const UserMenu = () => {
+export const UserMenu = ({ showName = false }) => {
   const userStorage = Cookies.get("user");
   const user = userStorage ? JSON.parse(userStorage) : null;
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="cursor-pointer">
-        <Avatar className="size-8">
-          <AvatarImage src="/images/avatar.jpg" />
-          <AvatarFallback>AA</AvatarFallback>
-        </Avatar>
+      <DropdownMenuTrigger asChild className="cursor-pointer flex">
+        <div className="flex items-center gap-2">
+          <Avatar className="size-8">
+            <AvatarImage src="/images/avatar.jpg" />
+            <AvatarFallback>AA</AvatarFallback>
+          </Avatar>
+          {showName && user && (
+            <span className="font-medium text-sm text-gray-700 dark:text-gray-200">
+              {user.name.split(" ")[0]}
+            </span>
+          )}
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 mx-2">
         <DropdownMenuLabel className="text-muted-foreground">

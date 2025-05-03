@@ -1,4 +1,4 @@
-import { FlashSale } from "@/components/FlashSale";
+import { FlashSale } from "@/components/shared/products/FlashSale";
 import { Heading } from "@/components/Heading";
 import { Hero } from "@/components/Hero";
 import { SaleCarousel } from "@/components/SaleCarousel";

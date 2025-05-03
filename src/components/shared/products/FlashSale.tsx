@@ -2,7 +2,7 @@
 
 import Loading from "@/app/loading";
 import { ProductCard } from "./ProductCard";
-import { Button } from "./ui/button";
+import { Button } from "../../ui/button";
 import { ChevronsRight } from "lucide-react";
 import Link from "next/link";
 import { useSpecificCategory } from "@/hooks/useCategories";

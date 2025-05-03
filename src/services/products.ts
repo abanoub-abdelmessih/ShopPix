@@ -35,3 +35,20 @@ export async function getAllProducts(
     throw new Error("An unexpected error occurred");
   }
 }
+
+export async function getSpecificProduct({ productId }: { productId: string }) {
+  try {
+    const response = await axios.get(
+      `https://ecommerce.routemisr.com/api/v1/products/${productId}`
+    );
+    return response.data.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const message =
+        error.response?.data.message ||
+        "Failed to get product. Please try again.";
+      throw new Error(message);
+    }
+    throw new Error("An unexpected error occurred");
+  }
+}

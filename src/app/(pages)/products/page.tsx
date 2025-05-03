@@ -1,5 +1,5 @@
 import { Heading } from "@/components/Heading";
-import { PaginationControls } from "@/components/PaginationControls";
+import { PaginationControls } from "@/components/shared/products/PaginationControls";
 
 export const metadata = {
   title: "Products",

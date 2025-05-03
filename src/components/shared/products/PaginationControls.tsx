@@ -4,19 +4,22 @@ import {
   PaginationContent,
   PaginationItem,
   PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
 } from "@/components/ui/pagination";
-import { ChevronsLeft, ChevronsRight } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
 
 import { useState, useEffect } from "react";
 import Loading from "@/app/loading";
-import { ProductCard } from "@/components/ProductCard";
 import { useProducts } from "@/hooks/useProducts";
 
 import { useSearchParams } from "next/navigation";
-import { Button } from "./ui/button";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ProductCard } from "./ProductCard";
 
 export const PaginationControls = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -80,8 +83,8 @@ export const PaginationControls = () => {
           <ProductCard key={product._id} product={product} />
         ))}
       </div>
-      <Pagination className="mb-8">
-        <PaginationContent>
+      <Pagination className="mb-5 flex-wrap">
+        <PaginationContent className="flex-wrap">
           <PaginationItem>
             <PaginationLink
               onClick={() => setCurrentPage(1)}
@@ -91,18 +94,20 @@ export const PaginationControls = () => {
                   : "cursor-pointer"
               }
             >
-              <ChevronsLeft /> 1
+              <ChevronsLeft />
             </PaginationLink>
           </PaginationItem>
           <PaginationItem>
-            <PaginationPrevious
+            <PaginationLink
               onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
               className={
                 currentPage === 1
                   ? "pointer-events-none opacity-50"
                   : "cursor-pointer"
               }
-            />
+            >
+              <ChevronLeft />
+            </PaginationLink>
           </PaginationItem>
 
           {pageNumbers.map((page) => (
@@ -118,7 +123,7 @@ export const PaginationControls = () => {
           ))}
 
           <PaginationItem>
-            <PaginationNext
+            <PaginationLink
               onClick={() =>
                 setCurrentPage((prev) => Math.min(totalPages, prev + 1))
               }
@@ -127,7 +132,9 @@ export const PaginationControls = () => {
                   ? "pointer-events-none opacity-50"
                   : "cursor-pointer"
               }
-            />
+            >
+              <ChevronRight />
+            </PaginationLink>
           </PaginationItem>
           <PaginationItem>
             <PaginationLink
@@ -138,7 +145,7 @@ export const PaginationControls = () => {
                   : "cursor-pointer"
               }
             >
-              <ChevronsRight /> {totalPages}
+              <ChevronsRight />
             </PaginationLink>
           </PaginationItem>
         </PaginationContent>

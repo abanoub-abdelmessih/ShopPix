@@ -5,26 +5,31 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export const Header = () => {
   return (
-    <header className="shadow-lg py-4 px-10 font-poppins border-b dark:border-b-slate-200 border-b-slate-900">
-      <nav
-        className="flex items-center justify-between"
-        role="navigation"
-        aria-label="Main navigation"
-      >
-        {/* Logo */}
-        <Link href="/" className="text-2xl font-semibold">
-          ShopPix.
-        </Link>
+    <header className="sticky top-0 z-50 bg-white dark:bg-zinc-900 backdrop-blur-sm bg-opacity-90 dark:bg-opacity-90 scroll-mb-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav
+          className="flex items-center justify-between h-16"
+          role="navigation"
+          aria-label="Main navigation"
+        >
+          {/* Logo */}
+          <Link
+            href="/"
+            className="text-2xl font-bold text-indigo-600 dark:text-indigo-400 flex items-center"
+          >
+            ShopPix<span className="text-black dark:text-white">.</span>
+          </Link>
 
-        {/* Navigation menu */}
-        <HeaderLinks />
-        <div className="hidden lg:flex items-center gap-3">
-          {/* Theme menu */}
-          <ThemeSwitcher />
-          {/* User menu */}
-          <UserMenu />
-        </div>
-      </nav>
+          {/* Navigation menu */}
+          <HeaderLinks />
+
+          {/* Actions Section */}
+          <div className="hidden lg:flex items-center gap-4">
+            <ThemeSwitcher />
+            <UserMenu />
+          </div>
+        </nav>
+      </div>
     </header>
   );
 };
