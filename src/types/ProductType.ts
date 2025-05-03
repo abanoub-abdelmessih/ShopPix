@@ -1,10 +1,9 @@
 import { BrandType } from "./BrandType";
-import { CategoriesType, SubCategoryType } from "./categoriesType";
+import { CategoriesType } from "./categoriesType";
 
 export type ProductType = {
   sold: number;
   images: string[];
-  subcategory: SubCategoryType[];
   ratingsQuantity: number;
   _id: string;
   title: string;
