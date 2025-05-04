@@ -10,7 +10,12 @@ import { useSpecificCategory } from "@/hooks/useCategories";
 export const FlashSale = () => {
   const { data: products, isLoading } = useSpecificCategory(5);
 
-  if (isLoading) return <Loading />;
+  if (isLoading)
+    return (
+      <div className="text-indigo-800">
+        <Loading />
+      </div>
+    );
 
   return (
     <div className="flex flex-col items-center justify-center py-5 overflow-hidden">

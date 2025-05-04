@@ -88,7 +88,7 @@ export const ProductCard = ({ product }: { product: ProductType }) => {
             )}
           </div>
 
-          <button className="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-lg transition-colors">
+          <button className="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg transition-colors duration-300">
             <Plus className="w-5 h-5" />
           </button>
         </div>

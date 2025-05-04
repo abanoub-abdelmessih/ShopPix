@@ -13,7 +13,8 @@ export type ProductsResponse = {
 export async function getAllProducts(
   page = 1,
   limit = 20,
-  categoryId?: string
+  categoryId?: string,
+  brandId?: string
 ): Promise<ProductsResponse> {
   try {
     let url = `https://ecommerce.routemisr.com/api/v1/products?page=${page}&limit=${limit}`;
@@ -21,6 +22,9 @@ export async function getAllProducts(
     // Add category filter if provided
     if (categoryId) {
       url += `&category[in]=${categoryId}`;
+    }
+    if (brandId) {
+      url += `&brand[in]=${brandId}`;
     }
 
     const response = await axios.get(url);

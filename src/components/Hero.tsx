@@ -1,54 +1,79 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import { ChevronsDownIcon, ChevronsRightIcon } from "lucide-react";
+import { ArrowDownIcon, ShoppingBagIcon } from "lucide-react";
 
 export const Hero = () => {
   const date = new Date();
+  const currentYear = date.getFullYear();
+
   return (
-    <section className="relative h-screen flex items-center justify-start px-5 sm:px-10 text-white">
-      {/* Background image */}
-      <Image
-        src="/images/hero.jpg"
-        alt="Hero Background"
-        fill
-        priority
-        className="object-cover"
-      />
+    <section className="relative h-screen w-full overflow-hidden">
+      {/* Background image*/}
+      <div className="absolute inset-0 scale-105 transform-gpu">
+        <Image
+          src="/images/hero.jpg"
+          alt="Fashion Collection"
+          fill
+          priority
+          className="object-cover transition-transform duration-700 filter brightness-90"
+        />
+      </div>
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 bg-black/40" />
+      {/* gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-indigo-900/20" />
 
-      {/* Hero Content */}
-      <div className="relative z-10 max-w-2xl flex flex-col gap-5 items-start justify-center">
-        <span className="uppercase backdrop-blur-3xl bg-white/15 border-2 border-slate-200 rounded-full p-3">
-          new collection {date.getFullYear()}
-        </span>
+      {/* Content container */}
+      <div className="relative h-full max-w-screen-xl mx-auto px-6 sm:px-10 lg:px-16 flex items-center">
+        <div className="max-w-2xl space-y-2">
+          {/* badge */}
+          <div className="inline-flex items-center mb-3 backdrop-blur-md bg-indigo-900/20 border border-indigo-300/20 rounded-full py-2.5 px-5 text-sm font-medium tracking-wider text-indigo-50 shadow-lg">
+            <span className="mr-2 text-indigo-300">★</span>
+            <span>NEW COLLECTION {currentYear}</span>
+          </div>
 
-        <h1 className="text-3xl sm:text-5xl font-medium font-poppins tracking-wide mt-2">
-          Upgrade Your Style with Trendy Fashion
-        </h1>
+          {/* Headline */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8">
+            <span className="block">Redefine Your Style</span>
+            <span className="block text-indigo-300 mt-2">
+              With Premium Fashion
+            </span>
+          </h1>
 
-        {/* Paragraph */}
-        <p className="text-lg sm:text-xl font-thin italic">
-          Explore a curated collection of high-quality, affordable clothing
-          designed to elevate your wardrobe. Find the perfect balance of
-          comfort, style, and confidence for every occasion.
-        </p>
+          {/* Description */}
+          <p className="text-lg text-gray-100 mb-10 max-w-lg backdrop-blur-sm bg-black/20 p-5 rounded-lg border-l-4 border-indigo-500 shadow-xl">
+            Discover our exclusive collection of thoughtfully crafted clothing
+            that combines bold aesthetics with everyday comfort. Designed for
+            those who aspire to make a statement.
+          </p>
 
-        <div className="flex gap-2 flex-wrap">
-          <Button variant="secondary" asChild>
-            <Link href={"#categories"} className="group uppercase">
-              Explore Collections
-              <ChevronsDownIcon className="group-hover:mt-2 group-hover:ml-3 duration-300" />
-            </Link>
-          </Button>
-          <Button variant="default" asChild>
-            <Link href={"/products"} className="group">
-              Shop Now
-              <ChevronsRightIcon className="group-hover:ml-3 duration-300" />
-            </Link>
-          </Button>
+          {/* buttons */}
+          <div className="flex flex-wrap gap-5">
+            <Button
+              className="group bg-indigo-600 text-white hover:bg-indigo-700 transition-all duration-300 text-base py-6 px-8 rounded-lg shadow-xl relative overflow-hidden"
+              asChild
+            >
+              <Link href="/products">
+                <span className="flex items-center relative z-10">
+                  Shop Collection
+                  <ShoppingBagIcon className="ml-2 w-5 h-5 transition-all duration-300 group-hover:scale-110" />
+                </span>
+                <span className="absolute inset-0 w-full h-full bg-white/10 transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500"></span>
+              </Link>
+            </Button>
+
+            <Button
+              className="group bg-white/10 backdrop-blur-md border border-indigo-400/30 hover:bg-indigo-900/30 text-white transition-all duration-300 text-base py-6 px-8 rounded-lg shadow-lg"
+              asChild
+            >
+              <Link href="#categories">
+                <span className="flex items-center">
+                  Explore Categories
+                  <ArrowDownIcon className="ml-2 w-5 h-5 transition-transform duration-500 group-hover:translate-y-1" />
+                </span>
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </section>

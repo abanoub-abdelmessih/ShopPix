@@ -111,10 +111,11 @@ export const HeaderLinks = () => {
 
       {/* Mobile Sheet Menu */}
       <Sheet>
-        <SheetTrigger className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-900">
+        <SheetTrigger className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 ">
           <Menu className="w-5 h-5" />
         </SheetTrigger>
         <SheetContent
+          aria-describedby={undefined}
           className="flex flex-col justify-between p-0 border-l border-gray-200 dark:border-zinc-700"
           side="right"
         >

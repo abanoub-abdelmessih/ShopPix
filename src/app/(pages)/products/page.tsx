@@ -7,7 +7,7 @@ export const metadata = {
 
 const Products = () => {
   return (
-    <div className="flex flex-col gap-5 items-center justify-center py-3">
+    <div className="flex flex-col gap-5 items-center justify-center py-3 flex-1">
       <Heading
         title="Our Products"
         description="Discover top picks from all categories."
