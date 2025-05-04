@@ -25,7 +25,7 @@ const ProductDetailsPage = () => {
   const productId = params.id as string;
   const { data: product, isLoading, isError } = useSpecificProduct(productId);
   const [selectedImage, setSelectedImage] = useState(product?.imageCover);
-  const { register, handleSubmit, watch, setValue } = useForm();
+  const { register, watch, setValue } = useForm();
   const router = useRouter();
 
   if (isLoading) {
