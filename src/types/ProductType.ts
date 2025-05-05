@@ -1,5 +1,5 @@
 import { BrandType } from "./BrandType";
-import { CategoriesType } from "./categoriesType";
+import { CategoriesType, SubCategoryType } from "./categoriesType";
 
 export type ProductType = {
   sold: number;
@@ -14,6 +14,7 @@ export type ProductType = {
   priceAfterDiscount?: number;
   imageCover: string;
   category: CategoriesType;
+  subcategory: SubCategoryType[];
   brand: BrandType;
   ratingsAverage: number;
   createdAt: string;

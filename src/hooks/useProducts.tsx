@@ -10,11 +10,13 @@ export function useProducts(
   page = 1,
   limit = 20,
   categoryId?: string,
-  brandId?: string
+  brandId?: string,
+  subcategoryId?: string
 ) {
   return useQuery<ProductsResponse, Error>({
-    queryKey: ["products", page, limit, categoryId, brandId],
-    queryFn: () => getAllProducts(page, limit, categoryId, brandId),
+    queryKey: ["products", page, limit, categoryId, brandId, subcategoryId],
+    queryFn: () =>
+      getAllProducts(page, limit, categoryId, brandId, subcategoryId),
     staleTime: 5 * 60 * 1000,
     placeholderData: (prevData) => prevData,
   });

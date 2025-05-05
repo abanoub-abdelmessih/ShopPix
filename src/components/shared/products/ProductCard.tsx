@@ -7,23 +7,45 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Heart, Plus, Star } from "lucide-react";
-import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
-export const ProductCard = ({ product }: { product: ProductType }) => {
+export const ProductCard = ({
+  product,
+  className,
+}: {
+  product: ProductType;
+  className?: string;
+}) => {
   const { price, priceAfterDiscount, title, imageCover } = product;
   const hasDiscount = !!priceAfterDiscount;
   const salePercentage = hasDiscount
     ? Math.round(((price - priceAfterDiscount!) / price) * 100)
     : 0;
+  const router = useRouter();
+
+  const handleProductClick = () => {
+    router.push(`/products/${product._id}`);
+  };
 
   return (
-    <Link
-      href={`/products/${product._id}`}
-      className="bg-white dark:bg-zinc-800 h-fit w-80 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg font-poppins"
+    <div
+      onClick={handleProductClick}
+      className={cn(
+        "bg-white dark:bg-zinc-800 h-fit w-full rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg font-poppins cursor-pointer",
+        className
+      )}
     >
       {/* Product Image */}
       <div className="relative h-64 bg-gray-50 dark:bg-zinc-700 overflow-hidden">
-        <Image src={imageCover} alt={title} layout="fill" objectFit="contain" />
+        <Image
+          src={imageCover}
+          alt={title}
+          fill
+          priority
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-contain"
+        />
 
         {/* Discount Tag */}
         {hasDiscount && (
@@ -93,6 +115,6 @@ export const ProductCard = ({ product }: { product: ProductType }) => {
           </button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };

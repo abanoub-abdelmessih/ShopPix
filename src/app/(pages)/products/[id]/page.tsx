@@ -1,8 +1,9 @@
 "use client";
 
 import Loading from "@/app/loading";
+import { ProductCard } from "@/components/shared/products/ProductCard";
 import { Button } from "@/components/ui/button";
-import { useSpecificProduct } from "@/hooks/useProducts";
+import { useProducts, useSpecificProduct } from "@/hooks/useProducts";
 import {
   ChevronsRight,
   Heart,
@@ -17,20 +18,28 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
 
 const ProductDetailsPage = () => {
   const params = useParams();
   const productId = params.id as string;
   const { data: product, isLoading, isError } = useSpecificProduct(productId);
-  const [selectedImage, setSelectedImage] = useState(product?.imageCover);
-  const { register, watch, setValue } = useForm();
+  const categoryId = product?.category._id;
+  const { data: relatedProducts, isLoading: loadingRelatedProducts } =
+    useProducts(1, 5, categoryId);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [theQuantity, setTheQuantity] = useState(1);
   const router = useRouter();
 
-  if (isLoading) {
+  useEffect(() => {
+    if (product) {
+      setSelectedImage(product.imageCover);
+    }
+  }, [product]);
+
+  if (isLoading || loadingRelatedProducts) {
     return (
-      <div className="flex items-center justify-center gap-3 text-3xl flex-1 text-indigo-800">
+      <div className="flex items-center justify-center gap-3 text-3xl flex-1 ">
         <Loading /> Please Wait
       </div>
     );
@@ -92,21 +101,10 @@ const ProductDetailsPage = () => {
         />
       ));
   };
+
   const handleBrandClick = (brandId: string) => {
     const encodedBrandId = encodeURIComponent(brandId);
     router.push(`/products?brand[in]=${encodedBrandId}`);
-  };
-
-  const quantity = watch("quantity", 1);
-
-  const handleIncrease = () => {
-    setValue("quantity", quantity + 1);
-  };
-
-  const handleDecrease = () => {
-    if (quantity > 1) {
-      setValue("quantity", quantity - 1);
-    }
   };
 
   return (
@@ -133,7 +131,6 @@ const ProductDetailsPage = () => {
               {product.images.map((image, index) => (
                 <button
                   key={index}
-                  onClick={() => setSelectedImage(image)}
                   className={`relative aspect-square overflow-hidden border-2 transition-all rounded-xl ${
                     selectedImage === image
                       ? "border-indigo-600 dark:border-indigo-400"
@@ -147,6 +144,7 @@ const ProductDetailsPage = () => {
                     className="object-cover"
                     sizes="(max-width: 768px) 25vw, 10vw"
                     quality={60}
+                    onClick={() => setSelectedImage(image)}
                   />
                 </button>
               ))}
@@ -161,7 +159,7 @@ const ProductDetailsPage = () => {
             {product.brand?.name && (
               <button
                 onClick={() => handleBrandClick(product.brand._id)}
-                className="inline-block mb-2 text-indigo-600 dark:text-indigo-400 font-medium"
+                className="bg-indigo-100 dark:bg-indigo-900/40 text-indigo-800 dark:text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-md text-center mb-2"
               >
                 {product.brand.name}
               </button>
@@ -194,7 +192,7 @@ const ProductDetailsPage = () => {
           </div>
 
           {/* Pricing */}
-          <div className="mb-8">
+          <div className="mb-6">
             {product.priceAfterDiscount ? (
               <div className="flex items-center">
                 <p className="text-3xl font-bold text-indigo-600 dark:text-indigo-400">
@@ -213,6 +211,22 @@ const ProductDetailsPage = () => {
                 ${product.price.toFixed(2)}
               </p>
             )}
+          </div>
+
+          {/* Category */}
+          <div className="mb-6 flex flex-wrap">
+            <Link
+              href={`/products?category[in]=${product.category._id}`}
+              className="bg-indigo-100 dark:bg-indigo-900/40 text-indigo-800 dark:text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-md text-center"
+            >
+              {product.category.name}
+            </Link>
+            <Link
+              href={`/products?subcategory[in]=${product.subcategory[0]._id}`}
+              className="ml-2 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-800 dark:text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-md text-center"
+            >
+              {product.subcategory[0].name}
+            </Link>
           </div>
 
           {/* Description */}
@@ -264,8 +278,8 @@ const ProductDetailsPage = () => {
             </label>
             <div className="inline-flex items-center max-w-[160px] bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-full shadow-sm">
               <button
-                onClick={handleDecrease}
-                disabled={quantity <= 1}
+                onClick={() => setTheQuantity(theQuantity - 1)}
+                disabled={theQuantity <= 1}
                 className="p-2.5 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-l-full disabled:text-zinc-400 dark:disabled:text-zinc-600 transition-colors"
               >
                 <MinusCircle className="w-5 h-5" />
@@ -275,13 +289,13 @@ const ProductDetailsPage = () => {
                 id="quantity"
                 min="1"
                 max={product.quantity}
-                {...register("quantity", { min: 1 })}
-                value={quantity}
-                className="w-20 text-center border-x border-zinc-200 dark:border-zinc-700 py-2 text-zinc-900 dark:text-white bg-transparent focus:outline-none"
+                value={theQuantity}
+                readOnly
+                className="w-16 text-center border-x border-zinc-200 dark:border-zinc-700 py-2 text-zinc-900 dark:text-white bg-transparent focus:outline-none"
               />
               <button
-                onClick={handleIncrease}
-                disabled={quantity >= product.quantity}
+                onClick={() => setTheQuantity(theQuantity + 1)}
+                disabled={theQuantity >= product.quantity}
                 className="p-2.5 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-r-full disabled:text-zinc-400 dark:disabled:text-zinc-600 transition-colors"
               >
                 <PlusCircle className="w-5 h-5" />
@@ -290,20 +304,27 @@ const ProductDetailsPage = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-10">
+          <div className="flex gap-4 mb-10">
             <button
-              type="button"
+              type="submit"
               disabled={product.quantity <= 0}
-              className={`flex-1 flex items-center justify-center rounded-full px-8 py-3.5 text-base font-medium shadow-lg transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 `}
+              className={`flex-1 flex items-center justify-center rounded-full px-8 py-3.5 text-base font-medium shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+                product.quantity <= 0
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-gradient-to-r from-indigo-600 to-purple-600 "
+              } text-white`}
             >
-              <ShoppingCart className="w-5 h-5 mr-2" />
+              <ShoppingCart className="w-5 h-5 mr-2" strokeWidth={2} />
               Add to Cart
             </button>
             <button
               type="button"
-              className={`flex items-center justify-center rounded-full px-4 py-3.5 shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none `}
+              className="flex items-center justify-center rounded-full w-14 h-14 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-md hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 group"
             >
-              <Heart className={`w-5 h-5 `} />
+              <Heart
+                className="w-6 h-6 text-zinc-500 dark:text-zinc-400 group-hover:text-red-500 group-hover:fill-red-500 transition-colors duration-300"
+                strokeWidth={1.5}
+              />
             </button>
           </div>
 
@@ -354,7 +375,7 @@ const ProductDetailsPage = () => {
           <div className="pt-6 border-t border-zinc-200 dark:border-zinc-700">
             <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {product.brand?.name && (
-                <div className="bg-white dark:bg-zinc-800/50 p-4 rounded-xl shadow-sm border border-zinc-100 dark:border-zinc-700">
+                <div className="bg-white dark:bg-zinc-800/50 p-4 rounded-xl shadow-md border border-zinc-100 dark:border-zinc-700">
                   <dt className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
                     Brand
                   </dt>
@@ -364,7 +385,7 @@ const ProductDetailsPage = () => {
                 </div>
               )}
               {product.sold && (
-                <div className="bg-white dark:bg-zinc-800/50 p-4 rounded-xl shadow-sm border border-zinc-100 dark:border-zinc-700">
+                <div className="bg-white dark:bg-zinc-800/50 p-4 rounded-xl border border-zinc-100 dark:border-zinc-700 shadow-md">
                   <dt className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
                     Units Sold
                   </dt>
@@ -377,6 +398,27 @@ const ProductDetailsPage = () => {
           </div>
         </div>
       </div>
+      {relatedProducts && (
+        <div className="mt-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+              Related Products
+            </h2>
+            <Link
+              href={`/products?category[in]=${categoryId}`}
+              className="text-sm font-medium text-indigo-600 dark:text-indigo-400 flex items-center group hover:underline"
+            >
+              View All
+              <ChevronsRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
+            {relatedProducts.data.map((product) => (
+              <ProductCard product={product} key={product._id} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -26,23 +26,25 @@ export const PaginationControls = () => {
   const searchParams = useSearchParams();
   const categoryId = searchParams.get("category[in]");
   const brandId = searchParams.get("brand[in]");
+  const subcategoryId = searchParams.get("subcategory[in]");
   const limit = 12;
 
   // Reset page number to 1 when category changes
   useEffect(() => {
     setCurrentPage(1);
-  }, [categoryId, brandId]);
+  }, [categoryId, brandId, subcategoryId]);
 
   const { data, isLoading, isError, error, isFetching } = useProducts(
     currentPage,
     limit,
     categoryId || undefined,
-    brandId || undefined
+    brandId || undefined,
+    subcategoryId || undefined
   );
 
   if (isLoading || isFetching) {
     return (
-      <div className="flex items-center justify-center gap-3 text-3xl flex-1 text-indigo-800">
+      <div className="flex items-center justify-center gap-3 text-3xl flex-1">
         <Loading /> Please Wait
       </div>
     );
@@ -108,12 +110,12 @@ export const PaginationControls = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 mb-8 container mx-auto">
         {products.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
       </div>
-      <Pagination className="mb-5 flex-wrap">
+      <Pagination className="mb-14 md:mb-5 flex-wrap">
         <PaginationContent className="flex-wrap">
           <PaginationItem>
             <PaginationLink

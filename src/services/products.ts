@@ -14,7 +14,8 @@ export async function getAllProducts(
   page = 1,
   limit = 20,
   categoryId?: string,
-  brandId?: string
+  brandId?: string,
+  subcategoryId?: string
 ): Promise<ProductsResponse> {
   try {
     let url = `https://ecommerce.routemisr.com/api/v1/products?page=${page}&limit=${limit}`;
@@ -25,6 +26,9 @@ export async function getAllProducts(
     }
     if (brandId) {
       url += `&brand[in]=${brandId}`;
+    }
+    if (subcategoryId) {
+      url += `&subcategory[in]=${subcategoryId}`;
     }
 
     const response = await axios.get(url);

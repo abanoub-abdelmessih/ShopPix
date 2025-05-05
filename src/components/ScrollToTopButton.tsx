@@ -17,7 +17,7 @@ export const ScrollToTopButton = () => {
 
   return (
     <button
-      className="fixed z-50 bottom-4 right-4 p-3 rounded-full bg-slate-600 text-white shadow-lg hover:bg-gray-600 transition-all duration-300 border-2 border-slate-800 dark:border-slate-200 dark:bg-black dark:text-white"
+      className="fixed z-50 bottom-4 right-4 p-3 rounded-full bg-gradient-to-t from-indigo-700 via-indigo-600 to-indigo-500 text-white shadow-lg transition-all duration-300 border-2"
       onClick={ScrollTop}
     >
       <ChevronsUpIcon size={24} />
