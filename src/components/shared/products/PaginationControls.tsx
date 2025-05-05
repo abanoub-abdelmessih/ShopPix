@@ -44,7 +44,7 @@ export const PaginationControls = () => {
 
   if (isLoading || isFetching) {
     return (
-      <div className="flex items-center justify-center gap-3 text-3xl flex-1">
+      <div className="flex items-center justify-center gap-3 text-3xl ">
         <Loading /> Please Wait
       </div>
     );
@@ -62,7 +62,7 @@ export const PaginationControls = () => {
 
   if (!data || data.data.length === 0) {
     return (
-      <div className="flex items-center justify-center flex-col px-4 mx-auto max-w-2xl flex-1">
+      <div className="flex items-center justify-center flex-col px-4 mx-auto max-w-2xl">
         <div className="mb-6 text-gray-400">
           <svg
             className="w-20 h-20 mx-auto"
@@ -109,8 +109,8 @@ export const PaginationControls = () => {
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 mb-8 container mx-auto">
+    <div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mb-8 container mx-auto">
         {products.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
@@ -182,6 +182,6 @@ export const PaginationControls = () => {
           </PaginationItem>
         </PaginationContent>
       </Pagination>
-    </>
+    </div>
   );
 };

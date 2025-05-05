@@ -2,6 +2,7 @@
 
 import Loading from "@/app/loading";
 import { ProductCard } from "@/components/shared/products/ProductCard";
+import { RenderStars } from "@/components/shared/products/RenderStars";
 import { Button } from "@/components/ui/button";
 import { useProducts, useSpecificProduct } from "@/hooks/useProducts";
 import {
@@ -12,7 +13,6 @@ import {
   PlusCircle,
   Shield,
   ShoppingCart,
-  Star,
   Truck,
 } from "lucide-react";
 import Image from "next/image";
@@ -87,21 +87,6 @@ const ProductDetailsPage = () => {
     );
   }
 
-  const renderStars = (rating: number) => {
-    return Array(5)
-      .fill(0)
-      .map((_, i) => (
-        <Star
-          key={i}
-          className={`w-5 h-5 ${
-            i < Math.floor(rating)
-              ? "text-yellow-400 fill-yellow-400"
-              : "text-gray-300"
-          }`}
-        />
-      ));
-  };
-
   const handleBrandClick = (brandId: string) => {
     const encodedBrandId = encodeURIComponent(brandId);
     router.push(`/products?brand[in]=${encodedBrandId}`);
@@ -112,13 +97,13 @@ const ProductDetailsPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-10 gap-8">
         {/* Image Gallery Section */}
         <div className="md:col-span-6 lg:col-span-4">
-          {/* Main Image */}
-          <div className="relative aspect-square w-full bg-gray-50 dark:bg-zinc-700 rounded-xl overflow-hidden mb-4 shadow-md">
+          <div className="relative aspect-square w-full bg-gray-50 dark:bg-zinc-700 rounded-xl overflow-hidden mb-4 shadow-md group">
+            {/* The actual product image */}
             <Image
               src={selectedImage || product.imageCover}
               alt={`${product.title} - Main view`}
               fill
-              className="object-contain px-4"
+              className="object-contain px-4 transition-transform duration-300 ease-in-out group-hover:scale-105"
               priority
               sizes="(max-width: 768px) 100vw, 50vw"
               quality={85}
@@ -134,8 +119,9 @@ const ProductDetailsPage = () => {
                   className={`relative aspect-square overflow-hidden border-2 transition-all rounded-xl ${
                     selectedImage === image
                       ? "border-indigo-600 dark:border-indigo-400"
-                      : "border-transparent"
+                      : "border-transparent hover:border-indigo-300 dark:hover:border-indigo-600/50"
                   }`}
+                  onClick={() => setSelectedImage(image)}
                 >
                   <Image
                     src={image}
@@ -144,7 +130,6 @@ const ProductDetailsPage = () => {
                     className="object-cover"
                     sizes="(max-width: 768px) 25vw, 10vw"
                     quality={60}
-                    onClick={() => setSelectedImage(image)}
                   />
                 </button>
               ))}
@@ -153,7 +138,7 @@ const ProductDetailsPage = () => {
         </div>
 
         {/* Product Details Section */}
-        <div className="md:col-span-5 lg:col-span-6 font-poppins bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg">
+        <div className="md:col-span-6 font-poppins bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg ">
           {/* Title and Brand */}
           <div className="mb-4">
             {product.brand?.name && (
@@ -172,7 +157,7 @@ const ProductDetailsPage = () => {
           {/* Rating */}
           <div className="flex items-center mb-6">
             <div className="flex">
-              {renderStars(product.ratingsAverage || 0)}
+              <RenderStars rating={product.ratingsAverage} />
             </div>
             <span className="ml-2 text-sm text-zinc-600 dark:text-zinc-300 font-medium">
               {product.ratingsAverage?.toFixed(1) || "0.0"}

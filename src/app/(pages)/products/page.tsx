@@ -1,5 +1,6 @@
 import { Heading } from "@/components/Heading";
 import { PaginationControls } from "@/components/shared/products/PaginationControls";
+import { ProductsSidebar } from "@/components/shared/products/ProductsSidebar";
 
 export const metadata = {
   title: "Products",
@@ -7,13 +8,13 @@ export const metadata = {
 
 const Products = () => {
   return (
-    <div className="flex flex-col gap-5 items-center justify-center py-3 flex-1">
+    <ProductsSidebar>
       <Heading
         title="Our Products"
         description="Discover top picks from all categories."
       />
       <PaginationControls />
-    </div>
+    </ProductsSidebar>
   );
 };
 

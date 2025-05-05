@@ -6,9 +6,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Heart, Plus, Star } from "lucide-react";
+import { Heart, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { RenderStars } from "./RenderStars";
 
 export const ProductCard = ({
   product,
@@ -82,7 +83,7 @@ export const ProductCard = ({
 
         {/* Rating */}
         <div className="flex items-center gap-1">
-          <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+          <RenderStars rating={product.ratingsAverage} />
           <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
             {product.ratingsAverage}
           </span>
