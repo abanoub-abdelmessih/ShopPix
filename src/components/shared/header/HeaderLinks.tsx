@@ -119,7 +119,7 @@ export const HeaderLinks = () => {
           className="flex flex-col justify-between p-0 border-l border-gray-200 dark:border-zinc-700"
           side="right"
         >
-          <div className="flex flex-col h-full mt-4">
+          <div className="flex flex-col h-full mt-7">
             <SheetHeader className="border-b border-gray-200 dark:border-zinc-700 p-4">
               <div className="flex items-center justify-between">
                 <SheetTitle className="text-lg font-medium text-gray-900 dark:text-white">

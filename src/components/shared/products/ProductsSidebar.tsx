@@ -27,12 +27,12 @@ export const ProductsSidebar = ({
   return (
     <div className="flex flex-1 font-poppins relative">
       {/* Sheet Trigger for small screens */}
-      <div className="xl:hidden px-5 pt-5">
+      <div className="xl:hidden">
         <Sheet>
           <SheetTrigger asChild>
             <Button
               variant="outline"
-              className="mb-4 uppercase absolute left-0 top-36 rotate-[-90deg] origin-top-left"
+              className="mb-4 uppercase fixed left-0 top-52 rotate-[-90deg] origin-top-left z-50"
             >
               Filters
               <SlidersVertical />
@@ -40,7 +40,7 @@ export const ProductsSidebar = ({
           </SheetTrigger>
           <SheetContent
             side="left"
-            className="w-72 sm:w-96"
+            className="overflow-y-auto"
             aria-describedby={undefined}
           >
             <SheetHeader>
@@ -56,7 +56,7 @@ export const ProductsSidebar = ({
       {/* Normal Sidebar for larger screens */}
       <div className="xl:w-1/4 2xl:w-1/5 px-5 border-r hidden xl:block">
         <div className="sticky top-[84px]">
-          <h3 className="font-bold mt-5 text-3xl bg-gradient-to-r from-indigo-300 via-indigo-600 to-indigo-300 bg-clip-text text-transparent">
+          <h3 className="font-bold mt-5 text-3xl bg-gradient-to-r from-indigo-300 via-indigo-600 to-indigo-300 bg-clip-text text-transparent border-t">
             Filter By ...
           </h3>
           <AccordionLinks />
@@ -85,7 +85,7 @@ const AccordionLinks = () => {
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1">
-        <AccordionTrigger className="text-lg hover:no-underline mt-3 font-bold">
+        <AccordionTrigger className="text-lg hover:no-underline mt-3 font-bold uppercase">
           Categories
         </AccordionTrigger>
         <AccordionContent className="flex flex-col items-start gap-3 px-2">
@@ -102,7 +102,7 @@ const AccordionLinks = () => {
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionTrigger className="text-lg hover:no-underline mt-3 font-bold">
+        <AccordionTrigger className="text-lg hover:no-underline mt-3 font-bold uppercase">
           Brands
         </AccordionTrigger>
         <AccordionContent className="flex flex-col items-start gap-3 px-2">

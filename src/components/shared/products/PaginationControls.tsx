@@ -116,7 +116,7 @@ export const PaginationControls = () => {
         ))}
       </div>
       <Pagination className="mb-14 md:mb-5 flex-wrap">
-        <PaginationContent className="flex-wrap">
+        <PaginationContent className="flex-wrap gap-0">
           <PaginationItem>
             <PaginationLink
               onClick={() => setCurrentPage(1)}

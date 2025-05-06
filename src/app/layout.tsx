@@ -4,6 +4,7 @@ import "./globals.css";
 import { ReactQueryProvider } from "@/lib/react-query-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "next-themes";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,7 +41,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <ReactQueryProvider>
+            <ScrollToTop />
+            {children}
+          </ReactQueryProvider>
           <Toaster />
         </ThemeProvider>
       </body>
