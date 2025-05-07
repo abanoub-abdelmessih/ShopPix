@@ -1,6 +1,6 @@
 "use client";
 
-import Loading from "@/app/loading";
+import { Loader } from "@/components/Loader";
 import { ProductCard } from "@/components/shared/products/ProductCard";
 import { RenderStars } from "@/components/shared/products/RenderStars";
 import { Button } from "@/components/ui/button";
@@ -40,7 +40,7 @@ const ProductDetailsPage = () => {
   if (isLoading || loadingRelatedProducts) {
     return (
       <div className="flex items-center justify-center gap-3 text-3xl flex-1 ">
-        <Loading /> Please Wait
+        <Loader /> Please Wait
       </div>
     );
   }

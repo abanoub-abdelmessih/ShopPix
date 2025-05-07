@@ -19,11 +19,15 @@ export async function getAllCategories(): Promise<CategoriesType[]> {
   }
 }
 
-// Get Men categories
-export async function getSaleProduct({ limit = 0 }: { limit?: number }) {
+// Get Specific category
+export async function getSpecificCategory({
+  categoryId,
+}: {
+  categoryId: string;
+}): Promise<CategoriesType> {
   try {
     const response = await axios.get(
-      `https://ecommerce.routemisr.com/api/v1/products?category[in]=6439d5b90049ad0b52b90048&limit=${limit}`
+      `https://ecommerce.routemisr.com/api/v1/categories/${categoryId}`
     );
     return response.data.data;
   } catch (error) {

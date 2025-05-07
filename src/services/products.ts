@@ -2,6 +2,7 @@ import { ProductType } from "@/types/ProductType";
 import axios from "axios";
 
 export type ProductsResponse = {
+  results: number;
   metadata: {
     currentPage: number;
     numberOfPages: number;
@@ -15,21 +16,22 @@ export async function getAllProducts(
   limit = 20,
   categoryId?: string,
   brandId?: string,
-  subcategoryId?: string
+  subcategoryId?: string,
+  minPrice?: number,
+  maxPrice?: number
 ): Promise<ProductsResponse> {
   try {
     let url = `https://ecommerce.routemisr.com/api/v1/products?page=${page}&limit=${limit}`;
 
-    // Add category filter if provided
-    if (categoryId) {
-      url += `&category[in]=${categoryId}`;
-    }
-    if (brandId) {
-      url += `&brand[in]=${brandId}`;
-    }
-    if (subcategoryId) {
-      url += `&subcategory[in]=${subcategoryId}`;
-    }
+    if (categoryId) url += `&category[in]=${categoryId}`;
+
+    if (brandId) url += `&brand[in]=${brandId}`;
+
+    if (subcategoryId) url += `&subcategory[in]=${subcategoryId}`;
+
+    if (minPrice !== undefined) url += `&price[gte]=${minPrice}`;
+
+    if (maxPrice !== undefined) url += `&price[lte]=${maxPrice}`;
 
     const response = await axios.get(url);
     return response.data;
@@ -55,6 +57,24 @@ export async function getSpecificProduct({ productId }: { productId: string }) {
       const message =
         error.response?.data.message ||
         "Failed to get product. Please try again.";
+      throw new Error(message);
+    }
+    throw new Error("An unexpected error occurred");
+  }
+}
+
+// Get Men products for Flash sale component
+export async function getFlashSale({ limit = 0 }: { limit?: number }) {
+  try {
+    const response = await axios.get(
+      `https://ecommerce.routemisr.com/api/v1/products?category[in]=6439d5b90049ad0b52b90048&limit=${limit}`
+    );
+    return response.data.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const message =
+        error.response?.data?.message ||
+        "Failed to get products. Please try again.";
       throw new Error(message);
     }
     throw new Error("An unexpected error occurred");

@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import {
   getAllProducts,
+  getFlashSale,
   getSpecificProduct,
   ProductsResponse,
 } from "@/services/products";
@@ -11,12 +12,31 @@ export function useProducts(
   limit = 20,
   categoryId?: string,
   brandId?: string,
-  subcategoryId?: string
+  subcategoryId?: string,
+  minPrice?: number,
+  maxPrice?: number
 ) {
   return useQuery<ProductsResponse, Error>({
-    queryKey: ["products", page, limit, categoryId, brandId, subcategoryId],
+    queryKey: [
+      "products",
+      page,
+      limit,
+      categoryId,
+      brandId,
+      subcategoryId,
+      minPrice,
+      maxPrice,
+    ],
     queryFn: () =>
-      getAllProducts(page, limit, categoryId, brandId, subcategoryId),
+      getAllProducts(
+        page,
+        limit,
+        categoryId,
+        brandId,
+        subcategoryId,
+        minPrice,
+        maxPrice
+      ),
     staleTime: 5 * 60 * 1000,
     placeholderData: (prevData) => prevData,
   });
@@ -30,3 +50,12 @@ export function useSpecificProduct(productId: string) {
     enabled: !!productId,
   });
 }
+
+// Get FlashSale products
+export const useFlashSale = (limit: number) => {
+  return useQuery<ProductType[]>({
+    queryKey: ["SpecificCategory", limit],
+    queryFn: () => getFlashSale({ limit }),
+    staleTime: 5 * 60 * 1000,
+  });
+};

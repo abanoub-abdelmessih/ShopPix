@@ -10,16 +10,24 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
+  ListFilter,
 } from "lucide-react";
 
 import { useState, useEffect } from "react";
-import Loading from "@/app/loading";
 import { useProducts } from "@/hooks/useProducts";
 
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "./ProductCard";
+import { Loader } from "@/components/Loader";
+import { useSpecificCategory } from "@/hooks/useCategories";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from "@/components/ui/select";
 
 export const PaginationControls = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,25 +35,30 @@ export const PaginationControls = () => {
   const categoryId = searchParams.get("category[in]");
   const brandId = searchParams.get("brand[in]");
   const subcategoryId = searchParams.get("subcategory[in]");
+  const minPrice = searchParams.get("minPrice");
+  const maxPrice = searchParams.get("maxPrice");
   const limit = 12;
-
-  // Reset page number to 1 when category changes
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [categoryId, brandId, subcategoryId]);
 
   const { data, isLoading, isError, error, isFetching } = useProducts(
     currentPage,
     limit,
     categoryId || undefined,
     brandId || undefined,
-    subcategoryId || undefined
+    subcategoryId || undefined,
+    minPrice ? Number(minPrice) : undefined,
+    maxPrice ? Number(maxPrice) : undefined
   );
+  const { data: categoryData } = useSpecificCategory(categoryId || "");
+
+  // Reset page number to 1 when category changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [categoryId, brandId, subcategoryId]);
 
   if (isLoading || isFetching) {
     return (
       <div className="flex items-center justify-center gap-3 text-3xl ">
-        <Loading /> Please Wait
+        <Loader /> Please Wait
       </div>
     );
   }
@@ -103,14 +116,31 @@ export const PaginationControls = () => {
   }
 
   const products = data.data || [];
+  const totalProducts = data.results || [];
   const totalPages = data?.metadata?.numberOfPages || 1;
 
   // Generate page numbers for pagination
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mb-8 container mx-auto">
+    <div className="container mx-auto font-poppins">
+      <div className="flex w-full justify-between items-center mb-6 gap-4">
+        <h2 className="text-xl md:text-2xl font-semibold bg-gradient-to-t from-indigo-700 via-indigo-500 to-indigo-300 bg-clip-text text-transparent">
+          {categoryId && categoryData ? categoryData.name : "All products"}
+          <span className="text-sm ml-2">({totalProducts})</span>
+        </h2>
+        <Select>
+          <SelectTrigger className="w-32 md:w-[180px] gap-3">
+            <ListFilter /> Sort By
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="light">Light</SelectItem>
+            <SelectItem value="dark">Dark</SelectItem>
+            <SelectItem value="system">System</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mb-8 ">
         {products.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}

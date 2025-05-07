@@ -26,7 +26,7 @@ import {
   SendResetCodeFunction,
   VerifyResetCodeFunction,
 } from "@/services/auth";
-import Loading from "@/app/loading";
+import { Loader } from "@/components/Loader";
 
 export const SendResetCode = ({ onSuccess }: { onSuccess: () => void }) => {
   const emailFromCookie = Cookies.get("email") || "";
@@ -73,7 +73,7 @@ export const SendResetCode = ({ onSuccess }: { onSuccess: () => void }) => {
         <Button type="submit" className="w-full mt-5" disabled={isPending}>
           {isPending ? (
             <>
-              <Loading /> Please Wait
+              <Loader /> Please Wait
             </>
           ) : (
             "Send Code"
@@ -151,7 +151,7 @@ export const VerifyResetCode = ({ onSuccess }: { onSuccess: () => void }) => {
         <Button type="submit" className="w-full" disabled={isPending}>
           {isPending ? (
             <>
-              <Loading /> Please Wait
+              <Loader /> Please Wait
             </>
           ) : (
             "Verify Code"
@@ -208,7 +208,7 @@ export const ResetPassword = () => {
         <Button type="submit" className="w-full mt-5" disabled={isPending}>
           {isPending ? (
             <>
-              <Loading /> Please Wait
+              <Loader /> Please Wait
             </>
           ) : (
             "Reset Password"

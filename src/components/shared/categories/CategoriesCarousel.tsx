@@ -4,8 +4,8 @@ import { useCategories } from "@/hooks/useCategories";
 import Image from "next/image";
 import { SwiperSlide } from "swiper/react";
 import { Carousel } from "../../Carousel";
-import Loading from "@/app/loading";
 import { useRouter } from "next/navigation";
+import { Loader } from "@/components/Loader";
 
 export const CategoriesCarousel: React.FC = () => {
   const { data: categories, isLoading, isError, error } = useCategories();
@@ -14,7 +14,7 @@ export const CategoriesCarousel: React.FC = () => {
   if (isLoading) {
     return (
       <div className="text-indigo-800">
-        <Loading />
+        <Loader />
       </div>
     );
   }

@@ -1,6 +1,5 @@
-import { getAllCategories, getSaleProduct } from "@/services/categories";
+import { getAllCategories, getSpecificCategory } from "@/services/categories";
 import { CategoriesType } from "@/types/categoriesType";
-import { ProductType } from "@/types/ProductType";
 import { useQuery } from "@tanstack/react-query";
 
 // Get all categories
@@ -13,10 +12,10 @@ export const useCategories = () => {
 };
 
 // Get Specific Category
-export const useSpecificCategory = (limit: number) => {
-  return useQuery<ProductType[]>({
-    queryKey: ["SpecificCategory", limit],
-    queryFn: () => getSaleProduct({ limit }),
+export const useSpecificCategory = (categoryId: string) => {
+  return useQuery<CategoriesType>({
+    queryKey: ["category", categoryId],
+    queryFn: () => getSpecificCategory({ categoryId }),
     staleTime: 5 * 60 * 1000,
   });
 };
