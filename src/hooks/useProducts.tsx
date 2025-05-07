@@ -3,40 +3,17 @@ import {
   getAllProducts,
   getFlashSale,
   getSpecificProduct,
-  ProductsResponse,
 } from "@/services/products";
-import { ProductType } from "@/types/ProductType";
+import {
+  GetAllProductsParams,
+  ProductsResponse,
+  ProductType,
+} from "@/types/ProductType";
 
-export function useProducts(
-  page = 1,
-  limit = 20,
-  categoryId?: string,
-  brandId?: string,
-  subcategoryId?: string,
-  minPrice?: number,
-  maxPrice?: number
-) {
+export function useProducts(params: GetAllProductsParams) {
   return useQuery<ProductsResponse, Error>({
-    queryKey: [
-      "products",
-      page,
-      limit,
-      categoryId,
-      brandId,
-      subcategoryId,
-      minPrice,
-      maxPrice,
-    ],
-    queryFn: () =>
-      getAllProducts(
-        page,
-        limit,
-        categoryId,
-        brandId,
-        subcategoryId,
-        minPrice,
-        maxPrice
-      ),
+    queryKey: ["products", params],
+    queryFn: () => getAllProducts(params),
     staleTime: 5 * 60 * 1000,
     placeholderData: (prevData) => prevData,
   });
@@ -51,7 +28,6 @@ export function useSpecificProduct(productId: string) {
   });
 }
 
-// Get FlashSale products
 export const useFlashSale = (limit: number) => {
   return useQuery<ProductType[]>({
     queryKey: ["SpecificCategory", limit],

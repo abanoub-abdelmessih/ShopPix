@@ -1,24 +1,22 @@
 "use client";
 
 import { Loader } from "@/components/Loader";
+import { ErrorMessage } from "@/components/shared/products/ErrorMessage";
 import { ProductCard } from "@/components/shared/products/ProductCard";
-import { RenderStars } from "@/components/shared/products/RenderStars";
-import { Button } from "@/components/ui/button";
+import { SpecificProductImages } from "@/components/shared/products/SpecificProduct/SpecificProductImages";
+import { SpecificProductQuantity } from "@/components/shared/products/SpecificProduct/SpecificProductQuantity";
+import { SpecificProductRating } from "@/components/shared/products/SpecificProduct/SpecificProductRating";
 import { useProducts, useSpecificProduct } from "@/hooks/useProducts";
 import {
   ChevronsRight,
   Heart,
-  MinusCircle,
   Package,
-  PlusCircle,
   Shield,
   ShoppingCart,
   Truck,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
 const ProductDetailsPage = () => {
   const params = useParams();
@@ -26,16 +24,8 @@ const ProductDetailsPage = () => {
   const { data: product, isLoading, isError } = useSpecificProduct(productId);
   const categoryId = product?.category._id;
   const { data: relatedProducts, isLoading: loadingRelatedProducts } =
-    useProducts(1, 5, categoryId);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [theQuantity, setTheQuantity] = useState(1);
+    useProducts({ page: 1, limit: 5, categoryId: categoryId });
   const router = useRouter();
-
-  useEffect(() => {
-    if (product) {
-      setSelectedImage(product.imageCover);
-    }
-  }, [product]);
 
   if (isLoading || loadingRelatedProducts) {
     return (
@@ -47,43 +37,10 @@ const ProductDetailsPage = () => {
 
   if (isError || !product) {
     return (
-      <div className="flex items-center justify-center flex-col px-4 mx-auto max-w-2xl flex-1">
-        <div className="mb-6 text-gray-400">
-          <svg
-            className="w-20 h-20 mx-auto"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M16 16s-1.5-2-4-2-4 2-4 2" />
-            <line x1="9" y1="9" x2="9.01" y2="9" />
-            <line x1="15" y1="9" x2="15.01" y2="9" />
-          </svg>
-        </div>
-
-        <h3 className="text-2xl md:text-3xl font-bold mb-3 text-center bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-          No products found
-        </h3>
-
-        <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 mb-8 text-center max-w-md">
-          The product you are looking for doesn&apos;t exist or has been
-          removed.
-        </p>
-
-        <Button
-          className="group bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-2.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-          asChild
-        >
-          <Link href="/products" className="flex items-center gap-2">
-            Browse All Products
-            <ChevronsRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
-          </Link>
-        </Button>
-      </div>
+      <ErrorMessage
+        description="The product you are looking for doesn't exist or has been
+          removed."
+      />
     );
   }
 
@@ -96,46 +53,7 @@ const ProductDetailsPage = () => {
     <div className="flex-1 container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 lg:grid-cols-10 gap-8">
         {/* Image Gallery Section */}
-        <div className="md:col-span-6 lg:col-span-4">
-          <div className="relative aspect-square w-full bg-gray-50 dark:bg-zinc-700 rounded-xl overflow-hidden mb-4 shadow-md group">
-            {/* The actual product image */}
-            <Image
-              src={selectedImage || product.imageCover}
-              alt={`${product.title} - Main view`}
-              fill
-              className="object-contain px-4 transition-transform duration-300 ease-in-out group-hover:scale-105"
-              priority
-              sizes="(max-width: 768px) 100vw, 50vw"
-              quality={85}
-            />
-          </div>
-
-          {/* Thumbnail Gallery */}
-          {product.images?.length > 1 && (
-            <div className="grid grid-cols-4 gap-3">
-              {product.images.map((image, index) => (
-                <button
-                  key={index}
-                  className={`relative aspect-square overflow-hidden border-2 transition-all rounded-xl ${
-                    selectedImage === image
-                      ? "border-indigo-600 dark:border-indigo-400"
-                      : "border-transparent hover:border-indigo-300 dark:hover:border-indigo-600/50"
-                  }`}
-                  onClick={() => setSelectedImage(image)}
-                >
-                  <Image
-                    src={image}
-                    alt={`${product.title} - Thumbnail ${index + 1}`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 25vw, 10vw"
-                    quality={60}
-                  />
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
+        <SpecificProductImages product={product} />
 
         {/* Product Details Section */}
         <div className="md:col-span-6 font-poppins bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg ">
@@ -155,26 +73,7 @@ const ProductDetailsPage = () => {
           </div>
 
           {/* Rating */}
-          <div className="flex items-center mb-6">
-            <div className="flex">
-              <RenderStars rating={product.ratingsAverage} />
-            </div>
-            <span className="ml-2 text-sm text-zinc-600 dark:text-zinc-300 font-medium">
-              {product.ratingsAverage?.toFixed(1) || "0.0"}
-            </span>
-            <span className="mx-2 text-zinc-400">•</span>
-            <span className="text-sm text-zinc-600 dark:text-zinc-300">
-              {product.ratingsQuantity || 0} reviews
-            </span>
-            {product.sold && (
-              <>
-                <span className="mx-2 text-zinc-400">•</span>
-                <span className="text-sm text-zinc-600 dark:text-zinc-300">
-                  {product.sold} sold
-                </span>
-              </>
-            )}
-          </div>
+          <SpecificProductRating product={product} />
 
           {/* Pricing */}
           <div className="mb-6">
@@ -254,39 +153,7 @@ const ProductDetailsPage = () => {
           </div>
 
           {/* Quantity Selector */}
-          <div className="mb-8">
-            <label
-              htmlFor="quantity"
-              className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2"
-            >
-              Quantity
-            </label>
-            <div className="inline-flex items-center max-w-[160px] bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-full shadow-sm">
-              <button
-                onClick={() => setTheQuantity(theQuantity - 1)}
-                disabled={theQuantity <= 1}
-                className="p-2.5 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-l-full disabled:text-zinc-400 dark:disabled:text-zinc-600 transition-colors"
-              >
-                <MinusCircle className="w-5 h-5" />
-              </button>
-              <input
-                type="number"
-                id="quantity"
-                min="1"
-                max={product.quantity}
-                value={theQuantity}
-                readOnly
-                className="w-16 text-center border-x border-zinc-200 dark:border-zinc-700 py-2 text-zinc-900 dark:text-white bg-transparent focus:outline-none"
-              />
-              <button
-                onClick={() => setTheQuantity(theQuantity + 1)}
-                disabled={theQuantity >= product.quantity}
-                className="p-2.5 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-r-full disabled:text-zinc-400 dark:disabled:text-zinc-600 transition-colors"
-              >
-                <PlusCircle className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
+          <SpecificProductQuantity product={product} />
 
           {/* Action Buttons */}
           <div className="flex gap-4 mb-10">
@@ -383,6 +250,8 @@ const ProductDetailsPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Related Products */}
       {relatedProducts && (
         <div className="mt-8">
           <div className="flex items-center justify-between mb-6">

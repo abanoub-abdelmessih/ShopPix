@@ -1,36 +1,24 @@
-import { ProductType } from "@/types/ProductType";
+import { GetAllProductsParams, ProductsResponse } from "@/types/ProductType";
 import axios from "axios";
 
-export type ProductsResponse = {
-  results: number;
-  metadata: {
-    currentPage: number;
-    numberOfPages: number;
-    nextPage: number | null;
-  };
-  data: ProductType[];
-};
-
-export async function getAllProducts(
+export async function getAllProducts({
   page = 1,
   limit = 20,
-  categoryId?: string,
-  brandId?: string,
-  subcategoryId?: string,
-  minPrice?: number,
-  maxPrice?: number
-): Promise<ProductsResponse> {
+  categoryId,
+  brandId,
+  sort,
+  subcategoryId,
+  minPrice,
+  maxPrice,
+}: GetAllProductsParams): Promise<ProductsResponse> {
   try {
     let url = `https://ecommerce.routemisr.com/api/v1/products?page=${page}&limit=${limit}`;
 
     if (categoryId) url += `&category[in]=${categoryId}`;
-
     if (brandId) url += `&brand[in]=${brandId}`;
-
+    if (sort) url += `&sort=${sort}`;
     if (subcategoryId) url += `&subcategory[in]=${subcategoryId}`;
-
     if (minPrice !== undefined) url += `&price[gte]=${minPrice}`;
-
     if (maxPrice !== undefined) url += `&price[lte]=${maxPrice}`;
 
     const response = await axios.get(url);
@@ -46,6 +34,7 @@ export async function getAllProducts(
   }
 }
 
+// باقي الدوال زي ما هي
 export async function getSpecificProduct({ productId }: { productId: string }) {
   try {
     const response = await axios.get(
@@ -63,7 +52,6 @@ export async function getSpecificProduct({ productId }: { productId: string }) {
   }
 }
 
-// Get Men products for Flash sale component
 export async function getFlashSale({ limit = 0 }: { limit?: number }) {
   try {
     const response = await axios.get(

@@ -107,7 +107,7 @@ const AccordionLinks = ({
                 >
                   <button
                     onClick={() => handleCategoryClick(category._id)}
-                    className="cursor-pointer dark:text-zinc-300 text-zinc-800 font-semibold border-2 rounded p-2 hover:scale-90 duration-300 focus:scale-90"
+                    className="text-xs cursor-pointer dark:text-zinc-300 text-zinc-800 font-semibold border-2 rounded p-2 hover:scale-90 duration-300 focus:scale-90"
                   >
                     {category.name}
                   </button>

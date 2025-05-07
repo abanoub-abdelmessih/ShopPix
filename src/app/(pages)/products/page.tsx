@@ -1,5 +1,5 @@
 import { Heading } from "@/components/Heading";
-import { PaginationControls } from "@/components/shared/products/PaginationControls";
+import { ProductsComponent } from "@/components/shared/products/ProductsComponent";
 import { ProductsSidebar } from "@/components/shared/products/ProductsSidebar";
 
 export const metadata = {
@@ -13,7 +13,7 @@ const Products = () => {
         title="Our Products"
         description="Discover top picks from all categories."
       />
-      <PaginationControls />
+      <ProductsComponent />
     </ProductsSidebar>
   );
 };

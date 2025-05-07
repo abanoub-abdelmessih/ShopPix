@@ -86,11 +86,7 @@ export const PriceRange = () => {
         </div>
       </div>
 
-      <Button
-        variant="outline"
-        onClick={handleApplyPriceFilter}
-        className="mt-3 w-full"
-      >
+      <Button onClick={handleApplyPriceFilter} className="mt-3 w-full">
         Apply Filter
       </Button>
     </>

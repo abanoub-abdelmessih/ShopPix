@@ -21,3 +21,24 @@ export type ProductType = {
   updatedAt: string;
   id: string;
 };
+
+export type ProductsResponse = {
+  results: number;
+  metadata: {
+    currentPage: number;
+    numberOfPages: number;
+    nextPage: number | null;
+  };
+  data: ProductType[];
+};
+
+export type GetAllProductsParams = {
+  page?: number;
+  limit?: number;
+  categoryId?: string;
+  brandId?: string;
+  sort?: string;
+  subcategoryId?: string;
+  minPrice?: number;
+  maxPrice?: number;
+};
