@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import {
   getAllProducts,
+  getBestSeller,
   getFlashSale,
   getSpecificProduct,
 } from "@/services/products";
@@ -21,7 +22,7 @@ export function useProducts(params: GetAllProductsParams) {
 
 export function useSpecificProduct(productId: string) {
   return useQuery<ProductType>({
-    queryKey: ["product", productId],
+    queryKey: ["specificProduct", productId],
     queryFn: () => getSpecificProduct({ productId }),
     staleTime: 5 * 60 * 1000,
     enabled: !!productId,
@@ -30,8 +31,16 @@ export function useSpecificProduct(productId: string) {
 
 export const useFlashSale = (limit: number) => {
   return useQuery<ProductType[]>({
-    queryKey: ["SpecificCategory", limit],
+    queryKey: ["flashSale", limit],
     queryFn: () => getFlashSale({ limit }),
+    staleTime: 5 * 60 * 1000,
+  });
+};
+
+export const useBestSeller = (categoryId: string) => {
+  return useQuery<ProductType[]>({
+    queryKey: ["bestSeller", categoryId],
+    queryFn: () => getBestSeller(categoryId),
     staleTime: 5 * 60 * 1000,
   });
 };

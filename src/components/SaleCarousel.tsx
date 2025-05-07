@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-export const SaleCarousel = () => {
+const SaleCarousel = () => {
   return (
     <Carousel
       slidesPerView={1}
@@ -135,3 +135,5 @@ export const SaleCarousel = () => {
     </Carousel>
   );
 };
+
+export default SaleCarousel;

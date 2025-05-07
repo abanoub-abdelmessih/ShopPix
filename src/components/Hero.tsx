@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { ArrowDownIcon, ShoppingBagIcon } from "lucide-react";
 
-export const Hero = () => {
+const Hero = () => {
   const date = new Date();
   const currentYear = date.getFullYear();
 
@@ -80,3 +80,5 @@ export const Hero = () => {
     </section>
   );
 };
+
+export default Hero;
