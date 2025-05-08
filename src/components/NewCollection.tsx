@@ -35,6 +35,7 @@ const NewCollection = () => {
             alt={images[1].title}
             fill
             className="object-cover rounded-lg"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
           <div className="absolute inset-0 bg-zinc-800/50 opacity-0 group-hover:opacity-100 duration-300 rounded-lg flex flex-col justify-end p-3 items-start">
             <h3 className="text-xl font-semibold">{images[1].title}</h3>
@@ -56,6 +57,7 @@ const NewCollection = () => {
                 alt={img.title}
                 fill
                 className="object-cover rounded-lg"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-zinc-800/50 opacity-0 group-hover:opacity-100 duration-300 rounded-lg flex flex-col justify-end p-3 items-start">
                 <h3 className="text-xl font-semibold">{img.title}</h3>

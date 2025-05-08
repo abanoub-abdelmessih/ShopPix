@@ -8,23 +8,41 @@ export const metadata = {
   title: "Home",
 };
 
-const DynamicHero = dynamic(() => import("@/components/Hero"));
+const DynamicHero = dynamic(() => import("@/components/Hero"), {
+  loading: () => <Loader />,
+});
 const DynamicCategoriesCarousel = dynamic(
-  () => import("@/components/shared/categories/CategoriesCarousel")
+  () => import("@/components/shared/categories/CategoriesCarousel"),
+  {
+    loading: () => <Loader />,
+  }
 );
-const DynamicSaleCarousel = dynamic(() => import("@/components/SaleCarousel"));
+const DynamicSaleCarousel = dynamic(() => import("@/components/SaleCarousel"), {
+  loading: () => <Loader />,
+});
 const DynamicFlashSale = dynamic(
-  () => import("@/components/shared/products/FlashSale")
+  () => import("@/components/shared/products/FlashSale"),
+  {
+    loading: () => <Loader />,
+  }
 );
 const DynamicBestSeller = dynamic(
-  () => import("@/components/shared/products/BestSeller")
+  () => import("@/components/shared/products/BestSeller"),
+  {
+    loading: () => <Loader />,
+  }
 );
 
 const DynamicNewCollection = dynamic(
-  () => import("@/components/NewCollection")
+  () => import("@/components/NewCollection"),
+  {
+    loading: () => <Loader />,
+  }
 );
 
-const DynamicServices = dynamic(() => import("@/components/Services"));
+const DynamicServices = dynamic(() => import("@/components/Services"), {
+  loading: () => <Loader />,
+});
 
 const Home = () => {
   return (
@@ -38,10 +56,13 @@ const Home = () => {
         <DynamicSaleCarousel />
         {/* Sale items */}
         <DynamicFlashSale />
+        <Separator />
         {/* New Collection */}
         <DynamicNewCollection />
+        <Separator />
         {/* Best Seller Products */}
         <DynamicBestSeller />
+        <Separator />
         {/* services */}
         <DynamicServices />
         {/* Footer */}

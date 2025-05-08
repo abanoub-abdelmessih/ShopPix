@@ -36,7 +36,7 @@ const Services = () => {
         {services.map((service, index) => (
           <div
             key={index}
-            className="flex flex-col items-center p-6 bg-white dark:bg-zinc-800 rounded-lg shadow-sm text-center transition-colors"
+            className="flex flex-col items-center p-6 bg-white dark:bg-zinc-800 rounded-lg shadow-md text-center transition-colors"
           >
             <div className="mb-4 text-indigo-600 dark:text-indigo-400">
               {service.icon}

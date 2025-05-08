@@ -1,47 +1,40 @@
-import { Instagram, Twitter, Facebook } from "lucide-react";
+const links = [
+  {
+    title: "LinkedIn",
+    href: "https://www.linkedin.com/in/abanoub-abd-elmessih/",
+  },
+  {
+    title: "GitHub",
+    href: "https://github.com/Abanoub-Abd-Elmessih",
+  },
+  {
+    title: "Gmail",
+    href: "mailto:abanoubabdelmessih110@gmail.com",
+  },
+];
 
-const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
+export default function Footer() {
   return (
-    <footer className="bg-white dark:bg-zinc-900 py-8 border-t border-gray-200 dark:border-zinc-800">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          {/* Logo and copyright */}
-          <div className="mb-4 md:mb-0">
-            <h2 className="text-xl font-bold text-indigo-600 dark:text-indigo-400 text-center md:text-start">
-              ShopPix
-            </h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              © {currentYear} All rights reserved.
-            </p>
-          </div>
-
-          {/* Social media icons */}
-          <div className="flex space-x-4">
-            <a
-              href="#"
-              className="text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors"
-            >
-              <Instagram size={20} />
-            </a>
-            <a
-              href="#"
-              className="text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors"
-            >
-              <Twitter size={20} />
-            </a>
-            <a
-              href="#"
-              className="text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors"
-            >
-              <Facebook size={20} />
-            </a>
+    <footer className="border-t bg-white py-12 dark:bg-transparent">
+      <div className="mx-auto container px-6">
+        <div className="flex flex-wrap justify-between gap-6">
+          <span className="text-muted-foreground  block text-center text-sm ">
+            © {new Date().getFullYear()} ShopPix, All rights reserved
+          </span>
+          <div className="flex flex-wrap justify-center gap-6 text-sm">
+            {links.map((link, index) => (
+              <a
+                key={index}
+                href={link.href}
+                target="_blank"
+                className="text-muted-foreground hover:text-primary block duration-150"
+              >
+                <span>{link.title}</span>
+              </a>
+            ))}
           </div>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
