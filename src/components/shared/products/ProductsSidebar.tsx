@@ -11,14 +11,13 @@ import {
   SheetTrigger,
   SheetHeader,
   SheetTitle,
-  SheetClose,
 } from "@/components/ui/sheet";
 import { useBrands } from "@/hooks/useBrands";
 import { useCategories } from "@/hooks/useCategories";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ChevronsRight, SlidersVertical } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { PriceRange } from "./PriceRange";
 
@@ -27,11 +26,13 @@ export const ProductsSidebar = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const [openSheet, setOpenSheet] = useState(false);
+
   return (
     <div className="flex flex-1 font-poppins relative">
       {/* Sheet Trigger for small screens */}
       <div className="xl:hidden">
-        <Sheet>
+        <Sheet open={openSheet} onOpenChange={setOpenSheet}>
           <SheetTrigger asChild>
             <Button
               variant="outline"
@@ -51,7 +52,7 @@ export const ProductsSidebar = ({
                 Filter By ...
               </SheetTitle>
             </SheetHeader>
-            <AccordionLinks closeOnClick />
+            <AccordionLinks setOpenSheet={setOpenSheet} />
           </SheetContent>
         </Sheet>
       </div>
@@ -73,9 +74,9 @@ export const ProductsSidebar = ({
 };
 
 const AccordionLinks = ({
-  closeOnClick = false,
+  setOpenSheet,
 }: {
-  closeOnClick?: boolean;
+  setOpenSheet?: (openSheet: boolean) => void;
 }) => {
   const { data: categories } = useCategories();
   const { data: brands } = useBrands();
@@ -83,58 +84,50 @@ const AccordionLinks = ({
 
   const handleCategoryClick = (categoryId: string) => {
     router.push(`/products?category[in]=${categoryId}`);
+    setOpenSheet?.(false);
   };
 
   const handleBrandClick = (brandId: string) => {
     router.push(`/products?brand[in]=${brandId}`);
+    setOpenSheet?.(false);
   };
-
-  const Wrapper = closeOnClick ? SheetClose : React.Fragment;
 
   return (
     <div className="flex flex-col gap-3">
       <Accordion type="single" collapsible>
-        {categories && categories?.length > 0 && (
+        {categories && categories.length > 0 && (
           <AccordionItem value="item-1">
             <AccordionTrigger className="text-lg hover:no-underline mt-3 font-bold uppercase">
               Categories
             </AccordionTrigger>
             <AccordionContent className="grid grid-cols-2 gap-3 p-2 max-h-80 overflow-y-auto">
-              {categories?.map((category) => (
-                <Wrapper
+              {categories.map((category) => (
+                <button
                   key={category._id}
-                  {...(closeOnClick ? { asChild: true } : {})}
+                  onClick={() => handleCategoryClick(category._id)}
+                  className="text-xs cursor-pointer dark:text-zinc-300 text-zinc-800 font-semibold border-2 rounded p-2 hover:scale-90 duration-300 focus:scale-90"
                 >
-                  <button
-                    onClick={() => handleCategoryClick(category._id)}
-                    className="text-xs cursor-pointer dark:text-zinc-300 text-zinc-800 font-semibold border-2 rounded p-2 hover:scale-90 duration-300 focus:scale-90"
-                  >
-                    {category.name}
-                  </button>
-                </Wrapper>
+                  {category.name}
+                </button>
               ))}
             </AccordionContent>
           </AccordionItem>
         )}
 
-        {brands && brands?.length > 0 && (
+        {brands && brands.length > 0 && (
           <AccordionItem value="item-2">
             <AccordionTrigger className="text-lg hover:no-underline mt-3 font-bold uppercase">
               Brands
             </AccordionTrigger>
             <AccordionContent className="grid grid-cols-2 gap-3 p-2 max-h-80 overflow-y-auto">
-              {brands?.map((brand) => (
-                <Wrapper
+              {brands.map((brand) => (
+                <button
                   key={brand._id}
-                  {...(closeOnClick ? { asChild: true } : {})}
+                  onClick={() => handleBrandClick(brand._id)}
+                  className="cursor-pointer dark:text-zinc-300 text-zinc-800 font-semibold border-2 rounded p-2 hover:scale-90 duration-300 focus:scale-90"
                 >
-                  <button
-                    onClick={() => handleBrandClick(brand._id)}
-                    className="cursor-pointer dark:text-zinc-300 text-zinc-800 font-semibold border-2 rounded p-2 hover:scale-90 duration-300 focus:scale-90"
-                  >
-                    {brand.name}
-                  </button>
-                </Wrapper>
+                  {brand.name}
+                </button>
               ))}
             </AccordionContent>
           </AccordionItem>
@@ -145,13 +138,17 @@ const AccordionLinks = ({
             Price
           </AccordionTrigger>
           <AccordionContent className="flex flex-col items-start gap-3 px-2">
-            {/* Slider for price range */}
             <PriceRange />
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+
       <Button asChild variant="outline">
-        <Link href="/products" className="flex items-center gap-2">
+        <Link
+          href="/products"
+          className="flex items-center gap-2"
+          onClick={() => setOpenSheet?.(false)}
+        >
           Clear Filters
           <ChevronsRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
         </Link>

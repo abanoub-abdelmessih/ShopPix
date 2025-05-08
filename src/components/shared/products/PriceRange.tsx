@@ -10,7 +10,11 @@ const MIN_PRICE = 0;
 const MAX_PRICE = 42960;
 const STEP = 10;
 
-export const PriceRange = () => {
+export const PriceRange = ({
+  setOpenSheet,
+}: {
+  setOpenSheet?: (openSheet: boolean) => void;
+}) => {
   const [priceRange, setPriceRange] = useState<[number, number]>([
     MIN_PRICE,
     MAX_PRICE,
@@ -42,6 +46,7 @@ export const PriceRange = () => {
     current.set("minPrice", minPrice.toString());
     current.set("maxPrice", maxPrice.toString());
     router.push(`${pathname}?${current.toString()}`);
+    setOpenSheet?.(false);
   };
 
   return (
