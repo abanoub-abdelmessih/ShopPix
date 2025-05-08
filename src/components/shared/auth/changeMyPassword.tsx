@@ -1,7 +1,5 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,14 +7,19 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-
-type FormData = {
-  currentPassword: string;
-  newPassword: string;
-  confirmPassword: string;
-};
+import { useForm } from "react-hook-form";
+import { PasswordField } from "./PasswordField";
+import {
+  ChangePasswordSchema,
+  changePasswordSchema,
+} from "@/schemas/changePassword";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { useMutation } from "@tanstack/react-query";
+import { ChangeMyPasswordFunction } from "@/services/auth";
+import { toast } from "@/hooks/use-toast";
+import { Loader } from "@/components/Loader";
 
 type ChangeMyPasswordProps = {
   open: boolean;
@@ -27,94 +30,90 @@ export const ChangeMyPassword = ({
   open,
   onOpenChange,
 }: ChangeMyPasswordProps) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    watch,
-    formState: { errors },
-  } = useForm<FormData>();
+  const form = useForm<ChangePasswordSchema>({
+    resolver: zodResolver(changePasswordSchema),
+    defaultValues: {
+      currentPassword: "",
+      password: "",
+      rePassword: "",
+    },
+  });
 
-  const onSubmit = (data: FormData) => {
-    console.log("Password change data:", data);
-    reset();
-    onOpenChange(false);
+  const { mutate, isPending } = useMutation({
+    mutationFn: ChangeMyPasswordFunction,
+    onSuccess: () => {
+      toast({
+        title: "Success",
+        description: "You have changed your password successfully!",
+        className: "bg-green-500",
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Failed",
+        description: error.message || "Error during sign-in",
+        variant: "destructive",
+      });
+    },
+
+    retry: false,
+  });
+
+  const onSubmit = (value: ChangePasswordSchema) => {
+    mutate(value);
   };
-
-  const newPassword = watch("newPassword");
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="w-11/12 rounded-lg">
         <DialogHeader>
           <DialogTitle>Change Password</DialogTitle>
           <DialogDescription>
             Enter your current password and choose a new one.
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="currentPassword" className="text-right">
-              Current
-            </Label>
-            <div className="col-span-3 flex flex-col gap-1">
-              <Input
-                id="currentPassword"
-                type="password"
-                {...register("currentPassword", { required: "Required" })}
-              />
-              {errors.currentPassword && (
-                <span className="text-xs text-red-500">
-                  {errors.currentPassword.message}
-                </span>
+
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <input
+              type="text"
+              name="username"
+              autoComplete="username"
+              className="hidden"
+            />
+
+            <PasswordField
+              id="currentPassword"
+              name="currentPassword"
+              label="Current Password"
+              placeholder="Enter your current password"
+              control={form.control}
+            />
+            <PasswordField
+              id="password"
+              name="password"
+              label="New Password"
+              placeholder="Enter your new password"
+              control={form.control}
+            />
+            <PasswordField
+              id="rePassword"
+              name="rePassword"
+              label="Confirm Password"
+              placeholder="Re-enter your password"
+              control={form.control}
+            />
+            <Button type="submit" className="w-full" disabled={isPending}>
+              {isPending ? (
+                <>
+                  <Loader /> Please Wait
+                </>
+              ) : (
+                "Change Password"
               )}
-            </div>
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="newPassword" className="text-right">
-              New
-            </Label>
-            <div className="col-span-3 flex flex-col gap-1">
-              <Input
-                id="newPassword"
-                type="password"
-                {...register("newPassword", {
-                  required: "Required",
-                  minLength: { value: 6, message: "At least 6 characters" },
-                })}
-              />
-              {errors.newPassword && (
-                <span className="text-xs text-red-500">
-                  {errors.newPassword.message}
-                </span>
-              )}
-            </div>
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="confirmPassword" className="text-right">
-              Confirm
-            </Label>
-            <div className="col-span-3 flex flex-col gap-1">
-              <Input
-                id="confirmPassword"
-                type="password"
-                {...register("confirmPassword", {
-                  required: "Required",
-                  validate: (value) =>
-                    value === newPassword || "Passwords do not match",
-                })}
-              />
-              {errors.confirmPassword && (
-                <span className="text-xs text-red-500">
-                  {errors.confirmPassword.message}
-                </span>
-              )}
-            </div>
-          </div>
-          <div className="flex justify-end">
-            <Button type="submit">Save changes</Button>
-          </div>
-        </form>
+            </Button>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   );

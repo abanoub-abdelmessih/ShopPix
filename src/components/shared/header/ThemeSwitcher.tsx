@@ -41,6 +41,7 @@ export const ThemeSwitcher = () => {
           variant="outline"
           size="icon"
           className="focus-visible:ring-0 focus-visible:ring-offset-0 !mt-0"
+          aria-label="Toggle theme"
         >
           {getIcon()}
         </Button>

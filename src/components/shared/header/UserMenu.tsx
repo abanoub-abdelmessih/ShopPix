@@ -37,7 +37,7 @@ export const UserMenu = ({ showName = false }) => {
             </Avatar>
             {showName && user && (
               <span className="font-medium text-sm text-gray-700 dark:text-gray-200">
-                {user.name.split(" ")[0]}
+                {user.name}
               </span>
             )}
           </div>

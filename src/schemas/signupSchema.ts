@@ -18,7 +18,7 @@ export const signUpSchema = z
         /^(\+201|01|00201)[0-2,5]{1}[0-9]{8}$/,
         "Phone number must be valid Egyptian phone number"
       ),
-      password: z
+    password: z
       .string()
       .nonempty("Please enter your password")
       .min(6, "Password must be at least 6 characters.")
@@ -26,8 +26,8 @@ export const signUpSchema = z
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/,
         "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character."
       ),
-    
-      rePassword: z.string().nonempty("Please confirm your password"),
+
+    rePassword: z.string().nonempty("Please confirm your password"),
     terms: z.boolean().refine((val) => val === true, {
       message: "Please accept Terms and Conditions.",
     }),
