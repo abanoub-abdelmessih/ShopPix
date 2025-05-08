@@ -14,16 +14,23 @@ import { LogoutFunction } from "@/services/auth";
 import { Edit, Edit2, ListOrderedIcon, LogOut } from "lucide-react";
 import Cookies from "js-cookie";
 import { ChangeMyPassword } from "../auth/changeMyPassword";
+import { UpdateUserData } from "../auth/UpdateUserData";
 
 export const UserMenu = ({ showName = false }) => {
-  const [isPasswordDialogOpen, setIsPasswordDialogOpen] = useState(false);
+  const [openUpdateDataDialog, setOpenUpdateDataDialog] = useState(false);
+  const [openPasswordDialog, setOpenPasswordDialog] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const userStorage = Cookies.get("user");
   const user = userStorage ? JSON.parse(userStorage) : null;
 
   const handlePasswordClick = () => {
     setDropdownOpen(false);
-    setIsPasswordDialogOpen(true);
+    setOpenPasswordDialog(true);
+  };
+
+  const handleUserDataClick = () => {
+    setDropdownOpen(false);
+    setOpenUpdateDataDialog(true);
   };
 
   return (
@@ -56,9 +63,12 @@ export const UserMenu = ({ showName = false }) => {
             My Orders
           </DropdownMenuItem>
 
-          <DropdownMenuItem className="cursor-pointer gap-2">
+          <DropdownMenuItem
+            className="cursor-pointer gap-2"
+            onClick={handleUserDataClick}
+          >
             <Edit2 size={16} />
-            Profile Info
+            Edit Profile Info
           </DropdownMenuItem>
 
           <DropdownMenuItem
@@ -81,9 +91,13 @@ export const UserMenu = ({ showName = false }) => {
         </DropdownMenuContent>
       </DropdownMenu>
 
+      <UpdateUserData
+        open={openUpdateDataDialog}
+        onOpenChange={setOpenUpdateDataDialog}
+      />
       <ChangeMyPassword
-        open={isPasswordDialogOpen}
-        onOpenChange={setIsPasswordDialogOpen}
+        open={openPasswordDialog}
+        onOpenChange={setOpenPasswordDialog}
       />
     </>
   );

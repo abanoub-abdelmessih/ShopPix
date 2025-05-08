@@ -51,7 +51,7 @@ export const ChangeMyPassword = ({
     onError: (error: Error) => {
       toast({
         title: "Failed",
-        description: error.message || "Error during sign-in",
+        description: error.message || "Error changing password",
         variant: "destructive",
       });
     },

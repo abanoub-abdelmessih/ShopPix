@@ -8,6 +8,7 @@ import {
   ResetCodeSchema,
 } from "@/schemas/ForgotPasswordSchema";
 import { ChangePasswordSchema } from "@/schemas/changePassword";
+import { UpdateUserDataSchema } from "@/schemas/UpdateUserDataSchema";
 
 // SIGN UP
 export async function signUpFunction(data: SignUpSchema) {
@@ -177,6 +178,46 @@ export async function ChangeMyPasswordFunction(data: ChangePasswordSchema) {
       const user = response.data.user;
 
       Cookies.set("token", token, { expires: 7, secure: true });
+      Cookies.set("user", JSON.stringify(user), { expires: 7, secure: true });
+      window.location.href = "/";
+
+      return { success: true };
+    }
+
+    throw new Error("Unexpected response");
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const message =
+        error.response?.data?.errors?.msg ||
+        error.response?.data?.message ||
+        "Failed to change password. Please try again.";
+      throw new Error(message);
+    } else {
+      throw new Error("An unexpected error occurred.");
+    }
+  }
+}
+// UPDATE USER DATA
+export async function UpdateUserDataFunction(data: UpdateUserDataSchema) {
+  const token = Cookies.get("token");
+  if (!token) {
+    window.location.href = "/sign-in";
+    throw new Error("You must be logged in to change your password.");
+  }
+
+  try {
+    const response = await axios.put(
+      "https://ecommerce.routemisr.com/api/v1/users/updateMe/",
+      data,
+      {
+        headers: {
+          token,
+        },
+      }
+    );
+
+    if (response.data.message === "success") {
+      const user = response.data.user;
       Cookies.set("user", JSON.stringify(user), { expires: 7, secure: true });
       window.location.href = "/";
 
