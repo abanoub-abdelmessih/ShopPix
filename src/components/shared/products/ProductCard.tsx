@@ -146,7 +146,6 @@ export const ProductCard = ({
             className="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg transition-colors duration-300"
             onClick={(e) => {
               e.stopPropagation();
-              // Add to cart functionality here
             }}
             aria-label="Add to cart"
           >

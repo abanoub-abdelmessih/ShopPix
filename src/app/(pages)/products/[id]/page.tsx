@@ -7,12 +7,17 @@ import { SpecificProductImages } from "@/components/shared/products/SpecificProd
 import { SpecificProductQuantity } from "@/components/shared/products/SpecificProduct/SpecificProductQuantity";
 import { SpecificProductRating } from "@/components/shared/products/SpecificProduct/SpecificProductRating";
 import { useProducts, useSpecificProduct } from "@/hooks/useProducts";
-import { useWishlist } from "@/hooks/useWishlist";
+import {
+  useAddWishlist,
+  useRemoveWishlist,
+  useWishlist,
+} from "@/hooks/useWishlist";
 import { cn } from "@/lib/utils";
 import { ProductType } from "@/types/ProductType";
 import {
   ChevronsRight,
   Heart,
+  LoaderPinwheel,
   Package,
   Shield,
   ShoppingCart,
@@ -20,6 +25,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { useMemo } from "react";
 
 const ProductDetailsPage = () => {
   const params = useParams();
@@ -29,6 +35,14 @@ const ProductDetailsPage = () => {
   const { data: relatedProducts, isLoading: loadingRelatedProducts } =
     useProducts({ page: 1, limit: 5, categoryId: categoryId });
   const { data: wishListProducts, isLoading: LoadingWishList } = useWishlist();
+  const { mutate: addToWishList, isPending: loadingAdd } = useAddWishlist();
+  const { mutate: removeFromWishList, isPending: loadingRemove } =
+    useRemoveWishlist();
+
+  const wishedIds = useMemo(
+    () => wishListProducts?.data.map((p: ProductType) => p._id) || [],
+    [wishListProducts]
+  );
 
   const router = useRouter();
 
@@ -54,7 +68,16 @@ const ProductDetailsPage = () => {
     router.push(`/products?brand[in]=${encodedBrandId}`);
   };
 
-  const wishedIds = wishListProducts?.data.map((p: ProductType) => p._id) || [];
+  const isWished = wishedIds.includes(product._id);
+
+  const toggleWishlist = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isWished) {
+      removeFromWishList(product._id);
+    } else {
+      addToWishList(product._id);
+    }
+  };
 
   return (
     <div className="flex-1 container mx-auto px-4 py-8">
@@ -179,15 +202,20 @@ const ProductDetailsPage = () => {
             <button
               type="button"
               className="flex items-center justify-center rounded-full w-14 h-14 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-md hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 group"
+              onClick={toggleWishlist}
             >
-              <Heart
-                className={cn(
-                  "w-5 h-5 transition-colors",
-                  wishedIds.includes(product._id)
-                    ? "fill-red-500 text-red-500"
-                    : "text-gray-500 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400"
-                )}
-              />
+              {loadingAdd || loadingRemove ? (
+                <LoaderPinwheel className="animate-spin" />
+              ) : (
+                <Heart
+                  className={cn(
+                    "w-5 h-5 transition-colors",
+                    wishedIds.includes(product._id)
+                      ? "fill-red-500 text-red-500"
+                      : "text-gray-500 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400"
+                  )}
+                />
+              )}
             </button>
           </div>
 

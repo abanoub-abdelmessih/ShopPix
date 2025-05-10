@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { useProducts } from "@/hooks/useProducts";
 import { PaginationBar } from "./PaginationBar";
@@ -45,6 +45,11 @@ export const ProductsComponent = () => {
     setCurrentPage(1);
   }, [categoryId, brandId, subcategoryId]);
 
+  const wishedIds = useMemo(
+    () => wishListProducts?.data.map((p: ProductType) => p._id) || [],
+    [wishListProducts]
+  );
+
   if (isLoading || isFetching || LoadingWishList) {
     return (
       <div className="flex items-center justify-center gap-3 text-3xl flex-1 ">
@@ -67,8 +72,6 @@ export const ProductsComponent = () => {
       />
     );
   }
-
-  const wishedIds = wishListProducts?.data.map((p: ProductType) => p._id) || [];
 
   return (
     <div className="container mx-auto font-poppins">

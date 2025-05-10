@@ -9,11 +9,16 @@ import { useFlashSale } from "@/hooks/useProducts";
 import { Heading } from "@/components/Heading";
 import { ProductType } from "@/types/ProductType";
 import { useWishlist } from "@/hooks/useWishlist";
+import { useMemo } from "react";
 
 const FlashSale = () => {
   const { data: products, isLoading } = useFlashSale(6);
   const { data: wishListProducts, isLoading: LoadingWishList } = useWishlist();
 
+  const wishedIds = useMemo(
+    () => wishListProducts?.data.map((p: ProductType) => p._id) || [],
+    [wishListProducts]
+  );
   if (isLoading || LoadingWishList)
     return (
       <div className="text-indigo-800">
@@ -23,7 +28,6 @@ const FlashSale = () => {
   const filteredProducts = products?.filter(
     (product) => product.priceAfterDiscount
   );
-  const wishedIds = wishListProducts?.data.map((p: ProductType) => p._id) || [];
 
   return (
     <>

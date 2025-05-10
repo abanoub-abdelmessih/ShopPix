@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ChevronsRight } from "lucide-react";
 
@@ -24,7 +24,10 @@ const BestSeller = () => {
   const { data: bestProducts, isLoading } = useBestSeller(category.id);
   const { data: wishListProducts, isLoading: LoadingWishList } = useWishlist();
 
-  const wishedIds = wishListProducts?.data.map((p: ProductType) => p._id) || [];
+  const wishedIds = useMemo(
+    () => wishListProducts?.data.map((p: ProductType) => p._id) || [],
+    [wishListProducts]
+  );
 
   return (
     <div className="container mx-auto flex flex-col items-center py-5">
