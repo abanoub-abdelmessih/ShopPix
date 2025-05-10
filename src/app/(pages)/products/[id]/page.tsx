@@ -7,6 +7,9 @@ import { SpecificProductImages } from "@/components/shared/products/SpecificProd
 import { SpecificProductQuantity } from "@/components/shared/products/SpecificProduct/SpecificProductQuantity";
 import { SpecificProductRating } from "@/components/shared/products/SpecificProduct/SpecificProductRating";
 import { useProducts, useSpecificProduct } from "@/hooks/useProducts";
+import { useWishlist } from "@/hooks/useWishlist";
+import { cn } from "@/lib/utils";
+import { ProductType } from "@/types/ProductType";
 import {
   ChevronsRight,
   Heart,
@@ -25,9 +28,11 @@ const ProductDetailsPage = () => {
   const categoryId = product?.category._id;
   const { data: relatedProducts, isLoading: loadingRelatedProducts } =
     useProducts({ page: 1, limit: 5, categoryId: categoryId });
+  const { data: wishListProducts, isLoading: LoadingWishList } = useWishlist();
+
   const router = useRouter();
 
-  if (isLoading || loadingRelatedProducts) {
+  if (isLoading || loadingRelatedProducts || LoadingWishList) {
     return (
       <div className="flex items-center justify-center gap-3 text-3xl flex-1 ">
         <Loader /> Please Wait
@@ -48,6 +53,8 @@ const ProductDetailsPage = () => {
     const encodedBrandId = encodeURIComponent(brandId);
     router.push(`/products?brand[in]=${encodedBrandId}`);
   };
+
+  const wishedIds = wishListProducts?.data.map((p: ProductType) => p._id) || [];
 
   return (
     <div className="flex-1 container mx-auto px-4 py-8">
@@ -174,8 +181,12 @@ const ProductDetailsPage = () => {
               className="flex items-center justify-center rounded-full w-14 h-14 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-md hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 group"
             >
               <Heart
-                className="w-6 h-6 text-zinc-500 dark:text-zinc-400 group-hover:text-red-500 group-hover:fill-red-500 transition-colors duration-300"
-                strokeWidth={1.5}
+                className={cn(
+                  "w-5 h-5 transition-colors",
+                  wishedIds.includes(product._id)
+                    ? "fill-red-500 text-red-500"
+                    : "text-gray-500 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400"
+                )}
               />
             </button>
           </div>
@@ -268,7 +279,11 @@ const ProductDetailsPage = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
             {relatedProducts.data.map((product) => (
-              <ProductCard product={product} key={product._id} />
+              <ProductCard
+                product={product}
+                key={product._id}
+                isWished={wishedIds.includes(product._id)}
+              />
             ))}
           </div>
         </div>

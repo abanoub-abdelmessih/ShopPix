@@ -7,16 +7,23 @@ import Link from "next/link";
 import { Loader } from "@/components/Loader";
 import { useFlashSale } from "@/hooks/useProducts";
 import { Heading } from "@/components/Heading";
+import { ProductType } from "@/types/ProductType";
+import { useWishlist } from "@/hooks/useWishlist";
 
 const FlashSale = () => {
-  const { data: products, isLoading } = useFlashSale(5);
+  const { data: products, isLoading } = useFlashSale(6);
+  const { data: wishListProducts, isLoading: LoadingWishList } = useWishlist();
 
-  if (isLoading)
+  if (isLoading || LoadingWishList)
     return (
       <div className="text-indigo-800">
         <Loader />
       </div>
     );
+  const filteredProducts = products?.filter(
+    (product) => product.priceAfterDiscount
+  );
+  const wishedIds = wishListProducts?.data.map((p: ProductType) => p._id) || [];
 
   return (
     <>
@@ -26,8 +33,12 @@ const FlashSale = () => {
       />
       <div className="flex flex-col items-center justify-center py-5 overflow-hidden">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 p-4 container">
-          {products?.map((product) => (
-            <ProductCard key={product._id} product={product} />
+          {filteredProducts?.map((product) => (
+            <ProductCard
+              key={product._id}
+              product={product}
+              isWished={wishedIds.includes(product._id)}
+            />
           ))}
         </div>
         <Button className="mx-auto group" asChild>

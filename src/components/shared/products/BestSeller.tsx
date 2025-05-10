@@ -10,6 +10,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { useBestSeller } from "@/hooks/useProducts";
 import { ProductCard } from "./ProductCard";
+import { ProductType } from "@/types/ProductType";
+import { useWishlist } from "@/hooks/useWishlist";
 
 const categories = [
   { id: "6439d5b90049ad0b52b90048", name: "Men's" },
@@ -20,6 +22,9 @@ const categories = [
 const BestSeller = () => {
   const [category, setCategory] = useState(categories[0]);
   const { data: bestProducts, isLoading } = useBestSeller(category.id);
+  const { data: wishListProducts, isLoading: LoadingWishList } = useWishlist();
+
+  const wishedIds = wishListProducts?.data.map((p: ProductType) => p._id) || [];
 
   return (
     <div className="container mx-auto flex flex-col items-center py-5">
@@ -46,14 +51,18 @@ const BestSeller = () => {
 
         {categories.map((cat) => (
           <TabsContent key={cat.id} value={cat.id} className="w-full">
-            {isLoading ? (
+            {isLoading || LoadingWishList ? (
               <div className="flex justify-center my-10">
                 <Loader />
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mb-8 p-4">
                 {bestProducts?.map((product) => (
-                  <ProductCard key={product._id} product={product} />
+                  <ProductCard
+                    key={product._id}
+                    product={product}
+                    isWished={wishedIds.includes(product._id)}
+                  />
                 ))}
               </div>
             )}

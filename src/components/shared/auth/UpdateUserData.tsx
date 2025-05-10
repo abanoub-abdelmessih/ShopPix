@@ -82,9 +82,7 @@ export const UpdateUserData = ({ open, onOpenChange }: UpdateUserDataProps) => {
       <DialogContent className="w-11/12 rounded-lg">
         <DialogHeader>
           <DialogTitle>Update Profile Information</DialogTitle>
-          <DialogDescription>
-            Update your name, email address, and phone number below.
-          </DialogDescription>
+          <DialogDescription>Update your name below.</DialogDescription>
         </DialogHeader>
 
         {!user ? (

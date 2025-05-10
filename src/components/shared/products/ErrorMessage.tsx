@@ -3,7 +3,13 @@ import { Button } from "@/components/ui/button";
 import { ChevronsRight } from "lucide-react";
 import Link from "next/link";
 
-export const ErrorMessage = ({ description }: { description: string }) => {
+export const ErrorMessage = ({
+  title = "No products found",
+  description,
+}: {
+  title?: string;
+  description: string;
+}) => {
   return (
     <div className="flex items-center justify-center flex-col px-4 mx-auto max-w-2xl flex-1">
       <div className="mb-6 text-gray-400">
@@ -24,7 +30,7 @@ export const ErrorMessage = ({ description }: { description: string }) => {
       </div>
 
       <h3 className="text-2xl md:text-3xl font-bold mb-3 text-center bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-        No products found
+        {title}
       </h3>
 
       <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 mb-8 text-center max-w-md">

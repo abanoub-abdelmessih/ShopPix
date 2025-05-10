@@ -9,6 +9,8 @@ import { ErrorMessage } from "./ErrorMessage";
 import { SortSelect } from "./SortSelect";
 import { ProductCard } from "./ProductCard";
 import { useSpecificCategory } from "@/hooks/useCategories";
+import { ProductType } from "@/types/ProductType";
+import { useWishlist } from "@/hooks/useWishlist";
 
 export const ProductsComponent = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,12 +39,13 @@ export const ProductsComponent = () => {
     maxPrice: maxPrice ? Number(maxPrice) : undefined,
   });
   const { data: categoryData } = useSpecificCategory(categoryId || "");
+  const { data: wishListProducts, isLoading: LoadingWishList } = useWishlist();
 
   useEffect(() => {
     setCurrentPage(1);
   }, [categoryId, brandId, subcategoryId]);
 
-  if (isLoading || isFetching) {
+  if (isLoading || isFetching || LoadingWishList) {
     return (
       <div className="flex items-center justify-center gap-3 text-3xl flex-1 ">
         <Loader /> Please Wait
@@ -65,6 +68,8 @@ export const ProductsComponent = () => {
     );
   }
 
+  const wishedIds = wishListProducts?.data.map((p: ProductType) => p._id) || [];
+
   return (
     <div className="container mx-auto font-poppins">
       <div className="flex w-full justify-between items-center mb-6 gap-4">
@@ -76,7 +81,11 @@ export const ProductsComponent = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 mb-8 ">
         {products.data.map((product) => (
-          <ProductCard key={product._id} product={product} />
+          <ProductCard
+            key={product._id}
+            product={product}
+            isWished={wishedIds.includes(product._id)}
+          />
         ))}
       </div>
       <PaginationBar

@@ -6,24 +6,40 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Heart, Plus } from "lucide-react";
+import { Heart, LoaderPinwheel, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { RenderStars } from "./RenderStars";
+import { useAddWishlist, useRemoveWishlist } from "@/hooks/useWishlist";
 
 export const ProductCard = ({
   product,
   className,
+  isWished = false,
 }: {
   product: ProductType;
   className?: string;
+  isWished?: boolean;
 }) => {
   const { price, priceAfterDiscount, title, imageCover } = product;
   const hasDiscount = !!priceAfterDiscount;
   const salePercentage = hasDiscount
     ? Math.round(((price - priceAfterDiscount!) / price) * 100)
     : 0;
+
   const router = useRouter();
+  const { mutate: addToWishList, isPending: loadingAdd } = useAddWishlist();
+  const { mutate: removeFromWishList, isPending: loadingRemove } =
+    useRemoveWishlist();
+
+  const toggleWishlist = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isWished) {
+      removeFromWishList(product._id);
+    } else {
+      addToWishList(product._id);
+    }
+  };
 
   const handleProductClick = () => {
     router.push(`/products/${product._id}`);
@@ -56,8 +72,23 @@ export const ProductCard = ({
         )}
 
         {/* Wishlist Button */}
-        <button className="absolute top-3 right-3 bg-white dark:bg-zinc-800 p-2 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-zinc-700 transition-all duration-200">
-          <Heart className="w-5 h-5 text-gray-500 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors" />
+        <button
+          className="absolute top-3 right-3 bg-white dark:bg-zinc-800 p-2 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-zinc-700 transition-all duration-200"
+          onClick={toggleWishlist}
+          aria-label={isWished ? "Remove from wishlist" : "Add to wishlist"}
+        >
+          {loadingAdd || loadingRemove ? (
+            <LoaderPinwheel className="animate-spin" />
+          ) : (
+            <Heart
+              className={cn(
+                "w-5 h-5 transition-colors",
+                isWished
+                  ? "text-red-500 fill-red-500"
+                  : "text-gray-500 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400"
+              )}
+            />
+          )}
         </button>
       </div>
 
@@ -111,7 +142,14 @@ export const ProductCard = ({
             )}
           </div>
 
-          <button className="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg transition-colors duration-300">
+          <button
+            className="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg transition-colors duration-300"
+            onClick={(e) => {
+              e.stopPropagation();
+              // Add to cart functionality here
+            }}
+            aria-label="Add to cart"
+          >
             <Plus className="w-5 h-5" />
           </button>
         </div>
