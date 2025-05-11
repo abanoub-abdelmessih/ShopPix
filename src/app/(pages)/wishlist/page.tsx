@@ -49,7 +49,7 @@ const Wishlist = () => {
         title="Wishlist"
         description="Browse the items you've marked as favorites."
       />
-      <div className="flex bg-gradient-to-t from-indigo-700 to-indigo-400 bg-clip-text text-transparent items-center gap-2">
+      <div className="flex bg-gradient-to-t from-indigo-700 to-indigo-400 bg-clip-text text-transparent items-center gap-2 px-3">
         <h2 className="text-2xl font-bold ">Wishlist Products Count :</h2>
         <span className="text-lg font-bold">{wishListProducts.count}</span>
       </div>
