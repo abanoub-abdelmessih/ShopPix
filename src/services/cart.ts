@@ -1,6 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
+// GET USER CART
 export async function getCartFunction() {
   const token = Cookies.get("token");
   if (!token) {
@@ -26,6 +27,39 @@ export async function getCartFunction() {
       }
       const message =
         error.response?.data.message || "Failed to get cart. Please try again.";
+      throw new Error(message);
+    }
+    throw new Error("An unexpected error occurred");
+  }
+}
+
+// CLEAR USER CART
+export async function clearUserCartFunction() {
+  const token = Cookies.get("token");
+  if (!token) {
+    window.location.href = "/sign-in";
+    return null;
+  }
+
+  try {
+    const response = await axios.delete(
+      "https://ecommerce.routemisr.com/api/v1/cart",
+      { headers: { token } }
+    );
+
+    if (response.data.message === "success") {
+      return { success: true };
+    }
+    throw new Error("Failed to clear user cart");
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 401) {
+        window.location.href = "/sign-in";
+        return null;
+      }
+      const message =
+        error.response?.data.message ||
+        "Failed to clear cart. Please try again.";
       throw new Error(message);
     }
     throw new Error("An unexpected error occurred");

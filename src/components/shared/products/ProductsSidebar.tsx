@@ -68,7 +68,9 @@ export const ProductsSidebar = ({
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-col flex-1 px-7">{children}</div>
+      <div className="flex flex-col flex-1 px-7 container mx-auto">
+        {children}
+      </div>
     </div>
   );
 };
