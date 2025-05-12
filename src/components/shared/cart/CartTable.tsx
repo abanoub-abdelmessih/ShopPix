@@ -12,6 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MouseEvent } from "react";
 import { CartActionButtons } from "./CartActionButtons";
+import { CartQuantity } from "./CartQuantity";
 
 interface CartTableProps {
   cartData: CartData;
@@ -80,15 +81,16 @@ export const CartTable = ({
                   </div>
                 </TableCell>
                 <TableCell>
-                  <span className="inline-flex items-center justify-center min-w-[32px] h-6 px-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 rounded-full text-sm font-medium">
-                    {item.count}
-                  </span>
+                  <CartQuantity
+                    postId={item.product._id}
+                    quantity={item.count}
+                  />
                 </TableCell>
                 <TableCell>${item.price.toFixed(2)}</TableCell>
                 <TableCell className="font-medium text-indigo-600 dark:text-indigo-400">
                   ${(item.count * item.price).toFixed(2)}
                 </TableCell>
-                <TableCell>
+                <TableCell className="text-center">
                   <CartActionButtons
                     isWished={isWished}
                     item={item}

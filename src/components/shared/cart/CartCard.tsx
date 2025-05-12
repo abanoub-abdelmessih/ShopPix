@@ -11,6 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MouseEvent } from "react";
 import { CartActionButtons } from "./CartActionButtons";
+import { CartQuantity } from "./CartQuantity";
 
 interface CartCardProps {
   cartData: CartData;
@@ -118,12 +119,7 @@ export const CartCard = ({
                   {item.product?.ratingsAverage?.toFixed(1) || "0.0"}
                 </span>
               </div>
-              <Link
-                href={`/products/${item.product?._id}`}
-                className="px-3 py-1 text-xs bg-indigo-100 hover:bg-indigo-200 dark:bg-indigo-900/30 dark:hover:bg-indigo-800/50 text-indigo-700 dark:text-indigo-300 rounded font-medium transition-colors"
-              >
-                View details
-              </Link>
+              <CartQuantity postId={item.product._id} quantity={item.count} />
             </CardFooter>
           </Card>
         );
