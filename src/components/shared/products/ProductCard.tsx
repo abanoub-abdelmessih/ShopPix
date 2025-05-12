@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { RenderStars } from "./RenderStars";
 import { useAddWishlist, useRemoveWishlist } from "@/hooks/useWishlist";
+import { useAddToCart } from "@/hooks/useCart";
 
 export const ProductCard = ({
   product,
@@ -31,6 +32,7 @@ export const ProductCard = ({
   const { mutate: addToWishList, isPending: loadingAdd } = useAddWishlist();
   const { mutate: removeFromWishList, isPending: loadingRemove } =
     useRemoveWishlist();
+  const { mutate: addToCart, isPending: loadingAddCart } = useAddToCart();
 
   const toggleWishlist = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -146,10 +148,15 @@ export const ProductCard = ({
             className="bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-lg transition-colors duration-300"
             onClick={(e) => {
               e.stopPropagation();
+              addToCart(product._id);
             }}
             aria-label="Add to cart"
           >
-            <Plus className="w-5 h-5" />
+            {loadingAddCart ? (
+              <LoaderPinwheel className="animate-spin w-5 h-5" />
+            ) : (
+              <Plus className="w-5 h-5" />
+            )}
           </button>
         </div>
       </div>

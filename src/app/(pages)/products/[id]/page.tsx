@@ -4,8 +4,8 @@ import { Loader } from "@/components/Loader";
 import { ErrorMessage } from "@/components/shared/products/ErrorMessage";
 import { ProductCard } from "@/components/shared/products/ProductCard";
 import { SpecificProductImages } from "@/components/shared/products/SpecificProduct/SpecificProductImages";
-import { SpecificProductQuantity } from "@/components/shared/products/SpecificProduct/SpecificProductQuantity";
 import { SpecificProductRating } from "@/components/shared/products/SpecificProduct/SpecificProductRating";
+import { useAddToCart } from "@/hooks/useCart";
 import { useProducts, useSpecificProduct } from "@/hooks/useProducts";
 import {
   useAddWishlist,
@@ -38,6 +38,7 @@ const ProductDetailsPage = () => {
   const { mutate: addToWishList, isPending: loadingAdd } = useAddWishlist();
   const { mutate: removeFromWishList, isPending: loadingRemove } =
     useRemoveWishlist();
+  const { mutate: addToCart, isPending: loadingAddCart } = useAddToCart();
 
   const wishedIds = useMemo(
     () => wishListProducts?.data.map((p: ProductType) => p._id) || [],
@@ -181,27 +182,33 @@ const ProductDetailsPage = () => {
               )}
             </div>
           </div>
-
-          {/* Quantity Selector */}
-          <SpecificProductQuantity product={product} />
-
           {/* Action Buttons */}
           <div className="flex gap-4 mb-10">
             <button
               type="submit"
               disabled={product.quantity <= 0}
-              className={`flex-1 flex items-center justify-center rounded-full px-8 py-3.5 text-base font-medium shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+              className={`flex-1 flex items-center justify-center rounded-full px-8 py-3.5 text-base font-medium shadow-lg hover:shadow-xl transition-all duration-300  ${
                 product.quantity <= 0
                   ? "bg-gray-400 cursor-not-allowed"
                   : "bg-gradient-to-r from-indigo-600 to-purple-600 "
               } text-white`}
+              onClick={(e) => {
+                e.stopPropagation();
+                addToCart(product._id);
+              }}
             >
-              <ShoppingCart className="w-5 h-5 mr-2" strokeWidth={2} />
-              Add to Cart
+              {loadingAddCart ? (
+                <LoaderPinwheel className="animate-spin w-5 h-5" />
+              ) : (
+                <>
+                  <ShoppingCart className="w-5 h-5 mr-2" strokeWidth={2} />
+                  Add to Cart
+                </>
+              )}
             </button>
             <button
               type="button"
-              className="flex items-center justify-center rounded-full w-14 h-14 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-md hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 group"
+              className="flex items-center justify-center rounded-full w-14 h-14 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-md hover:shadow-xl transition-all duration-300 focus:outline-none hover:bg-red-50 dark:hover:bg-red-900/20 group"
               onClick={toggleWishlist}
             >
               {loadingAdd || loadingRemove ? (
