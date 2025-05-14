@@ -9,16 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import {
-  Barcode,
-  Heart,
-  Home,
-  LogOut,
-  Menu,
-  ShoppingCart,
-  Smartphone,
-  Users,
-} from "lucide-react";
+import { Barcode, Heart, Home, LogOut, Menu, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -36,12 +27,6 @@ const navLinks = [
   },
   { path: "/cart", name: "Cart", icon: <ShoppingCart className="w-4 h-4" /> },
   { path: "/wishlist", name: "Wishlist", icon: <Heart className="w-4 h-4" /> },
-  { path: "/about", name: "About us", icon: <Users className="w-4 h-4" /> },
-  {
-    path: "/contactUs",
-    name: "Contact us",
-    icon: <Smartphone className="w-4 h-4" />,
-  },
 ];
 
 const NavLinksList = ({

@@ -5,8 +5,14 @@ import { useGetAddresses, useRemoveAddress } from "@/hooks/useAddress";
 import { Address as AddressType } from "@/types/AddressType";
 import { MapPin, Phone, Trash } from "lucide-react";
 import { CartDeleteDialog } from "../cart/CartDeleteDialog";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
-export const Address = () => {
+export const Address = ({
+  onSelect,
+}: {
+  onSelect: (address: AddressType) => void;
+}) => {
   const {
     data: AddressData,
     isLoading: loadingAddresses,
@@ -34,14 +40,21 @@ export const Address = () => {
           Saved Addresses
         </h2>
       </div>
-
-      <div className="divide-y divide-gray-100 dark:divide-zinc-800">
+      <RadioGroup
+        className="divide-y divide-gray-100 dark:divide-zinc-800"
+        onValueChange={(value) => onSelect(JSON.parse(value))}
+      >
         {AddressData.map((address: AddressType) => (
           <div
             key={address._id}
-            className="p-4 hover:bg-gray-100 dark:hover:bg-zinc-800/50 duration-300"
+            className="flex items-center p-4 hover:bg-gray-100 dark:hover:bg-zinc-800/50 duration-300"
           >
-            <div className="flex justify-between">
+            <RadioGroupItem
+              value={JSON.stringify(address)}
+              id={address._id}
+              className="mr-3"
+            />
+            <Label htmlFor={address._id} className="flex-1 cursor-pointer">
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <span className="px-2.5 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 rounded-md text-xs font-medium uppercase">
@@ -68,22 +81,22 @@ export const Address = () => {
                   </p>
                 </div>
               </div>
+            </Label>
 
-              <div>
-                <CartDeleteDialog
-                  description="Are you sure you want to remove this address?"
-                  isLoading={loadingRemoveAddresses}
-                  onConfirm={() => removingAddresses(address._id)}
-                >
-                  <button className="p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors">
-                    <Trash className="h-4 w-4" />
-                  </button>
-                </CartDeleteDialog>
-              </div>
+            <div>
+              <CartDeleteDialog
+                description="Are you sure you want to remove this address?"
+                isLoading={loadingRemoveAddresses}
+                onConfirm={() => removingAddresses(address._id)}
+              >
+                <button className="p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20 text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors">
+                  <Trash className="h-4 w-4" />
+                </button>
+              </CartDeleteDialog>
             </div>
           </div>
         ))}
-      </div>
+      </RadioGroup>
     </div>
   );
 };

@@ -1,10 +1,15 @@
 import { AddAddressDialog } from "./AddAddressDialog";
 import { Address } from "./Address";
+import { Address as AddressType } from "@/types/AddressType";
 
-export const CheckoutAddress = () => {
+export const CheckoutAddress = ({
+  onSelect,
+}: {
+  onSelect: (address: AddressType) => void;
+}) => {
   return (
     <>
-      <Address />
+      <Address onSelect={onSelect} />
       <AddAddressDialog />
     </>
   );
