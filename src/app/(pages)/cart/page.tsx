@@ -16,6 +16,7 @@ import { CartCard } from "@/components/shared/cart/CartCard";
 import { Heading } from "@/components/Heading";
 import { Trash } from "lucide-react";
 import { CartDeleteDialog } from "@/components/shared/cart/CartDeleteDialog";
+import Link from "next/link";
 
 const CartPage = () => {
   const { data: cartData, isError, isFetching, isLoading } = useGetCart();
@@ -103,8 +104,11 @@ const CartPage = () => {
               <Trash /> Clear Cart
             </Button>
           </CartDeleteDialog>
-          <Button className="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-600 text-white transition-colors ">
-            Proceed to Checkout
+          <Button
+            asChild
+            className="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-600 text-white transition-colors "
+          >
+            <Link href={"/checkout"}>Proceed to Checkout</Link>
           </Button>
         </div>
         <div className="text-xl font-semibold text-right text-gray-900 dark:text-white">

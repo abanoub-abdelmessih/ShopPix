@@ -24,13 +24,14 @@ export const useAddToCart = () => {
 
   return useMutation({
     mutationFn: (postId: string) => addProductCart(postId),
-    onSuccess: () => {
+    onSuccess: async () => {
+      const data = await getCartFunction();
+      queryClient.setQueryData(["cart"], data);
       toast({
         title: "Success",
         description: "product added to cart successfully",
         className: "bg-green-500",
       });
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
     onError: (error: Error) => {
       toast({
@@ -71,19 +72,9 @@ export const useRemoveFromCart = () => {
   return useMutation({
     mutationFn: (postId: string) => removeProductCart(postId),
 
-    onSuccess: (_, postId) => {
-      queryClient.setQueryData<CartData>(["cart"], (oldData) => {
-        if (!oldData) return oldData;
-        return {
-          ...oldData,
-          data: {
-            ...oldData.data,
-            products: oldData.data.products.filter(
-              (item) => item.product._id !== postId
-            ),
-          },
-        };
-      });
+    onSuccess: async () => {
+      const data = await getCartFunction();
+      queryClient.setQueryData(["cart"], data);
 
       toast({
         title: "Success",
@@ -91,7 +82,6 @@ export const useRemoveFromCart = () => {
         className: "bg-green-500",
       });
     },
-
     onError: (error: Error) => {
       toast({
         title: "Failed",
