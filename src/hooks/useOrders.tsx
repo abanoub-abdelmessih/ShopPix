@@ -1,20 +1,29 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "./use-toast";
 import {
   CreateCashOrder,
   CreateCashOrderProps,
   CreateOnlinePaymentOrder,
   CreateOnlinePaymentOrderProps,
+  GetAllOrders,
 } from "@/services/Orders";
 
-// ADD TO CART
+export const useGetOrders = () => {
+  return useQuery({
+    queryKey: ["orders"],
+    queryFn: GetAllOrders,
+    staleTime: 5 * 60 * 1000,
+  });
+};
+
 export const useCreateCashOrder = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: ({ data, cartId }: CreateCashOrderProps) =>
       CreateCashOrder({ data, cartId }),
-    onSuccess: () => {
+    onSuccess: (updatedOrders) => {
+      queryClient.setQueryData(["orders"], updatedOrders);
       toast({
         title: "Success",
         description: "Order Created successfully",
