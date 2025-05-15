@@ -62,7 +62,10 @@ export const UserMenu = ({ showName = false }) => {
 
           <DropdownMenuItem
             className="cursor-pointer gap-2"
-            onClick={() => router.push("/allorders")}
+            onClick={() => {
+              setDropdownOpen(false);
+              router.push("/allorders");
+            }}
           >
             <ListOrderedIcon size={16} />
             My Orders
