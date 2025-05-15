@@ -15,6 +15,7 @@ import { Edit, Edit2, ListOrderedIcon, LogOut } from "lucide-react";
 import Cookies from "js-cookie";
 import { ChangeMyPassword } from "../auth/changeMyPassword";
 import { UpdateUserData } from "../auth/UpdateUserData";
+import { useRouter } from "next/navigation";
 
 export const UserMenu = ({ showName = false }) => {
   const [openUpdateDataDialog, setOpenUpdateDataDialog] = useState(false);
@@ -22,6 +23,7 @@ export const UserMenu = ({ showName = false }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const userStorage = Cookies.get("user");
   const user = userStorage ? JSON.parse(userStorage) : null;
+  const router = useRouter();
 
   const handlePasswordClick = () => {
     setDropdownOpen(false);
@@ -58,7 +60,10 @@ export const UserMenu = ({ showName = false }) => {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem className="cursor-pointer gap-2">
+          <DropdownMenuItem
+            className="cursor-pointer gap-2"
+            onClick={() => router.push("/allorders")}
+          >
             <ListOrderedIcon size={16} />
             My Orders
           </DropdownMenuItem>

@@ -47,7 +47,7 @@ export const AddAddressDialog = () => {
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger asChild>
-        <Button className="w-full border-b py-5" variant="ghost">
+        <Button className="w-full border-b py-5">
           <Plus /> Add New Address
         </Button>
       </DialogTrigger>
