@@ -45,10 +45,14 @@ export const useAddToCart = () => {
 
 // UPDATE PRODUCT COUNT
 export const useUpdateProductCount = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: ({ postId, count }: { postId: string; count: string }) =>
       updateProductCount({ postId, count }),
-    onSuccess: () => {
+    onSuccess: async () => {
+      const data = await getCartFunction();
+      queryClient.setQueryData(["cart"], data);
       toast({
         title: "Success",
         description: "product count updated successfully",

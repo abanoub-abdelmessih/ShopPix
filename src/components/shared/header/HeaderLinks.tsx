@@ -17,6 +17,9 @@ import { UserMenu } from "./UserMenu";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { Button } from "@/components/ui/button";
 import { LogoutFunction } from "@/services/auth";
+import { useEffect, useState } from "react";
+import LanguageToggle from "@/components/LanguageToggle";
+import { useLocale } from "next-intl";
 
 const navLinks = [
   { path: "/", name: "Home", icon: <Home className="w-4 h-4" /> },
@@ -89,20 +92,27 @@ const NavLinksList = ({
 };
 
 export const HeaderLinks = () => {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const currentLocale = useLocale();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
   return (
     <div>
       {/* Desktop Links */}
       <NavLinksList className="hidden lg:flex items-center space-x-1" />
 
       {/* Mobile Sheet Menu */}
-      <Sheet>
+      <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger className="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 ">
           <Menu className="w-5 h-5" />
         </SheetTrigger>
         <SheetContent
           aria-describedby={undefined}
           className="flex flex-col justify-between p-0 border-l border-gray-200 dark:border-zinc-700"
-          side="right"
+          side={currentLocale === "en" ? "right" : "left"}
         >
           <div className="flex flex-col h-full mt-7">
             <SheetHeader className="border-b border-gray-200 dark:border-zinc-700 p-4">
@@ -110,7 +120,10 @@ export const HeaderLinks = () => {
                 <SheetTitle className="text-lg font-medium text-gray-900 dark:text-white">
                   Menu
                 </SheetTitle>
-                <ThemeSwitcher />
+                <div className="flex items-center gap-2">
+                  <LanguageToggle />
+                  <ThemeSwitcher />
+                </div>
               </div>
             </SheetHeader>
 

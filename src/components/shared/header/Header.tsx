@@ -2,6 +2,7 @@ import Link from "next/link";
 import { HeaderLinks } from "./HeaderLinks";
 import { UserMenu } from "./UserMenu";
 import { ThemeSwitcher } from "./ThemeSwitcher";
+import LanguageToggle from "@/components/LanguageToggle";
 
 export const Header = () => {
   return (
@@ -25,6 +26,7 @@ export const Header = () => {
 
           {/* Actions Section */}
           <div className="hidden lg:flex items-center gap-4">
+            <LanguageToggle />
             <ThemeSwitcher />
             <UserMenu />
           </div>

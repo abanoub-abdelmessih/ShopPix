@@ -111,7 +111,7 @@ const CartPage = () => {
             <Link href={"/checkout"}>Proceed to Checkout</Link>
           </Button>
         </div>
-        <div className="text-xl font-semibold text-right text-gray-900 dark:text-white">
+        <div className="text-xl font-semibold text-center text-gray-900 dark:text-white">
           Total:
           <span className="text-indigo-600 dark:text-indigo-400 ml-2">
             ${cartData.data.totalCartPrice.toFixed(2)}

@@ -2,8 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useUpdateProductCount } from "@/hooks/useCart";
-import { Minus, Plus } from "lucide-react";
-import { useState } from "react";
+import { LoaderPinwheel, Minus, Plus } from "lucide-react";
 
 export const CartQuantity = ({
   quantity: initialQuantity,
@@ -12,19 +11,16 @@ export const CartQuantity = ({
   quantity: number;
   postId: string;
 }) => {
-  const [localQuantity, setLocalQuantity] = useState(initialQuantity);
-  const { mutate: updateCount } = useUpdateProductCount();
+  const { mutate: updateCount, isPending } = useUpdateProductCount();
 
   const handleIncrement = () => {
-    const newCount = localQuantity + 1;
-    setLocalQuantity(newCount);
+    const newCount = initialQuantity + 1;
     updateCount({ postId, count: newCount.toString() });
   };
 
   const handleDecrement = () => {
-    const newCount = localQuantity - 1;
+    const newCount = initialQuantity - 1;
     if (newCount >= 1) {
-      setLocalQuantity(newCount);
       updateCount({ postId, count: newCount.toString() });
     }
   };
@@ -35,15 +31,19 @@ export const CartQuantity = ({
         variant="outline"
         size="sm"
         onClick={handleDecrement}
-        disabled={localQuantity <= 1}
+        disabled={initialQuantity <= 1 || isPending}
         className="h-8 w-8 p-0 rounded-full"
         aria-label="Decrease quantity"
       >
-        <Minus className="h-4 w-4" />
+        {isPending ? (
+          <LoaderPinwheel className="animate-spin" />
+        ) : (
+          <Minus className="h-4 w-4" />
+        )}
       </Button>
 
       <span className="inline-flex items-center justify-center min-w-[32px] h-6 px-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-300 rounded-full text-sm font-medium">
-        {localQuantity}
+        {initialQuantity}
       </span>
 
       <Button
@@ -51,9 +51,14 @@ export const CartQuantity = ({
         size="sm"
         onClick={handleIncrement}
         className="h-8 w-8 p-0 rounded-full"
+        disabled={isPending}
         aria-label="Increase quantity"
       >
-        <Plus className="h-4 w-4" />
+        {isPending ? (
+          <LoaderPinwheel className="animate-spin" />
+        ) : (
+          <Plus className="h-4 w-4" />
+        )}
       </Button>
     </div>
   );

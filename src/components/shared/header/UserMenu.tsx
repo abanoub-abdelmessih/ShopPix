@@ -25,6 +25,11 @@ export const UserMenu = ({ showName = false }) => {
   const user = userStorage ? JSON.parse(userStorage) : null;
   const router = useRouter();
 
+  const handleOrdersClick = () => {
+    setDropdownOpen(false);
+    router.push("/allorders");
+  };
+
   const handlePasswordClick = () => {
     setDropdownOpen(false);
     setOpenPasswordDialog(true);
@@ -62,10 +67,7 @@ export const UserMenu = ({ showName = false }) => {
 
           <DropdownMenuItem
             className="cursor-pointer gap-2"
-            onClick={() => {
-              setDropdownOpen(false);
-              router.push("/allorders");
-            }}
+            onClick={handleOrdersClick}
           >
             <ListOrderedIcon size={16} />
             My Orders
