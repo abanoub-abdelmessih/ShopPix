@@ -73,7 +73,7 @@ const CategoriesCarousel: React.FC = () => {
                   priority
                 />
               </div>
-              <p className="text-center mt-3 font-semibold font-poppins uppercase">
+              <p className="text-center mt-3 font-semibold  uppercase">
                 {category.name}
               </p>
               <span

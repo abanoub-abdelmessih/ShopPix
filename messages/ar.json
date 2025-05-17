@@ -116,5 +116,51 @@
     },
     "menu": "القائمة",
     "signOut": "تسجيل الخروج"
+  },
+  "Products": {
+    "Heading": {
+      "title": "منتجاتنا",
+      "description": "اكتشف أفضل الاختيارات من جميع الفئات."
+    },
+    "AllProducts": "كل المنتجات",
+    "IsError": "حدث خطأ أثناء تحميل المنتجات.",
+    "NoProduct": "لم نتمكن من العثور على أي منتجات تطابق معاييرك. يرجى تجربة فئة أخرى أو العودة لاحقًا.",
+    "SortBy": "ترتيب حسب",
+    "HighToLow": "من الأعلى إلى الأقل",
+    "LowToHigh": "من الأقل إلى الأعلى",
+    "FilterBy": "تصفية حسب ...",
+    "Filters": "الفلاتر",
+    "Categories": "الفئات",
+    "Brands": "الماركات",
+    "Price": "السعر",
+    "ClearFilters": "مسح الفلاتر",
+    "minPrice": "أقل سعر",
+    "maxPrice": "أعلى سعر",
+    "ApplyFilter": "تطبيق الفلتر",
+    "SpecificProduct": {
+      "isError": "المنتج الذي تبحث عنه غير موجود أو تم حذفه.",
+      "RelatedProducts": "منتجات ذات صلة",
+      "ViewAll": "عرض الكل",
+      "reviews": "تقييمات",
+      "sold": "تم البيع",
+      "SAVE": "وفر",
+      "Description": "الوصف",
+      "OnlyProductLeft": "المتبقي فقط {quantity}",
+      "AddToCart": "أضف إلى السلة",
+      "FreeShipping": "شحن مجاني",
+      "OnOrdersOver$50": "للطلبات التي تزيد عن 50 دولارًا",
+      "EasyReturns": "إرجاع سهل",
+      "30dayReturnPolicy": "سياسة إرجاع خلال 30 يومًا",
+      "SecurePayment": "دفع آمن",
+      "100%SafeCheckout": "عملية شراء آمنة 100%",
+      "Brand": "العلامة التجارية",
+      "UnitsSold": "عدد الوحدات المباعة",
+      "units": "وحدة",
+      "InStock": "متوفر في المخزون",
+      "OutOfStock": "غير متوفر في المخزون"
+    }
+  },
+  "Common": {
+    "PleaseWait": "برجاء الانتظار"
   }
 }

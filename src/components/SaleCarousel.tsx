@@ -33,7 +33,7 @@ const SaleCarousel = () => {
       {/* Background elements */}
       <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/disk.jpg')] bg-cover bg-center opacity-30"></div>
 
-      <SwiperSlide className="!flex justify-center items-center flex-col gap-8 font-poppins text-center px-4 z-10">
+      <SwiperSlide className="!flex justify-center items-center flex-col gap-8  text-center px-4 z-10">
         <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-medium border border-white/20">
           <span className="relative flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -70,7 +70,7 @@ const SaleCarousel = () => {
         </Button>
       </SwiperSlide>
 
-      <SwiperSlide className="!flex justify-center items-center flex-col gap-8 font-poppins text-center px-4 z-10">
+      <SwiperSlide className="!flex justify-center items-center flex-col gap-8  text-center px-4 z-10">
         <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-medium border border-white/20">
           <span className="relative flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
@@ -107,7 +107,7 @@ const SaleCarousel = () => {
         </Button>
       </SwiperSlide>
 
-      <SwiperSlide className="!flex justify-center items-center flex-col gap-8 font-poppins text-center px-4 z-10">
+      <SwiperSlide className="!flex justify-center items-center flex-col gap-8  text-center px-4 z-10">
         <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-medium border border-white/20">
           <span className="relative flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>

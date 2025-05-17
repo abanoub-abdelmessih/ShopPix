@@ -11,6 +11,7 @@ import { ProductCard } from "./ProductCard";
 import { useSpecificCategory } from "@/hooks/useCategories";
 import { ProductType } from "@/types/ProductType";
 import { useWishlist } from "@/hooks/useWishlist";
+import { useTranslations } from "next-intl";
 
 export const ProductsComponent = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,6 +41,8 @@ export const ProductsComponent = () => {
   });
   const { data: categoryData } = useSpecificCategory(categoryId || "");
   const { data: wishListProducts, isLoading: LoadingWishList } = useWishlist();
+  const t = useTranslations("Products");
+  const tCommon = useTranslations("Common");
 
   useEffect(() => {
     setCurrentPage(1);
@@ -53,32 +56,25 @@ export const ProductsComponent = () => {
   if (isLoading || isFetching || LoadingWishList) {
     return (
       <div className="flex items-center justify-center gap-3 text-3xl flex-1 ">
-        <Loader /> Please Wait
+        <Loader /> {tCommon("PleaseWait")}
       </div>
     );
   }
 
   if (isError) {
-    return (
-      <ErrorMessage description="An error occurred while loading products." />
-    );
+    return <ErrorMessage description={t("IsError")} />;
   }
 
   if (!products || products.data.length === 0) {
-    return (
-      <ErrorMessage
-        description="We couldn't find any products matching your criteria. Please try
-          another category or check back later."
-      />
-    );
+    return <ErrorMessage description={t("NoProduct")} />;
   }
 
   return (
-    <div className="container mx-auto font-poppins">
-      <div className="flex w-full justify-between items-center mb-6 gap-4">
-        <h2 className="text-base md:text-2xl font-semibold bg-gradient-to-t from-indigo-700 via-indigo-500 to-indigo-300 bg-clip-text text-transparent">
-          {categoryId && categoryData ? categoryData.name : "All products"}
-          <span className="text-sm ml-2">({products.results})</span>
+    <div className="container mx-auto">
+      <div className="flex flex-col md:flex-row w-full justify-between items-center mb-6 gap-4">
+        <h2 className="text-xl md:text-2xl font-semibold bg-gradient-to-t from-indigo-700 via-indigo-500 to-indigo-300 bg-clip-text text-transparent">
+          {categoryId && categoryData ? categoryData.name : t("AllProducts")}
+          <span className="text-sm ml-2 rtl:mr-2">({products.results})</span>
         </h2>
         <SortSelect />
       </div>

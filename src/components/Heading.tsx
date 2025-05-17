@@ -6,7 +6,7 @@ interface HeadingProps {
 
 export const Heading = ({ title, description, id }: HeadingProps) => {
   return (
-    <div id={id} className="py-10 px-4 font-poppins">
+    <div id={id} className="py-10 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col gap-3">
           <h3 className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent text-xl md:text-2xl font-bold">

@@ -116,5 +116,51 @@
     },
     "menu": "Menu",
     "signOut": "Sign Out"
+  },
+  "Products": {
+    "Heading": {
+      "title": "Our Products",
+      "description": "Discover top picks from all categories."
+    },
+    "AllProducts": "All products",
+    "IsError": "An error occurred while loading products.",
+    "NoProduct": "We couldn't find any products matching your criteria. Please try another category or check back later.",
+    "SortBy": "Sort By",
+    "HighToLow": "High to low",
+    "LowToHigh": "Low to high",
+    "FilterBy": "Filter By ...",
+    "Filters": "Filters",
+    "Categories": "Categories",
+    "Brands": "Brands",
+    "Price": "Price",
+    "ClearFilters": "Clear Filters",
+    "minPrice": "min price",
+    "maxPrice": "max price",
+    "ApplyFilter": "Apply Filter",
+    "SpecificProduct": {
+      "isError": "The product you are looking for doesn't exist or has been removed.",
+      "RelatedProducts": "Related Products",
+      "ViewAll": "View All",
+      "reviews": "reviews",
+      "sold": "sold",
+      "SAVE": "SAVE",
+      "Description": "Description",
+      "OnlyProductLeft": "Only {quantity} left",
+      "AddToCart": "Add to Cart",
+      "FreeShipping": "Free Shipping",
+      "OnOrdersOver$50": "On orders over $50",
+      "EasyReturns": "Easy Returns",
+      "30dayReturnPolicy": "30-day return policy",
+      "SecurePayment": "Secure Payment",
+      "100%SafeCheckout": "100% safe checkout",
+      "Brand": "Brand",
+      "UnitsSold": "Units Sold",
+      "units": "units",
+      "InStock": "In Stock",
+      "OutOfStock": "Out of Stock"
+    }
+  },
+  "Common": {
+    "PleaseWait": "Please Wait"
   }
 }

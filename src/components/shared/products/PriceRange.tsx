@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { DualRangeSlider } from "@/components/ui/dual-range-slider";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useTranslations } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -22,6 +23,7 @@ export const PriceRange = ({
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const t = useTranslations("Products");
 
   // Update state from URL when searchParams change
   useEffect(() => {
@@ -63,7 +65,7 @@ export const PriceRange = ({
       <div className="flex w-full gap-2 items-center">
         <div className="flex-1">
           <Label className="text-base" htmlFor="minPrice">
-            $ min price
+            $ {t("minPrice")}
           </Label>
           <Input
             type="number"
@@ -77,7 +79,7 @@ export const PriceRange = ({
         </div>
         <div className="flex-1">
           <Label className="text-base" htmlFor="maxPrice">
-            $ max price
+            $ {t("maxPrice")}
           </Label>
           <Input
             type="number"
@@ -92,7 +94,7 @@ export const PriceRange = ({
       </div>
 
       <Button onClick={handleApplyPriceFilter} className="mt-3 w-full">
-        Apply Filter
+        {t("ApplyFilter")}
       </Button>
     </>
   );

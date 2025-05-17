@@ -26,7 +26,7 @@ export const PaginationBar: FC<PaginationBarProps> = ({
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <Pagination className="mb-14 md:mb-5 flex-wrap">
+    <Pagination className="mb-14 md:mb-5 flex-wrap" dir="ltr">
       <PaginationContent className="flex-wrap gap-0">
         <PaginationItem>
           <PaginationLink

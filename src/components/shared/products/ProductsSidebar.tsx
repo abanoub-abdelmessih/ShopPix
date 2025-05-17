@@ -20,6 +20,7 @@ import { ChevronsRight, SlidersVertical } from "lucide-react";
 import React, { useState } from "react";
 import Link from "next/link";
 import { PriceRange } from "./PriceRange";
+import { useTranslations } from "next-intl";
 
 export const ProductsSidebar = ({
   children,
@@ -27,9 +28,10 @@ export const ProductsSidebar = ({
   children: React.ReactNode;
 }) => {
   const [openSheet, setOpenSheet] = useState(false);
+  const t = useTranslations("Products");
 
   return (
-    <div className="flex flex-1 font-poppins relative">
+    <div className="flex flex-1 relative">
       {/* Sheet Trigger for small screens */}
       <div className="xl:hidden">
         <Sheet open={openSheet} onOpenChange={setOpenSheet}>
@@ -38,7 +40,7 @@ export const ProductsSidebar = ({
               variant="outline"
               className="mb-4 uppercase fixed left-0 top-52 rotate-[-90deg] origin-top-left z-50"
             >
-              Filters
+              {t("Filters")}
               <SlidersVertical />
             </Button>
           </SheetTrigger>
@@ -49,7 +51,7 @@ export const ProductsSidebar = ({
           >
             <SheetHeader>
               <SheetTitle className="font-bold mt-5 text-3xl bg-gradient-to-r from-indigo-300 via-indigo-600 to-indigo-300 bg-clip-text text-transparent">
-                Filter By ...
+                {t("FilterBy")}
               </SheetTitle>
             </SheetHeader>
             <AccordionLinks setOpenSheet={setOpenSheet} />
@@ -58,10 +60,10 @@ export const ProductsSidebar = ({
       </div>
 
       {/* Normal Sidebar for larger screens */}
-      <div className="xl:w-1/4 2xl:w-1/5 px-5 border-r hidden xl:block border-t">
+      <div className="xl:w-1/4 2xl:w-1/5 px-5 border-r rtl:border-l hidden xl:block border-t">
         <div className="sticky top-[84px]">
           <h3 className="font-bold mt-5 text-3xl bg-gradient-to-r from-indigo-300 via-indigo-600 to-indigo-300 bg-clip-text text-transparent">
-            Filter By ...
+            {t("FilterBy")}
           </h3>
           <AccordionLinks />
         </div>
@@ -83,6 +85,7 @@ const AccordionLinks = ({
   const { data: categories } = useCategories();
   const { data: brands } = useBrands();
   const router = useRouter();
+  const t = useTranslations("Products");
 
   const handleCategoryClick = (categoryId: string) => {
     router.push(`/products?category[in]=${categoryId}`);
@@ -100,7 +103,7 @@ const AccordionLinks = ({
         {categories && categories.length > 0 && (
           <AccordionItem value="item-1">
             <AccordionTrigger className="text-lg hover:no-underline mt-3 font-bold uppercase">
-              Categories
+              {t("Categories")}
             </AccordionTrigger>
             <AccordionContent className="grid grid-cols-2 gap-3 p-2 max-h-80 overflow-y-auto">
               {categories.map((category) => (
@@ -119,7 +122,7 @@ const AccordionLinks = ({
         {brands && brands.length > 0 && (
           <AccordionItem value="item-2">
             <AccordionTrigger className="text-lg hover:no-underline mt-3 font-bold uppercase">
-              Brands
+              {t("Brands")}
             </AccordionTrigger>
             <AccordionContent className="grid grid-cols-2 gap-3 p-2 max-h-80 overflow-y-auto">
               {brands.map((brand) => (
@@ -137,7 +140,7 @@ const AccordionLinks = ({
 
         <AccordionItem value="item-3">
           <AccordionTrigger className="text-lg hover:no-underline mt-3 font-bold uppercase">
-            Price
+            {t("Price")}
           </AccordionTrigger>
           <AccordionContent className="flex flex-col items-start gap-3 px-2">
             <PriceRange />
@@ -148,11 +151,11 @@ const AccordionLinks = ({
       <Button asChild variant="outline">
         <Link
           href="/products"
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 group"
           onClick={() => setOpenSheet?.(false)}
         >
-          Clear Filters
-          <ChevronsRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
+          {t("ClearFilters")}
+          <ChevronsRight className="w-5 h-5 transform ltr:group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform duration-300 rtl:rotate-180" />
         </Link>
       </Button>
     </div>

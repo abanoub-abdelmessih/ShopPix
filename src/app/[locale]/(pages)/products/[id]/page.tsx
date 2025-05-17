@@ -23,6 +23,7 @@ import {
   ShoppingCart,
   Truck,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo } from "react";
@@ -39,6 +40,8 @@ const ProductDetailsPage = () => {
   const { mutate: removeFromWishList, isPending: loadingRemove } =
     useRemoveWishlist();
   const { mutate: addToCart, isPending: loadingAddCart } = useAddToCart();
+  const t = useTranslations("Products.SpecificProduct");
+  const tCommon = useTranslations("Common");
 
   const wishedIds = useMemo(
     () => wishListProducts?.data.map((p: ProductType) => p._id) || [],
@@ -50,18 +53,13 @@ const ProductDetailsPage = () => {
   if (isLoading || loadingRelatedProducts || LoadingWishList) {
     return (
       <div className="flex items-center justify-center gap-3 text-3xl flex-1 ">
-        <Loader /> Please Wait
+        <Loader /> {tCommon("PleaseWait")}
       </div>
     );
   }
 
   if (isError || !product) {
-    return (
-      <ErrorMessage
-        description="The product you are looking for doesn't exist or has been
-          removed."
-      />
-    );
+    return <ErrorMessage description={t("isError")} />;
   }
 
   const handleBrandClick = (brandId: string) => {
@@ -87,7 +85,7 @@ const ProductDetailsPage = () => {
         <SpecificProductImages product={product} />
 
         {/* Product Details Section */}
-        <div className="md:col-span-6 font-poppins bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg ">
+        <div className="md:col-span-6 bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg ">
           {/* Title and Brand */}
           <div className="mb-4">
             {product.brand?.name && (
@@ -109,7 +107,7 @@ const ProductDetailsPage = () => {
           {/* Pricing */}
           <div className="mb-6">
             {product.priceAfterDiscount ? (
-              <div className="flex items-center">
+              <div className="flex items-center gap-2">
                 <p className="text-3xl font-bold text-indigo-600 dark:text-indigo-400">
                   ${product.priceAfterDiscount.toFixed(2)}
                 </p>
@@ -117,7 +115,7 @@ const ProductDetailsPage = () => {
                   ${product.price.toFixed(2)}
                 </p>
                 <span className="ml-3 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-800 dark:text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-md text-center">
-                  SAVE $
+                  {t("SAVE")} $
                   {(product.price - product.priceAfterDiscount).toFixed(2)}
                 </span>
               </div>
@@ -129,7 +127,7 @@ const ProductDetailsPage = () => {
           </div>
 
           {/* Category */}
-          <div className="mb-6 flex flex-wrap">
+          <div className="mb-6 flex flex-wrap gap-2">
             <Link
               href={`/products?category[in]=${product.category._id}`}
               className="bg-indigo-100 dark:bg-indigo-900/40 text-indigo-800 dark:text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-md text-center"
@@ -138,7 +136,7 @@ const ProductDetailsPage = () => {
             </Link>
             <Link
               href={`/products?subcategory[in]=${product.subcategory[0]._id}`}
-              className="ml-2 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-800 dark:text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-md text-center"
+              className="bg-indigo-100 dark:bg-indigo-900/40 text-indigo-800 dark:text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-md text-center"
             >
               {product.subcategory[0].name}
             </Link>
@@ -147,7 +145,7 @@ const ProductDetailsPage = () => {
           {/* Description */}
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-zinc-900 dark:text-white mb-3">
-              Description
+              {t("Description")}
             </h3>
             <div className="bg-white dark:bg-zinc-800/50 rounded-2xl p-5 shadow border border-zinc-100 dark:border-zinc-700">
               <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed">
@@ -158,7 +156,7 @@ const ProductDetailsPage = () => {
 
           {/* Stock Status */}
           <div className="mb-8">
-            <div className="flex items-center">
+            <div className="flex items-center gap-1">
               <span
                 className={`inline-flex w-3 h-3 rounded-full mr-2 ${
                   product.quantity > 0
@@ -173,11 +171,11 @@ const ProductDetailsPage = () => {
                     : "text-red-600 dark:text-red-400"
                 }`}
               >
-                {product.quantity > 0 ? "In Stock" : "Out of Stock"}
+                {product.quantity > 0 ? t("InStock") : t("OutOfStock")}
               </span>
               {product.quantity > 0 && product.quantity < 10 && (
                 <span className="ml-3 text-sm text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 px-3 py-1 rounded-full">
-                  Only {product.quantity} left
+                  {t("OnlyProductLeft", { quantity: product.quantity })}
                 </span>
               )}
             </div>
@@ -202,7 +200,7 @@ const ProductDetailsPage = () => {
               ) : (
                 <>
                   <ShoppingCart className="w-5 h-5 mr-2" strokeWidth={2} />
-                  Add to Cart
+                  {t("AddToCart")}
                 </>
               )}
             </button>
@@ -234,10 +232,10 @@ const ProductDetailsPage = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-zinc-900 dark:text-white">
-                  Free Shipping
+                  {t("FreeShipping")}
                 </p>
                 <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                  On orders over $50
+                  {t("OnOrdersOver$50")}
                 </p>
               </div>
             </div>
@@ -247,10 +245,10 @@ const ProductDetailsPage = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-zinc-900 dark:text-white">
-                  Easy Returns
+                  {t("EasyReturns")}
                 </p>
                 <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                  30-day return policy
+                  {t("30dayReturnPolicy")}
                 </p>
               </div>
             </div>
@@ -260,10 +258,10 @@ const ProductDetailsPage = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-zinc-900 dark:text-white">
-                  Secure Payment
+                  {t("SecurePayment")}
                 </p>
                 <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                  100% safe checkout
+                  {t("100%SafeCheckout")}
                 </p>
               </div>
             </div>
@@ -275,7 +273,7 @@ const ProductDetailsPage = () => {
               {product.brand?.name && (
                 <div className="bg-white dark:bg-zinc-800/50 p-4 rounded-xl shadow-md border border-zinc-100 dark:border-zinc-700">
                   <dt className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-                    Brand
+                    {t("Brand")}
                   </dt>
                   <dd className="mt-1 text-sm font-semibold text-zinc-900 dark:text-white">
                     {product.brand.name}
@@ -285,10 +283,10 @@ const ProductDetailsPage = () => {
               {product.sold && (
                 <div className="bg-white dark:bg-zinc-800/50 p-4 rounded-xl border border-zinc-100 dark:border-zinc-700 shadow-md">
                   <dt className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
-                    Units Sold
+                    {t("UnitsSold")}
                   </dt>
                   <dd className="mt-1 text-sm font-semibold text-zinc-900 dark:text-white">
-                    {product.sold} units
+                    {product.sold} {t("units")}
                   </dd>
                 </div>
               )}
@@ -302,14 +300,14 @@ const ProductDetailsPage = () => {
         <div className="mt-8">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-              Related Products
+              {t("RelatedProducts")}
             </h2>
             <Link
               href={`/products?category[in]=${categoryId}`}
               className="text-sm font-medium text-indigo-600 dark:text-indigo-400 flex items-center group hover:underline"
             >
-              View All
-              <ChevronsRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+              {t("ViewAll")}
+              <ChevronsRight className="w-4 h-4 ml-1 ltr:group-hover:translate-x-1 transition-transform rtl:rotate-180 rtl:mr-1 rtl:group-hover:-translate-x-1" />
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">

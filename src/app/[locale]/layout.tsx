@@ -22,10 +22,13 @@ const Layout = async ({
 
   const isRTL = locale === "ar";
   const direction = isRTL ? "rtl" : "ltr";
+  const fontClass = isRTL ? "font-cairo" : "font-poppins";
 
   return (
     <div
-      className={`min-h-screen flex flex-col ${isRTL ? "rtl" : "ltr"}`}
+      className={`min-h-screen flex flex-col ${fontClass} ${
+        isRTL ? "rtl" : "ltr"
+      }`}
       dir={direction}
       lang={locale}
     >

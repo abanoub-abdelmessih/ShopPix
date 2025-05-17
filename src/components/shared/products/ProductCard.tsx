@@ -51,7 +51,7 @@ export const ProductCard = ({
     <div
       onClick={handleProductClick}
       className={cn(
-        "bg-white dark:bg-zinc-800 h-fit w-full rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg font-poppins cursor-pointer",
+        "bg-white dark:bg-zinc-800 h-fit w-full rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg cursor-pointer",
         className
       )}
     >
