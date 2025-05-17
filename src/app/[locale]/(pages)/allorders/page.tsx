@@ -33,7 +33,7 @@ const AllOrders = () => {
   }
 
   // Preserved empty state
-  if (!orders || orders.length === 0) {
+  if (!Array.isArray(orders) || orders.length === 0) {
     return (
       <ErrorMessage
         title="You don't have any orders yet"
@@ -52,7 +52,7 @@ const AllOrders = () => {
       </div>
 
       <div className="space-y-6 sm:space-y-8">
-        {[...orders]
+        {orders
           .sort(
             (a, b) =>
               new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()

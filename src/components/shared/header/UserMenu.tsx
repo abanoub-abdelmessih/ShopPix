@@ -16,6 +16,7 @@ import Cookies from "js-cookie";
 import { ChangeMyPassword } from "../auth/changeMyPassword";
 import { UpdateUserData } from "../auth/UpdateUserData";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export const UserMenu = ({ showName = false }) => {
   const [openUpdateDataDialog, setOpenUpdateDataDialog] = useState(false);
@@ -24,6 +25,7 @@ export const UserMenu = ({ showName = false }) => {
   const userStorage = Cookies.get("user");
   const user = userStorage ? JSON.parse(userStorage) : null;
   const router = useRouter();
+  const t = useTranslations("Header.user");
 
   const handleOrdersClick = () => {
     setDropdownOpen(false);
@@ -58,11 +60,9 @@ export const UserMenu = ({ showName = false }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="end">
           <DropdownMenuLabel className="text-muted-foreground">
-            Welcome back :
-            <span className="ml-2 text-black dark:text-white">
-              {user ? user.name.split(" ")[0] : "Guest"}
-            </span>
+            {t("welcome", { name: user ? user.name.split(" ")[0] : "Guest" })}
           </DropdownMenuLabel>
+
           <DropdownMenuSeparator />
 
           <DropdownMenuItem
@@ -70,7 +70,7 @@ export const UserMenu = ({ showName = false }) => {
             onClick={handleOrdersClick}
           >
             <ListOrderedIcon size={16} />
-            My Orders
+            {t("myOrders")}
           </DropdownMenuItem>
 
           <DropdownMenuItem
@@ -78,7 +78,7 @@ export const UserMenu = ({ showName = false }) => {
             onClick={handleUserDataClick}
           >
             <Edit2 size={16} />
-            Edit Profile Info
+            {t("editProfile")}
           </DropdownMenuItem>
 
           <DropdownMenuItem
@@ -86,17 +86,15 @@ export const UserMenu = ({ showName = false }) => {
             onClick={handlePasswordClick}
           >
             <Edit size={16} />
-            Update Password
+            {t("updatePassword")}
           </DropdownMenuItem>
-
-          <DropdownMenuSeparator />
 
           <DropdownMenuItem
             className="cursor-pointer gap-2 text-red-500"
             onClick={LogoutFunction}
           >
             <LogOut size={16} />
-            Sign Out
+            {t("signOut")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

@@ -4,7 +4,6 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  // SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -19,86 +18,94 @@ import { Button } from "@/components/ui/button";
 import { LogoutFunction } from "@/services/auth";
 import { useEffect, useState } from "react";
 import LanguageToggle from "@/components/LanguageToggle";
-import { useLocale } from "next-intl";
-
-const navLinks = [
-  { path: "/", name: "Home", icon: <Home className="w-4 h-4" /> },
-  {
-    path: "/products",
-    name: "Products",
-    icon: <Barcode className="w-4 h-4" />,
-  },
-  { path: "/cart", name: "Cart", icon: <ShoppingCart className="w-4 h-4" /> },
-  { path: "/wishlist", name: "Wishlist", icon: <Heart className="w-4 h-4" /> },
-];
-
-const NavLinksList = ({
-  className,
-  icons = false,
-  closeSheetOnClick = false,
-}: {
-  className: string;
-  icons?: boolean;
-  closeSheetOnClick?: boolean;
-}) => {
-  const pathName = usePathname();
-
-  return (
-    <ul className={className} role="list">
-      {navLinks.map((link) => {
-        const isActive = pathName === link.path;
-
-        const LinkComponent = (
-          <Link
-            href={link.path}
-            className={cn(
-              "font-medium transition-all duration-200 flex items-center",
-              icons
-                ? "gap-3 px-3 py-2 rounded-lg w-full"
-                : "px-3 py-2 rounded-md text-sm",
-              isActive
-                ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-300 font-semibold"
-                : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800/50 hover:text-gray-900 dark:hover:text-white"
-            )}
-          >
-            {icons && (
-              <span
-                className={cn(
-                  "transition-colors",
-                  isActive
-                    ? "text-indigo-600 dark:text-indigo-400"
-                    : "text-gray-500 dark:text-gray-400"
-                )}
-              >
-                {link.icon}
-              </span>
-            )}
-            {link.name}
-          </Link>
-        );
-
-        return (
-          <li key={link.path} role="listitem">
-            {closeSheetOnClick ? (
-              <SheetClose asChild>{LinkComponent}</SheetClose>
-            ) : (
-              LinkComponent
-            )}
-          </li>
-        );
-      })}
-    </ul>
-  );
-};
+import { useLocale, useTranslations } from "next-intl";
 
 export const HeaderLinks = () => {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const currentLocale = useLocale();
+  const t = useTranslations("Header");
+
+  const navLinks = [
+    { path: "/", name: t("nav.home"), icon: <Home className="w-4 h-4" /> },
+    {
+      path: "/products",
+      name: t("nav.products"),
+      icon: <Barcode className="w-4 h-4" />,
+    },
+    {
+      path: "/cart",
+      name: t("nav.cart"),
+      icon: <ShoppingCart className="w-4 h-4" />,
+    },
+    {
+      path: "/wishlist",
+      name: t("nav.wishlist"),
+      icon: <Heart className="w-4 h-4" />,
+    },
+  ];
 
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  const NavLinksList = ({
+    className,
+    icons = false,
+    closeSheetOnClick = false,
+  }: {
+    className: string;
+    icons?: boolean;
+    closeSheetOnClick?: boolean;
+  }) => {
+    return (
+      <ul className={className} role="list">
+        {navLinks.map((link) => {
+          const isActive = pathname === link.path;
+
+          const LinkComponent = (
+            <Link
+              href={link.path}
+              className={cn(
+                "font-medium transition-all duration-200 flex items-center",
+                icons
+                  ? "gap-3 px-3 py-2 rounded-lg w-full"
+                  : "px-3 py-2 rounded-md text-sm",
+                isActive
+                  ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-300 font-semibold"
+                  : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800/50 hover:text-gray-900 dark:hover:text-white"
+              )}
+            >
+              {icons && (
+                <span
+                  className={cn(
+                    "transition-colors",
+                    isActive
+                      ? "text-indigo-600 dark:text-indigo-400"
+                      : "text-gray-500 dark:text-gray-400"
+                  )}
+                >
+                  {link.icon}
+                </span>
+              )}
+              {link.name}
+            </Link>
+          );
+
+          return (
+            <li key={link.path} role="listitem">
+              {closeSheetOnClick ? (
+                <SheetClose asChild>{LinkComponent}</SheetClose>
+              ) : (
+                LinkComponent
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    );
+  };
+
   return (
     <div>
       {/* Desktop Links */}
@@ -118,9 +125,9 @@ export const HeaderLinks = () => {
             <SheetHeader className="border-b border-gray-200 dark:border-zinc-700 p-4">
               <div className="flex items-center justify-between">
                 <SheetTitle className="text-lg font-medium text-gray-900 dark:text-white">
-                  Menu
+                  {t("menu")}
                 </SheetTitle>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1">
                   <LanguageToggle />
                   <ThemeSwitcher />
                 </div>
@@ -146,7 +153,7 @@ export const HeaderLinks = () => {
                   variant="outline"
                 >
                   <LogOut className="w-4 h-4" />
-                  Sign Out
+                  {t("signOut")}
                 </Button>
               </SheetClose>
             </div>

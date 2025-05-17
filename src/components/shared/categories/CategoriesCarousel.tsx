@@ -7,10 +7,12 @@ import { Carousel } from "../../Carousel";
 import { useRouter } from "next/navigation";
 import { Loader } from "@/components/Loader";
 import { Heading } from "@/components/Heading";
+import { useTranslations } from "next-intl";
 
 const CategoriesCarousel: React.FC = () => {
   const { data: categories, isLoading, isError, error } = useCategories();
   const router = useRouter();
+  const t = useTranslations();
 
   if (isLoading) {
     return (
@@ -32,7 +34,11 @@ const CategoriesCarousel: React.FC = () => {
   }
 
   if (!categories || categories.length === 0) {
-    return <div className="w-full py-8 text-center">No categories found</div>;
+    return (
+      <div className="w-full py-8 text-center">
+        {t("HomePage.CategoriesCarousel.NoCategoriesFound")}
+      </div>
+    );
   }
 
   const handleCategoryClick = (categoryId: string) => {
@@ -42,8 +48,8 @@ const CategoriesCarousel: React.FC = () => {
   return (
     <>
       <Heading
-        title="Browse Categories"
-        description="Find what you love across all our categories"
+        title={t("HomePage.CategoriesCarousel.Heading.title")}
+        description={t("HomePage.CategoriesCarousel.Heading.description")}
         id="categories"
       />
       <Carousel

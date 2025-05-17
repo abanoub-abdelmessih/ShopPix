@@ -1,30 +1,32 @@
 import Image from "next/image";
 import { Heading } from "./Heading";
+import { useTranslations } from "next-intl";
 
 const NewCollection = () => {
+  const t = useTranslations();
   const images = [
     {
       path: "/images/newCollection/NewCollection1.jpg",
-      title: "Summer Collection",
-      description: "Explore our latest seasonal designs",
+      title: t("HomePage.NewCollection.Images.image1.title"),
+      description: t("HomePage.NewCollection.Images.image1.description"),
     },
     {
       path: "/images/newCollection/NewCollection2.jpg",
-      title: "Featured Item",
-      description: "The centerpiece of our new line",
+      title: t("HomePage.NewCollection.Images.image2.title"),
+      description: t("HomePage.NewCollection.Images.image2.description"),
     },
     {
       path: "/images/newCollection/NewCollection3.jpg",
-      title: "Limited Edition",
-      description: "Exclusive styles for a limited time",
+      title: t("HomePage.NewCollection.Images.image3.title"),
+      description: t("HomePage.NewCollection.Images.image3.description"),
     },
   ];
 
   return (
     <div className="min-h-screen flex flex-col container mx-auto p-3">
       <Heading
-        title="New Collection"
-        description="Explore the latest arrivals handpicked just for you."
+        title={t("HomePage.NewCollection.Heading.title")}
+        description={t("HomePage.NewCollection.Heading.description")}
       />
 
       <div className="flex-1 flex flex-col md:flex-row gap-3 bg-white p-2 md:p-4 rounded-lg">

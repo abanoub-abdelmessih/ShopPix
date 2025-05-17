@@ -1,35 +1,38 @@
+import { useTranslations } from "next-intl";
 import { Heading } from "./Heading";
 import { Truck, ShieldCheck, RefreshCcw, Headset } from "lucide-react";
 
 const Services = () => {
+  const t = useTranslations("HomePage.Services");
+
   const services = [
     {
       icon: <Truck size={24} />,
-      title: "Free Shipping",
-      description: "On all orders over $50",
+      title: t("service1.title"),
+      description: t("service1.description"),
     },
     {
       icon: <ShieldCheck size={24} />,
-      title: "Secure Payment",
-      description: "100% secure transactions",
+      title: t("service2.title"),
+      description: t("service2.description"),
     },
     {
       icon: <RefreshCcw size={24} />,
-      title: "Easy Returns",
-      description: "Within 30 days",
+      title: t("service3.title"),
+      description: t("service3.description"),
     },
     {
       icon: <Headset size={24} />,
-      title: "24/7 Support",
-      description: "Dedicated customer service",
+      title: t("service4.title"),
+      description: t("service4.description"),
     },
   ];
 
   return (
     <div className="container mx-auto py-12 px-3">
       <Heading
-        title="Our Services"
-        description="What we offer to our valued customers"
+        title={t("Heading.title")}
+        description={t("Heading.description")}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">

@@ -3,10 +3,12 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { ArrowDownIcon, ShoppingBagIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const Hero = () => {
   const date = new Date();
   const currentYear = date.getFullYear();
+  const t = useTranslations();
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
@@ -28,24 +30,26 @@ const Hero = () => {
       <div className="relative h-full max-w-screen-xl mx-auto px-6 sm:px-10 lg:px-16 flex items-center">
         <div className="max-w-2xl space-y-2">
           {/* badge */}
-          <div className="inline-flex items-center mb-3 backdrop-blur-md bg-indigo-900/20 border border-indigo-300/20 rounded-full py-2.5 px-5 text-sm font-medium tracking-wider text-indigo-50 shadow-lg">
-            <span className="mr-2 text-indigo-300">★</span>
-            <span>NEW COLLECTION {currentYear}</span>
+          <div className="inline-flex gap-2 items-center mb-3 backdrop-blur-md bg-indigo-900/20 border border-indigo-300/20 rounded-full py-2.5 px-5 text-sm font-medium tracking-wider text-indigo-50 shadow-lg">
+            <span className=" text-indigo-300">★</span>
+            <span>
+              {t("HomePage.Hero.badge")} {currentYear}
+            </span>
           </div>
 
           {/* Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8">
-            <span className="block">Redefine Your Style</span>
+            <span className="block">
+              {t("HomePage.Hero.Headline.mainTitle")}
+            </span>
             <span className="block text-indigo-300 mt-2">
-              With Premium Fashion
+              {t("HomePage.Hero.Headline.subTitle")}
             </span>
           </h1>
 
           {/* Description */}
           <p className="text-lg text-gray-100 mb-10 max-w-lg backdrop-blur-sm bg-black/20 p-5 rounded-lg border-l-4 border-indigo-500 shadow-xl">
-            Discover our exclusive collection of thoughtfully crafted clothing
-            that combines bold aesthetics with everyday comfort. Designed for
-            those who aspire to make a statement.
+            {t("HomePage.Hero.Description")}
           </p>
 
           {/* buttons */}
@@ -55,9 +59,9 @@ const Hero = () => {
               asChild
             >
               <Link href="/products">
-                <span className="flex items-center relative z-10">
-                  Shop Collection
-                  <ShoppingBagIcon className="ml-2 w-5 h-5 transition-all duration-300 group-hover:scale-110" />
+                <span className="flex items-center gap-2 relative z-10">
+                  {t("HomePage.Hero.buttons.ShopCollection")}
+                  <ShoppingBagIcon className=" w-5 h-5 transition-all duration-300 group-hover:scale-110" />
                 </span>
                 <span className="absolute inset-0 w-full h-full bg-white/10 transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500"></span>
               </Link>
@@ -68,9 +72,9 @@ const Hero = () => {
               asChild
             >
               <Link href="#categories">
-                <span className="flex items-center">
-                  Explore Categories
-                  <ArrowDownIcon className="ml-2 w-5 h-5 transition-transform duration-500 group-hover:translate-y-1" />
+                <span className="flex items-center gap-2">
+                  {t("HomePage.Hero.buttons.ExploreCategories")}
+                  <ArrowDownIcon className=" w-5 h-5 transition-transform duration-500 group-hover:translate-y-1" />
                 </span>
               </Link>
             </Button>

@@ -12,14 +12,18 @@ import { useBestSeller } from "@/hooks/useProducts";
 import { ProductCard } from "./ProductCard";
 import { ProductType } from "@/types/ProductType";
 import { useWishlist } from "@/hooks/useWishlist";
-
-const categories = [
-  { id: "6439d5b90049ad0b52b90048", name: "Men's" },
-  { id: "6439d58a0049ad0b52b9003f", name: "Women's" },
-  { id: "6439d2d167d9aa4ca970649f", name: "Electronics" },
-];
+import { useTranslations } from "next-intl";
 
 const BestSeller = () => {
+  const t = useTranslations();
+  const categories = [
+    { id: "6439d5b90049ad0b52b90048", name: t("HomePage.BestSeller.Men's") },
+    { id: "6439d58a0049ad0b52b9003f", name: t("HomePage.BestSeller.Women's") },
+    {
+      id: "6439d2d167d9aa4ca970649f",
+      name: t("HomePage.BestSeller.Electronics"),
+    },
+  ];
   const [category, setCategory] = useState(categories[0]);
   const { data: bestProducts, isLoading } = useBestSeller(category.id);
   const { data: wishListProducts, isLoading: LoadingWishList } = useWishlist();
@@ -32,8 +36,8 @@ const BestSeller = () => {
   return (
     <div className="container mx-auto flex flex-col items-center py-5">
       <Heading
-        title="Best-Selling Products"
-        description="Discover the most popular items loved by our customers."
+        title={t("HomePage.BestSeller.Heading.title")}
+        description={t("HomePage.BestSeller.Heading.description")}
       />
 
       <Tabs
@@ -75,8 +79,8 @@ const BestSeller = () => {
 
       <Button asChild className="group mt-2">
         <Link href={`/products?category[in]=${category.id}`}>
-          See All {category.name} Products
-          <ChevronsRight className="ml-1 group-hover:ml-2 transition-all duration-300" />
+          {t("HomePage.BestSeller.SeeAllProducts", { category: category.name })}
+          <ChevronsRight className="ml-1 ltr:group-hover:ml-2 rtl:group-hover:mr-2 transition-all duration-300 rtl:rotate-180 rtl:mr-1" />
         </Link>
       </Button>
     </div>

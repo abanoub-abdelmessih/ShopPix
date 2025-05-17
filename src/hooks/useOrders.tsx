@@ -22,14 +22,14 @@ export const useCreateCashOrder = () => {
   return useMutation({
     mutationFn: ({ data, cartId }: CreateCashOrderProps) =>
       CreateCashOrder({ data, cartId }),
-    onSuccess: (updatedOrders) => {
-      queryClient.setQueryData(["orders"], updatedOrders);
+    onSuccess: () => {
       toast({
         title: "Success",
         description: "Order Created successfully",
         className: "bg-green-500",
       });
       queryClient.invalidateQueries({ queryKey: ["cart"] });
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: (error: Error) => {
       toast({

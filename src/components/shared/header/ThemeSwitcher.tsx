@@ -11,10 +11,12 @@ import { Button } from "@/components/ui/button";
 import { Moon, MoonIcon, Sun, SunMoon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export const ThemeSwitcher = () => {
   const { theme = "light", setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const t = useTranslations("Header.theme");
 
   // avoid hydration mismatch
   useEffect(() => {
@@ -47,25 +49,25 @@ export const ThemeSwitcher = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("label")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={() => setTheme("light")}
           className="cursor-pointer"
         >
-          <Sun /> Light
+          <Sun className="mr-2 h-4 w-4" /> {t("light")}
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme("dark")}
           className="cursor-pointer"
         >
-          <Moon /> Dark
+          <Moon className="mr-2 h-4 w-4" /> {t("dark")}
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme("system")}
           className="cursor-pointer"
         >
-          <SunMoon /> System
+          <SunMoon className="mr-2 h-4 w-4" /> {t("system")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

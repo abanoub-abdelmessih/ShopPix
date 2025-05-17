@@ -13,6 +13,7 @@ import {
   useCreateCashOrder,
   useCreateOnlinePaymentOrder,
 } from "@/hooks/useOrders";
+import { useRouter } from "next/navigation";
 
 const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState<
@@ -28,6 +29,7 @@ const Checkout = () => {
     mutate: createOnlinePaymentOrder,
     isPending: loadingOnlinePaymentOrder,
   } = useCreateOnlinePaymentOrder();
+  const router = useRouter();
 
   if (isLoading || isFetching) {
     return (
@@ -54,6 +56,7 @@ const Checkout = () => {
         data: selectedAddress,
         cartId: cartData?.data._id || "",
       });
+      router.push("/allorders");
     } else {
       createOnlinePaymentOrder({
         data: selectedAddress,
@@ -114,7 +117,7 @@ const Checkout = () => {
 
               <div className="flex justify-between pb-4 border-b border-zinc-200 dark:border-zinc-700">
                 <span className="text-zinc-600 dark:text-zinc-300">Tax</span>
-                <span>$5</span>
+                <span>$0</span>
               </div>
 
               <div className="flex justify-between font-semibold text-lg text-indigo-700 dark:text-indigo-300">

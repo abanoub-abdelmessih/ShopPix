@@ -1,6 +1,120 @@
 {
   "HomePage": {
-    "title": "اهلا بالعالم",
-    "about": "الذهاب لصفحة الاستعلامات"
+    "Hero": {
+      "badge": "المجموعة الجديدة",
+      "Headline": {
+        "mainTitle": "أعد تعريف أسلوبك",
+        "subTitle": "مع أزياء مميزة"
+      },
+      "Description": "اكتشف مجموعتنا الحصرية من الملابس المصممة بعناية والتي تجمع بين الجمالية الجريئة والراحة اليومية. صُممت لمن يرغب في التميز.",
+      "buttons": {
+        "ShopCollection": "تسوق المجموعة",
+        "ExploreCategories": "استكشف الفئات"
+      }
+    },
+    "CategoriesCarousel": {
+      "NoCategoriesFound": "لم يتم العثور على فئات",
+      "Heading": {
+        "title": "تصفح الفئات",
+        "description": "اعثر على ما تحب عبر جميع فئاتنا"
+      }
+    },
+    "SaleCarousel": {
+      "LimitedTimeOffer": "عرض محدود",
+      "HurryUpFlashSale": "أسرع! تخفيضات سريعة",
+      "EnjoyUpTo": "استمتع حتى",
+      "70%OFF": "خصم 70%",
+      "ShopNow": "تسوق الآن",
+      "FlashSale": "تخفيضات سريعة",
+      "FlashDealJustForYou": "عرض خاص لك!",
+      "Save": "وفر",
+      "upTo50%": "حتى 50%",
+      "GrabDeal": "احصل على العرض",
+      "freeShipping": "شحن مجاني",
+      "FreeShippingWorldwide": "شحن مجاني حول العالم!",
+      "OnAllOrders": "على جميع الطلبات",
+      "thisWeek": "هذا الأسبوع",
+      "CheckNow": "تحقق الآن"
+    },
+    "FlashSale": {
+      "title": "عروض حصرية!",
+      "description": "احصل عليها قبل أن تنفد!",
+      "seeAll": "عرض الكل"
+    },
+    "NewCollection": {
+      "Heading": {
+        "title": "المجموعة الجديدة",
+        "description": "اكتشف أحدث الإصدارات التي تم اختيارها خصيصًا لك."
+      },
+      "Images": {
+        "image1": {
+          "title": "مجموعة الصيف",
+          "description": "استكشف أحدث تصميمات الموسم"
+        },
+        "image2": {
+          "title": "العنصر المميز",
+          "description": "قطعة مركزية من مجموعتنا الجديدة"
+        },
+        "image3": {
+          "title": "إصدار محدود",
+          "description": "تصاميم حصرية لفترة محدودة"
+        }
+      }
+    },
+    "BestSeller": {
+      "Heading": {
+        "title": "أفضل المنتجات مبيعًا",
+        "description": "اكتشف أكثر المنتجات شعبية التي يحبها عملاؤنا."
+      },
+      "Men's": "للرجال",
+      "Women's": "للنساء",
+      "Electronics": "إلكترونيات",
+      "SeeAllProducts": "عرض جميع منتجات {category}"
+    },
+    "Services": {
+      "Heading": {
+        "title": "خدماتنا",
+        "description": "ما نقدمه لعملائنا الكرام."
+      },
+      "service1": {
+        "title": "شحن مجاني",
+        "description": "على جميع الطلبات التي تزيد عن 50 دولارًا"
+      },
+      "service2": {
+        "title": "دفع آمن",
+        "description": "معاملات مضمونة 100%"
+      },
+      "service3": {
+        "title": "إرجاع سهل",
+        "description": "خلال 30 يومًا"
+      },
+      "service4": {
+        "title": "دعم 24/7",
+        "description": "خدمة عملاء مخصصة"
+      }
+    }
+  },
+  "Header": {
+    "nav": {
+      "home": "الرئيسية",
+      "products": "المنتجات",
+      "cart": "عربة التسوق",
+      "wishlist": "المفضلة"
+    },
+    "theme": {
+      "label": "المظهر",
+      "light": "فاتح",
+      "dark": "داكن",
+      "system": "النظام"
+    },
+    "user": {
+      "welcome": "{name}: أهلاً بعودتك",
+      "myOrders": "طلباتي",
+      "editProfile": "تعديل الملف الشخصي",
+      "updatePassword": "تحديث كلمة المرور",
+      "signOut": "تسجيل الخروج"
+    },
+    "menu": "القائمة",
+    "signOut": "تسجيل الخروج"
   }
 }

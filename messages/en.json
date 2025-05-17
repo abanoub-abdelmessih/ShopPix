@@ -1,6 +1,120 @@
 {
   "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+    "Hero": {
+      "badge": "NEW COLLECTION",
+      "Headline": {
+        "mainTitle": "Redefine Your Style",
+        "subTitle": "With Premium Fashion"
+      },
+      "Description": "Discover our exclusive collection of thoughtfully crafted clothing that combines bold aesthetics with everyday comfort. Designed for those who aspire to make a statement.",
+      "buttons": {
+        "ShopCollection": "Shop Collection",
+        "ExploreCategories": "Explore Categories"
+      }
+    },
+    "CategoriesCarousel": {
+      "NoCategoriesFound": "No categories found",
+      "Heading": {
+        "title": "Browse Categories",
+        "description": "Find what you love across all our categories"
+      }
+    },
+    "SaleCarousel": {
+      "LimitedTimeOffer": "LIMITED TIME OFFER",
+      "HurryUpFlashSale": "Hurry Up! Flash Sale",
+      "EnjoyUpTo": "Enjoy up to",
+      "70%OFF": "70% OFF",
+      "ShopNow": "Shop Now",
+      "FlashSale": "FLASH SALE",
+      "FlashDealJustForYou": "Flash Deal Just for You!",
+      "Save": "Save",
+      "upTo50%": "up to 50%",
+      "GrabDeal": "Grab Deal",
+      "freeShipping": "FREE SHIPPING",
+      "FreeShippingWorldwide": "Free Shipping Worldwide!",
+      "OnAllOrders": "On all orders",
+      "thisWeek": "this week",
+      "CheckNow": "Check Now"
+    },
+    "FlashSale": {
+      "title": "Exclusive Offers!",
+      "description": "Get them before they're gone!",
+      "seeAll": "See All"
+    },
+    "NewCollection": {
+      "Heading": {
+        "title": "New Collection",
+        "description": "Explore the latest arrivals handpicked just for you."
+      },
+      "Images": {
+        "image1": {
+          "title": "Summer Collection",
+          "description": "Explore our latest seasonal designs"
+        },
+        "image2": {
+          "title": "Featured Item",
+          "description": "The centerpiece of our new line"
+        },
+        "image3": {
+          "title": "Limited Edition",
+          "description": "Exclusive styles for a limited time"
+        }
+      }
+    },
+    "BestSeller": {
+      "Heading": {
+        "title": "Best-Selling Products",
+        "description": "Discover the most popular items loved by our customers."
+      },
+      "Men's": "Men's",
+      "Women's": "Women's",
+      "Electronics": "Electronics",
+      "SeeAllProducts": "See all {category} products"
+    },
+    "Services": {
+      "Heading": {
+        "title": "Our Services",
+        "description": "What we offer to our valued customers."
+      },
+      "service1": {
+        "title": "Free Shipping",
+        "description": "On all orders over $50"
+      },
+      "service2": {
+        "title": "Secure Payment",
+        "description": "100% secure transactions"
+      },
+      "service3": {
+        "title": "Easy Returns",
+        "description": "Within 30 days"
+      },
+      "service4": {
+        "title": "24/7 Support",
+        "description": "Dedicated customer service"
+      }
+    }
+  },
+  "Header": {
+    "nav": {
+      "home": "Home",
+      "products": "Products",
+      "cart": "Cart",
+      "wishlist": "Wishlist"
+    },
+    "theme": {
+      "label": "Appearance",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "user": {
+      "welcome": "Welcome back: {name}",
+      "myOrders": "My Orders",
+      "editProfile": "Edit Profile Info",
+      "updatePassword": "Update Password",
+      "signOut": "Sign Out"
+    },
+    "menu": "Menu",
+    "signOut": "Sign Out"
   }
 }

@@ -25,7 +25,7 @@ export const Header = () => {
           <HeaderLinks />
 
           {/* Actions Section */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-3">
             <LanguageToggle />
             <ThemeSwitcher />
             <UserMenu />

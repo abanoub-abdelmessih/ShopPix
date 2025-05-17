@@ -41,7 +41,11 @@ const CarouselButton: React.FC<CarouselButtonsProps> = ({
       )}
       aria-label={position === "right" ? "Next slide" : "Previous slide"}
     >
-      {position === "right" ? <ChevronsRightIcon /> : <ChevronsLeftIcon />}
+      {position === "right" ? (
+        <ChevronsRightIcon className="rtl:rotate-180" />
+      ) : (
+        <ChevronsLeftIcon className="rtl:rotate-180" />
+      )}
     </button>
   );
 };

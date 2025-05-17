@@ -15,8 +15,11 @@ import {
   ZapIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const SaleCarousel = () => {
+  const t = useTranslations();
+
   return (
     <Carousel
       slidesPerView={1}
@@ -36,20 +39,23 @@ const SaleCarousel = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
             <span className="rounded-full h-3 w-3 bg-red-500"></span>
           </span>
-          LIMITED TIME OFFER
+          {t("HomePage.SaleCarousel.LimitedTimeOffer")}
         </div>
 
         <h3 className="font-extrabold text-2xl md:text-5xl tracking-tighter drop-shadow-lg flex flex-col md:flex-row items-center gap-3">
           <FlameIcon className="size-12 md:size-16 text-red-500 filter drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-            Hurry Up! Flash Sale
+            {t("HomePage.SaleCarousel.HurryUpFlashSale")}
           </span>
         </h3>
 
         <div className="text-xl md:text-3xl flex items-center justify-center flex-wrap gap-2 font-light">
           <p className="flex items-center gap-2">
             <AlarmClockIcon className="w-6 h-6 text-red-400" />
-            Enjoy up to <span className="font-bold text-red-400">70% OFF</span>
+            {t("HomePage.SaleCarousel.EnjoyUpTo")}
+            <span className="font-bold text-red-400">
+              {t("HomePage.SaleCarousel.70%OFF")}
+            </span>
           </p>
         </div>
 
@@ -59,7 +65,7 @@ const SaleCarousel = () => {
         >
           <Link href={"/products"}>
             <ShoppingBagIcon className="w-5 h-5" />
-            Shop Now
+            {t("HomePage.SaleCarousel.ShopNow")}
           </Link>
         </Button>
       </SwiperSlide>
@@ -70,20 +76,23 @@ const SaleCarousel = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
             <span className="rounded-full h-3 w-3 bg-yellow-500"></span>
           </span>
-          FLASH SALE
+          {t("HomePage.SaleCarousel.FlashSale")}
         </div>
 
         <h3 className="font-extrabold text-2xl md:text-5xl tracking-tighter drop-shadow-lg flex flex-col md:flex-row items-center gap-3">
           <ZapIcon className="size-12 md:size-16 text-yellow-400 filter drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]" />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-            Flash Deal Just for You!
+            {t("HomePage.SaleCarousel.FlashDealJustForYou")}
           </span>
         </h3>
 
         <div className="text-xl md:text-3xl flex items-center justify-center flex-wrap gap-2 font-light">
           <p className="flex items-center gap-2">
             <TimerIcon className="w-6 h-6 text-yellow-400" />
-            Save <span className="font-bold text-yellow-400">up to 50%</span>
+            {t("HomePage.SaleCarousel.Save")}{" "}
+            <span className="font-bold text-yellow-400">
+              {t("HomePage.SaleCarousel.upTo50%")}
+            </span>
           </p>
         </div>
 
@@ -93,7 +102,7 @@ const SaleCarousel = () => {
         >
           <Link href={"/products"}>
             <ShoppingCartIcon className="w-5 h-5" />
-            Grab Deal
+            {t("HomePage.SaleCarousel.GrabDeal")}
           </Link>
         </Button>
       </SwiperSlide>
@@ -104,21 +113,24 @@ const SaleCarousel = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="rounded-full h-3 w-3 bg-green-500"></span>
           </span>
-          FREE SHIPPING
+          {t("HomePage.SaleCarousel.freeShipping")}
         </div>
 
         <h3 className="font-extrabold text-2xl md:text-5xl tracking-tighter drop-shadow-lg flex flex-col md:flex-row items-center gap-3">
           <TruckIcon className="size-12 md:size-16 text-green-400 filter drop-shadow-[0_0_8px_rgba(74,222,128,0.5)]" />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-            Free Shipping Worldwide!
+            {t("HomePage.SaleCarousel.FreeShippingWorldwide")}
           </span>
         </h3>
 
         <div className="text-xl md:text-3xl flex items-center justify-center flex-wrap gap-2 font-light">
           <p className="flex items-center gap-2">
             <GiftIcon className="w-6 h-6 text-green-400" />
-            On all orders{" "}
-            <span className="font-bold text-green-400">this week</span>
+            {t("HomePage.SaleCarousel.OnAllOrders")}
+
+            <span className="font-bold text-green-400">
+              {t("HomePage.SaleCarousel.thisWeek")}
+            </span>
           </p>
         </div>
 
@@ -128,7 +140,7 @@ const SaleCarousel = () => {
         >
           <Link href={"/products"}>
             <MapPinIcon className="w-5 h-5" />
-            Check Now
+            {t("HomePage.SaleCarousel.CheckNow")}
           </Link>
         </Button>
       </SwiperSlide>
