@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { LoaderPinwheel } from "lucide-react";
 import { ReactNode } from "react";
+import { useTranslations } from "next-intl";
 
 interface DeleteDialogProps {
   children: ReactNode;
@@ -26,24 +27,26 @@ export const CartDeleteDialog = ({
   isLoading,
   onConfirm,
 }: DeleteDialogProps) => {
+  const t = useTranslations("CartDeleteDialog");
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent className="w-11/12 rounded-lg">
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>{t("Title")}</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. {description}
+            {t("DescriptionPrefix")} {description}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>{t("Cancel")}</AlertDialogCancel>
           <AlertDialogAction
             className="bg-red-600 text-white hover:bg-red-500 duration-300"
             disabled={isLoading}
             onClick={onConfirm}
           >
-            {isLoading ? <LoaderPinwheel /> : <>Sure</>}
+            {isLoading ? <LoaderPinwheel /> : t("Confirm")}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

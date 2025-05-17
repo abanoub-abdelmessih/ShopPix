@@ -12,6 +12,7 @@ import Link from "next/link";
 import { MouseEvent } from "react";
 import { CartActionButtons } from "./CartActionButtons";
 import { CartQuantity } from "./CartQuantity";
+import { useTranslations } from "next-intl";
 
 interface CartCardProps {
   cartData: CartData;
@@ -28,6 +29,8 @@ export const CartCard = ({
   loadingRemove,
   toggleWishlist,
 }: CartCardProps) => {
+  const t = useTranslations("Cart");
+
   return (
     <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-4">
       {cartData.data.products.map((item) => {
@@ -42,6 +45,7 @@ export const CartCard = ({
                 <Link
                   href={`/products/${item.product?._id}`}
                   className="hover:underline"
+                  aria-label={t("ViewProduct")}
                 >
                   {(item.product?.title).split(" ").slice(0, 3).join(" ") ||
                     "N/A"}
@@ -57,7 +61,7 @@ export const CartCard = ({
                 <div className="flex-shrink-0 relative w-[90px] h-[90px] rounded-md overflow-hidden shadow-sm border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-800/70">
                   <Image
                     src={item.product?.imageCover || "/placeholder.png"}
-                    alt={item.product?.title || "Product"}
+                    alt={item.product?.title || t("Product")}
                     fill
                     property="true"
                     className="object-contain"
@@ -72,7 +76,7 @@ export const CartCard = ({
                         ${item.price.toFixed(2)}
                       </span>
                       <span className="text-sm text-gray-500 dark:text-gray-400">
-                        each
+                        {t("Each")}
                       </span>
                     </div>
                     <div className="flex gap-1">
@@ -95,13 +99,13 @@ export const CartCard = ({
                           </span>
                         </div>
                         <span className="text-sm text-gray-600 dark:text-gray-300">
-                          × item{item.count !== 1 && "s"}
+                          × {t("Items")}
                         </span>
                       </div>
 
                       <div className="text-right">
                         <div className="text-xs text-gray-500 dark:text-gray-400 uppercase font-medium">
-                          Total
+                          {t("TotalLabel")}
                         </div>
                         <div className="text-lg font-bold text-indigo-600 dark:text-indigo-400">
                           ${(item.count * item.price).toFixed(2)}
@@ -112,6 +116,7 @@ export const CartCard = ({
                 </div>
               </div>
             </CardContent>
+
             <CardFooter className="justify-between gap-2 border-t py-3">
               <div className="flex items-center gap-1 mt-1">
                 <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />

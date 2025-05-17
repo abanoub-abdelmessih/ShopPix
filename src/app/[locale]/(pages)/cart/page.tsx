@@ -17,8 +17,11 @@ import { Heading } from "@/components/Heading";
 import { Trash } from "lucide-react";
 import { CartDeleteDialog } from "@/components/shared/cart/CartDeleteDialog";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const CartPage = () => {
+  const t = useTranslations("Cart");
+
   const { data: cartData, isError, isFetching, isLoading } = useGetCart();
   const { data: wishListProducts } = useWishlist();
   const { mutate: addToWishList, isPending: loadingAdd } = useAddWishlist();
@@ -35,22 +38,20 @@ const CartPage = () => {
   if (isLoading || isFetching) {
     return (
       <div className="flex items-center justify-center gap-3 text-3xl flex-1">
-        <Loader /> Please Wait
+        <Loader /> {t("Loading")}
       </div>
     );
   }
 
   if (isError) {
-    return (
-      <ErrorMessage description="An error occurred while loading cart products." />
-    );
+    return <ErrorMessage description={t("LoadError")} />;
   }
 
   if (!cartData || cartData.data.products.length === 0) {
     return (
       <ErrorMessage
-        title="Your cart is empty"
-        description="Items you add to your cart will appear here."
+        title={t("ErrorTitle")}
+        description={t("ErrorDescription")}
       />
     );
   }
@@ -66,16 +67,13 @@ const CartPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-6">
-      <Heading
-        title="Your Shopping Cart"
-        description="Review your selected items before checkout."
-      />
+      <Heading title={t("Title")} description={t("Description")} />
+
       <div className="flex bg-gradient-to-t from-indigo-700 to-indigo-400 bg-clip-text text-transparent items-center gap-2 mb-3 px-3">
-        <h2 className="text-2xl font-bold ">Cart Products Count :</h2>
+        <h2 className="text-2xl font-bold">{t("CountLabel")}</h2>
         <span className="text-lg font-bold">{cartData.numOfCartItems}</span>
       </div>
 
-      {/* Desktop Table */}
       <CartTable
         cartData={cartData}
         loadingAdd={loadingAdd}
@@ -84,7 +82,6 @@ const CartPage = () => {
         wishedIds={wishedIds}
       />
 
-      {/* Mobile Cards */}
       <CartCard
         cartData={cartData}
         loadingAdd={loadingAdd}
@@ -96,24 +93,26 @@ const CartPage = () => {
       <div className="flex flex-col md:flex-row items-end sm:items-center justify-between mt-8 pt-4 border-t border-gray-200 dark:border-zinc-800">
         <div className="flex gap-2 flex-col md:flex-row w-full mb-4 md:mb-0">
           <CartDeleteDialog
-            description="this will clear your cart"
+            description={t("ClearCartConfirm")}
             isLoading={PendingClearCart}
             onConfirm={() => ClearCart()}
           >
             <Button variant="destructive">
-              <Trash /> Clear Cart
+              <Trash /> {t("ClearCart")}
             </Button>
           </CartDeleteDialog>
+
           <Button
             asChild
             className="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-600 text-white transition-colors "
           >
-            <Link href={"/checkout"}>Proceed to Checkout</Link>
+            <Link href={"/checkout"}>{t("ProceedToCheckout")}</Link>
           </Button>
         </div>
-        <div className="text-xl font-semibold text-center text-gray-900 dark:text-white">
-          Total:
-          <span className="text-indigo-600 dark:text-indigo-400 ml-2">
+
+        <div className="text-xl font-semibold text-center text-gray-900 dark:text-white w-full md:w-fit">
+          {t("Total")}:
+          <span className="text-indigo-600 dark:text-indigo-400 ml-2 rtl:mr-2">
             ${cartData.data.totalCartPrice.toFixed(2)}
           </span>
         </div>

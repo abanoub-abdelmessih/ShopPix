@@ -160,7 +160,119 @@
       "OutOfStock": "غير متوفر في المخزون"
     }
   },
+  "Cart": {
+    "Loading": "يرجى الانتظار",
+    "ErrorTitle": "سلة التسوق فارغة",
+    "ErrorDescription": "العناصر التي تضيفها إلى السلة ستظهر هنا.",
+    "LoadError": "حدث خطأ أثناء تحميل منتجات السلة.",
+    "Title": "سلة التسوق الخاصة بك",
+    "Description": "راجع العناصر التي قمت باختيارها قبل إتمام الشراء.",
+    "CountLabel": "عدد المنتجات في السلة:",
+    "ClearCartConfirm": "سيتم إفراغ السلة بالكامل",
+    "ClearCart": "إفراغ السلة",
+    "ProceedToCheckout": "المتابعة لإتمام الشراء",
+    "Total": "الإجمالي",
+    "Image": "الصورة",
+    "Product": "المنتج",
+    "Rating": "التقييم",
+    "Quantity": "الكمية",
+    "Price": "السعر",
+    "Actions": "الإجراءات",
+    "Each": "لكل واحدة",
+    "Items": "عنصر/عناصر",
+    "TotalLabel": "الإجمالي",
+    "ViewProduct": "عرض المنتج"
+  },
+  "CartDeleteDialog": {
+    "Title": "هل أنت متأكد تمامًا؟",
+    "DescriptionPrefix": "هذا الإجراء لا يمكن التراجع عنه.",
+    "Cancel": "إلغاء",
+    "Confirm": "تأكيد"
+  },
+  "Wishlist": {
+    "Loading": "يرجى الانتظار",
+    "ErrorTitle": "قائمة الأمنيات فارغة",
+    "ErrorDescription": "العناصر التي تضيفها إلى قائمة الأمنيات ستظهر هنا.",
+    "LoadError": "حدث خطأ أثناء تحميل منتجات قائمة الأمنيات.",
+    "Title": "قائمة الأمنيات",
+    "Description": "تصفح العناصر التي أضفتها للمفضلة.",
+    "CountLabel": "عدد منتجات قائمة الأمنيات :"
+  },
+  "Checkout": {
+    "secureCheckoutTitle": "الدفع الآمن",
+    "secureCheckoutDescription": "أكمل عملية الشراء بتوفير معلومات الشحن وبيانات الدفع.",
+    "shippingInformation": "معلومات الشحن",
+    "paymentMethod": "طريقة الدفع",
+    "orderSummary": "ملخص الطلب",
+    "items": "العناصر",
+    "shipping": "الشحن",
+    "free": "مجاني",
+    "tax": "الضريبة",
+    "total": "الإجمالي",
+    "proceedToPayment": "المتابعة إلى الدفع",
+    "placeOrder": "تنفيذ الطلب",
+    "orderSecured": "طلبك مؤمن بتشفير 256 بت",
+    "pleaseSelectAddressAndPayment": "يرجى اختيار العنوان وطريقة الدفع",
+    "failed": "فشل",
+    "pleaseWait": "يرجى الانتظار",
+    "Address": {
+      "pleaseWait": "الرجاء الانتظار",
+      "savedAddresses": "العناوين المحفوظة",
+      "removeAddressConfirmation": "هل أنت متأكد من حذف هذا العنوان؟"
+    },
+    "AddAddressDialog": {
+      "addNewAddress": "إضافة عنوان جديد",
+      "addNewShippingAddress": "أضف عنوان شحن جديد",
+      "enterAddressDetails": "أدخل تفاصيل عنوانك للتوصيل.",
+      "addressType": "نوع العنوان",
+      "home": "المنزل",
+      "office": "المكتب",
+      "details": "التفاصيل",
+      "detailsPlaceholder": "أدخل التفاصيل",
+      "phone": "رقم الهاتف",
+      "phonePlaceholder": "أدخل رقم هاتفك",
+      "city": "المدينة",
+      "cityPlaceholder": "أدخل مدينتك",
+      "saveAddress": "حفظ العنوان"
+    },
+    "PaymentMethod": {
+      "paymentMethod": "طريقة الدفع",
+      "onlinePayment": "الدفع الإلكتروني",
+      "cashOnDelivery": "الدفع عند الاستلام"
+    }
+  },
+  "Orders": {
+    "title": "طلباتك",
+    "description": "راجع جميع طلباتك السابقة وتفاصيلها وحالتها هنا.",
+    "loading": "يرجى الانتظار",
+    "error": {
+      "title": "لم يتم العثور على طلبات",
+      "description": "حدث خطأ أثناء تحميل الطلبات."
+    },
+    "empty": {
+      "title": "ليس لديك أي طلبات حتى الآن",
+      "description": "تصفح منتجاتنا واطلب أول منتج ليظهر هنا."
+    },
+    "order": "طلب",
+    "paid": "مدفوع",
+    "unpaid": "غير مدفوع",
+    "delivered": "تم التوصيل",
+    "inTransit": "قيد التوصيل",
+    "shippingAddress": "عنوان الشحن",
+    "noAddress": "لا يوجد عنوان شحن متاح",
+    "payment": "الدفع",
+    "deliveryStatus": "حالة التوصيل",
+    "summary": "ملخص الطلب",
+    "subtotal": "المجموع الفرعي",
+    "shipping": "الشحن",
+    "tax": "الضريبة",
+    "total": "الإجمالي",
+    "items": "العناصر",
+    "quantity": "الكمية"
+  },
   "Common": {
-    "PleaseWait": "برجاء الانتظار"
+    "NoProductsFound": "لم يتم العثور على منتجات",
+    "BrowseAllProducts": "تصفح جميع المنتجات",
+    "PleaseWait": "يرجى الانتظار"
   }
 }

@@ -13,6 +13,7 @@ import Link from "next/link";
 import { MouseEvent } from "react";
 import { CartActionButtons } from "./CartActionButtons";
 import { CartQuantity } from "./CartQuantity";
+import { useTranslations } from "next-intl";
 
 interface CartTableProps {
   cartData: CartData;
@@ -29,18 +30,20 @@ export const CartTable = ({
   loadingRemove,
   toggleWishlist,
 }: CartTableProps) => {
+  const t = useTranslations("Cart");
+
   return (
     <div className="hidden lg:block rounded-lg overflow-hidden border border-gray-200 dark:border-zinc-800">
       <Table>
         <TableHeader className="bg-gray-50 dark:bg-zinc-800">
           <TableRow>
-            <TableHead>Image</TableHead>
-            <TableHead>Product</TableHead>
-            <TableHead>Rating</TableHead>
-            <TableHead>Quantity</TableHead>
-            <TableHead>Price</TableHead>
-            <TableHead>Total</TableHead>
-            <TableHead className="text-center">Actions</TableHead>
+            <TableHead className="rtl:text-start">{t("Image")}</TableHead>
+            <TableHead className="rtl:text-start">{t("Product")}</TableHead>
+            <TableHead className="rtl:text-start">{t("Rating")}</TableHead>
+            <TableHead className="rtl:text-start">{t("Quantity")}</TableHead>
+            <TableHead className="rtl:text-start">{t("Price")}</TableHead>
+            <TableHead className="rtl:text-start">{t("Total")}</TableHead>
+            <TableHead className="text-center">{t("Actions")}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

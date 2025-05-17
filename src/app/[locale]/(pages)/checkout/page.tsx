@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { Heading } from "@/components/Heading";
 import { CheckoutAddress } from "@/components/shared/checkout/CheckoutAddress";
 import { PaymentMethod } from "@/components/shared/checkout/PaymentMethod";
@@ -16,6 +17,7 @@ import {
 import { useRouter } from "next/navigation";
 
 const Checkout = () => {
+  const t = useTranslations("Checkout");
   const [paymentMethod, setPaymentMethod] = useState<
     "OnlinePayment" | "CashOnDelivery" | null
   >(null);
@@ -34,7 +36,7 @@ const Checkout = () => {
   if (isLoading || isFetching) {
     return (
       <div className="flex items-center justify-center gap-3 text-3xl flex-1">
-        <Loader /> Please Wait
+        <Loader /> {t("pleaseWait")}
       </div>
     );
   }
@@ -42,8 +44,8 @@ const Checkout = () => {
   const handlePlaceOrder = () => {
     if (!selectedAddress || !paymentMethod || !cartData?.cartId) {
       toast({
-        title: "Failed",
-        description: "Please select address and payment method",
+        title: t("failed"),
+        description: t("pleaseSelectAddressAndPayment"),
         variant: "destructive",
       });
       return;
@@ -70,8 +72,8 @@ const Checkout = () => {
     <div className="container mx-auto pb-10">
       <div className="mb-6">
         <Heading
-          title="Secure Checkout"
-          description="Complete your purchase by providing shipping information and payment details."
+          title={t("secureCheckoutTitle")}
+          description={t("secureCheckoutDescription")}
         />
       </div>
 
@@ -81,7 +83,7 @@ const Checkout = () => {
           {/* Address Selection */}
           <div className="bg-white dark:bg-zinc-800 rounded-lg shadow p-6 border border-zinc-200 dark:border-zinc-700">
             <h2 className="text-xl font-semibold mb-4 text-indigo-700 dark:text-indigo-300">
-              Shipping Information
+              {t("shippingInformation")}
             </h2>
             <CheckoutAddress onSelect={setSelectedAddress} />
           </div>
@@ -89,7 +91,7 @@ const Checkout = () => {
           {/* Payment Method */}
           <div className="bg-white dark:bg-zinc-800 rounded-lg shadow p-6 border border-zinc-200 dark:border-zinc-700">
             <h2 className="text-xl font-semibold mb-4 text-indigo-700 dark:text-indigo-300">
-              Payment Method
+              {t("paymentMethod")}
             </h2>
             <PaymentMethod onSelect={setPaymentMethod} />
           </div>
@@ -99,29 +101,33 @@ const Checkout = () => {
         <div className="lg:w-1/3">
           <div className="bg-indigo-50 dark:bg-zinc-800 rounded-lg shadow p-6 sticky top-20 border border-indigo-100 dark:border-zinc-700">
             <h2 className="text-xl font-semibold mb-4 text-indigo-700 dark:text-indigo-300">
-              Order Summary
+              {t("orderSummary")}
             </h2>
 
             <div className="space-y-4">
               <div className="flex justify-between pb-4 border-b border-zinc-200 dark:border-zinc-700">
-                <span className="text-zinc-600 dark:text-zinc-300">Items</span>
+                <span className="text-zinc-600 dark:text-zinc-300">
+                  {t("items")}
+                </span>
                 <span>{cartData?.numOfCartItems}</span>
               </div>
 
               <div className="flex justify-between pb-4 border-b border-zinc-200 dark:border-zinc-700">
                 <span className="text-zinc-600 dark:text-zinc-300">
-                  Shipping
+                  {t("shipping")}
                 </span>
-                <span>Free</span>
+                <span>{t("free")}</span>
               </div>
 
               <div className="flex justify-between pb-4 border-b border-zinc-200 dark:border-zinc-700">
-                <span className="text-zinc-600 dark:text-zinc-300">Tax</span>
+                <span className="text-zinc-600 dark:text-zinc-300">
+                  {t("tax")}
+                </span>
                 <span>$0</span>
               </div>
 
               <div className="flex justify-between font-semibold text-lg text-indigo-700 dark:text-indigo-300">
-                <span>Total</span>
+                <span>{t("total")}</span>
                 <span>${cartData?.data.totalCartPrice.toFixed(2)}</span>
               </div>
 
@@ -139,18 +145,16 @@ const Checkout = () => {
                   {loadingCashOrder || loadingOnlinePaymentOrder ? (
                     <LoaderPinwheel className="animate-spin" />
                   ) : paymentMethod === "OnlinePayment" ? (
-                    "Proceed to Payment"
+                    t("proceedToPayment")
                   ) : (
-                    "Place Order"
+                    t("placeOrder")
                   )}
                 </Button>
               </div>
 
               <div className="text-center pt-2 text-zinc-500 dark:text-zinc-400 flex items-center justify-center gap-1">
                 <Lock size={15} className="text-indigo-400" />
-                <p className="text-xs xl:text-sm">
-                  Your order is secured with 256-bit encryption
-                </p>
+                <p className="text-xs xl:text-sm">{t("orderSecured")}</p>
               </div>
             </div>
           </div>

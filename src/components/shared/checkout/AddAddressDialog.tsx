@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -21,6 +22,8 @@ import { Controller, FormProvider, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 
 export const AddAddressDialog = () => {
+  const t = useTranslations("Checkout.AddAddressDialog");
+
   const form = useForm<AddressSchema>({
     resolver: zodResolver(addressSchema),
     defaultValues: {
@@ -48,21 +51,19 @@ export const AddAddressDialog = () => {
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger asChild>
         <Button className="w-full border-b py-5">
-          <Plus /> Add New Address
+          <Plus /> {t("addNewAddress")}
         </Button>
       </DialogTrigger>
       <DialogContent className="w-11/12 rounded-lg">
         <DialogHeader>
-          <DialogTitle>Add a New Shipping Address</DialogTitle>
-          <DialogDescription>
-            Enter your address details for delivery.
-          </DialogDescription>
+          <DialogTitle>{t("addNewShippingAddress")}</DialogTitle>
+          <DialogDescription>{t("enterAddressDetails")}</DialogDescription>
         </DialogHeader>
         <div>
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <div>
-                <Label className="mb-3 block">Address Type</Label>
+                <Label className="mb-3 block">{t("addressType")}</Label>
                 <Controller
                   control={form.control}
                   name="name"
@@ -74,42 +75,41 @@ export const AddAddressDialog = () => {
                     >
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="home" id="home" />
-                        <Label htmlFor="home">Home</Label>
+                        <Label htmlFor="home">{t("home")}</Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="office" id="office" />
-                        <Label htmlFor="office">Office</Label>
+                        <Label htmlFor="office">{t("office")}</Label>
                       </div>
                     </RadioGroup>
                   )}
                 />
               </div>
 
-              {/* details */}
               <FormInput
                 control={form.control}
-                label="Details"
+                label={t("details")}
                 name="details"
-                placeholder="Enter your details"
+                placeholder={t("detailsPlaceholder")}
                 autoComplete="details"
                 id="details"
               />
-              {/* phone */}
+
               <FormInput
                 type="tel"
                 control={form.control}
-                label="Phone"
+                label={t("phone")}
                 name="phone"
-                placeholder="Enter your phone"
+                placeholder={t("phonePlaceholder")}
                 autoComplete="phone"
                 id="phone"
               />
-              {/* city */}
+
               <FormInput
                 control={form.control}
-                label="City"
+                label={t("city")}
                 name="city"
-                placeholder="Enter your city"
+                placeholder={t("cityPlaceholder")}
                 autoComplete="city"
                 id="city"
               />
@@ -119,7 +119,7 @@ export const AddAddressDialog = () => {
                   {isPending ? (
                     <LoaderPinwheel className="animate-spin" />
                   ) : (
-                    <>Save Address</>
+                    t("saveAddress")
                   )}
                 </Button>
               </DialogFooter>

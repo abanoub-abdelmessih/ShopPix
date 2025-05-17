@@ -6,8 +6,11 @@ import { ProductCard } from "@/components/shared/products/ProductCard";
 import { useWishlist } from "@/hooks/useWishlist";
 import { ProductType } from "@/types/ProductType";
 import { useMemo } from "react";
+import { useTranslations } from "next-intl";
 
 const Wishlist = () => {
+  const t = useTranslations("Wishlist");
+
   const {
     data: wishListProducts,
     isLoading,
@@ -23,34 +26,29 @@ const Wishlist = () => {
   if (isLoading || isFetching) {
     return (
       <div className="flex items-center justify-center gap-3 text-3xl flex-1 ">
-        <Loader /> Please Wait
+        <Loader /> {t("Loading")}
       </div>
     );
   }
 
   if (isError) {
-    return (
-      <ErrorMessage description="An error occurred while loading wishlist products." />
-    );
+    return <ErrorMessage description={t("LoadError")} />;
   }
 
   if (!wishListProducts || wishListProducts.data.length === 0) {
     return (
       <ErrorMessage
-        title="Your wishlist is empty"
-        description="Items you add to your wishlist will appear here."
+        title={t("ErrorTitle")}
+        description={t("ErrorDescription")}
       />
     );
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Heading
-        title="Wishlist"
-        description="Browse the items you've marked as favorites."
-      />
+      <Heading title={t("Title")} description={t("Description")} />
       <div className="flex bg-gradient-to-t from-indigo-700 to-indigo-400 bg-clip-text text-transparent items-center gap-2 px-3">
-        <h2 className="text-2xl font-bold ">Wishlist Products Count :</h2>
+        <h2 className="text-2xl font-bold ">{t("CountLabel")}</h2>
         <span className="text-lg font-bold">{wishListProducts.count}</span>
       </div>
 

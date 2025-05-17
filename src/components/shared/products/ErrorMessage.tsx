@@ -1,15 +1,17 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { ChevronsRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 export const ErrorMessage = ({
-  title = "No products found",
+  title = "NoProductsFound",
   description,
 }: {
   title?: string;
   description: string;
 }) => {
+  const t = useTranslations("Common");
   return (
     <div className="flex items-center justify-center flex-col px-4 mx-auto max-w-2xl flex-1">
       <div className="mb-6 text-gray-400">
@@ -30,7 +32,7 @@ export const ErrorMessage = ({
       </div>
 
       <h3 className="text-2xl md:text-3xl font-bold mb-3 text-center bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-        {title}
+        {t(title)}
       </h3>
 
       <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 mb-8 text-center max-w-md">
@@ -42,8 +44,8 @@ export const ErrorMessage = ({
         asChild
       >
         <Link href="/products" className="flex items-center gap-2">
-          Browse All Products
-          <ChevronsRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
+          {t("BrowseAllProducts")}
+          <ChevronsRight className="w-5 h-5 transform ltr:group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform duration-300 rtl:rotate-180" />
         </Link>
       </Button>
     </div>

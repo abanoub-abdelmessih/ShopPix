@@ -160,7 +160,119 @@
       "OutOfStock": "Out of Stock"
     }
   },
+  "Cart": {
+    "Loading": "Please Wait",
+    "ErrorTitle": "Your cart is empty",
+    "ErrorDescription": "Items you add to your cart will appear here.",
+    "LoadError": "An error occurred while loading cart products.",
+    "Title": "Your Shopping Cart",
+    "Description": "Review your selected items before checkout.",
+    "CountLabel": "Cart Products Count :",
+    "ClearCartConfirm": "This will clear your cart",
+    "ClearCart": "Clear Cart",
+    "ProceedToCheckout": "Proceed to Checkout",
+    "Total": "Total",
+    "Image": "Image",
+    "Product": "Product",
+    "Rating": "Rating",
+    "Quantity": "Quantity",
+    "Price": "Price",
+    "Actions": "Actions",
+    "Each": "each",
+    "Items": "item(s)",
+    "TotalLabel": "Total",
+    "ViewProduct": "View Product"
+  },
+  "CartDeleteDialog": {
+    "Title": "Are you absolutely sure?",
+    "DescriptionPrefix": "This action cannot be undone.",
+    "Cancel": "Cancel",
+    "Confirm": "Sure"
+  },
+  "Wishlist": {
+    "Loading": "Please Wait",
+    "ErrorTitle": "Your wishlist is empty",
+    "ErrorDescription": "Items you add to your wishlist will appear here.",
+    "LoadError": "An error occurred while loading wishlist products.",
+    "Title": "Wishlist",
+    "Description": "Browse the items you've marked as favorites.",
+    "CountLabel": "Wishlist Products Count :"
+  },
+  "Checkout": {
+    "secureCheckoutTitle": "Secure Checkout",
+    "secureCheckoutDescription": "Complete your purchase by providing shipping information and payment details.",
+    "shippingInformation": "Shipping Information",
+    "paymentMethod": "Payment Method",
+    "orderSummary": "Order Summary",
+    "items": "Items",
+    "shipping": "Shipping",
+    "free": "Free",
+    "tax": "Tax",
+    "total": "Total",
+    "proceedToPayment": "Proceed to Payment",
+    "placeOrder": "Place Order",
+    "orderSecured": "Your order is secured with 256-bit encryption",
+    "pleaseSelectAddressAndPayment": "Please select address and payment method",
+    "failed": "Failed",
+    "pleaseWait": "Please Wait",
+    "Address": {
+      "pleaseWait": "Please Wait",
+      "savedAddresses": "Saved Addresses",
+      "removeAddressConfirmation": "Are you sure you want to remove this address?"
+    },
+    "AddAddressDialog": {
+      "addNewAddress": "Add New Address",
+      "addNewShippingAddress": "Add a New Shipping Address",
+      "enterAddressDetails": "Enter your address details for delivery.",
+      "addressType": "Address Type",
+      "home": "Home",
+      "office": "Office",
+      "details": "Details",
+      "detailsPlaceholder": "Enter your details",
+      "phone": "Phone",
+      "phonePlaceholder": "Enter your phone",
+      "city": "City",
+      "cityPlaceholder": "Enter your city",
+      "saveAddress": "Save Address"
+    },
+    "PaymentMethod": {
+      "paymentMethod": "Payment Method",
+      "onlinePayment": "Online Payment",
+      "cashOnDelivery": "Cash On Delivery"
+    }
+  },
+  "Orders": {
+    "title": "Your Orders",
+    "description": "Review all your previous orders, their details, and status here.",
+    "loading": "Please Wait",
+    "error": {
+      "title": "No orders found",
+      "description": "An error occurred while loading your orders."
+    },
+    "empty": {
+      "title": "You don't have any orders yet",
+      "description": "Browse our products and place your first order to see it here."
+    },
+    "order": "Order",
+    "paid": "Paid",
+    "unpaid": "Unpaid",
+    "delivered": "Delivered",
+    "inTransit": "In Transit",
+    "shippingAddress": "Shipping Address",
+    "noAddress": "No shipping address provided",
+    "payment": "Payment",
+    "deliveryStatus": "Delivery Status",
+    "summary": "Order Summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "total": "Total",
+    "items": "Items",
+    "quantity": "Qty"
+  },
   "Common": {
+    "NoProductsFound": "No products found",
+    "BrowseAllProducts": "Browse All Products",
     "PleaseWait": "Please Wait"
   }
 }

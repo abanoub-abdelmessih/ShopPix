@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Loader } from "@/components/Loader";
 import { useGetAddresses, useRemoveAddress } from "@/hooks/useAddress";
 import { Address as AddressType } from "@/types/AddressType";
@@ -13,6 +14,8 @@ export const Address = ({
 }: {
   onSelect: (address: AddressType) => void;
 }) => {
+  const t = useTranslations("Checkout.Address");
+
   const {
     data: AddressData,
     isLoading: loadingAddresses,
@@ -24,7 +27,7 @@ export const Address = ({
   if (loadingAddresses || fetchingAddresses) {
     return (
       <div className="flex items-center justify-center gap-3 text-3xl flex-1">
-        <Loader className="animate-spin" /> Please Wait
+        <Loader className="animate-spin" /> {t("pleaseWait")}
       </div>
     );
   }
@@ -37,7 +40,7 @@ export const Address = ({
     <div className="bg-gray-50 dark:bg-zinc-900 rounded-xl shadow-lg border border-gray-100 dark:border-zinc-800 overflow-hidden mb-3">
       <div className="p-4 border-b border-gray-100 dark:border-zinc-800 shadow">
         <h2 className="font-semibold text-lg text-gray-800 dark:text-gray-100">
-          Saved Addresses
+          {t("savedAddresses")}
         </h2>
       </div>
       <RadioGroup
@@ -85,7 +88,7 @@ export const Address = ({
 
             <div>
               <CartDeleteDialog
-                description="Are you sure you want to remove this address?"
+                description={t("removeAddressConfirmation")}
                 isLoading={loadingRemoveAddresses}
                 onConfirm={() => removingAddresses(address._id)}
               >

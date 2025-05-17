@@ -9,15 +9,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { Package, CreditCard, Truck, MapPin, Phone } from "lucide-react";
 import { Heading } from "@/components/Heading";
+import { useTranslations } from "next-intl";
 
 const AllOrders = () => {
   const { data: orders, isLoading, isError, isFetching } = useGetOrders();
+  const t = useTranslations("Orders");
 
   // Preserved loading state
   if (isLoading || isFetching) {
     return (
       <div className="flex items-center justify-center gap-3 text-3xl flex-1 text-gray-700 dark:text-zinc-300">
-        <Loader /> Please Wait
+        <Loader /> {t("loading")}
       </div>
     );
   }
@@ -26,8 +28,8 @@ const AllOrders = () => {
   if (isError) {
     return (
       <ErrorMessage
-        title="No orders found"
-        description="An error occurred while loading your orders."
+        title={t("error.title")}
+        description={t("error.description")}
       />
     );
   }
@@ -36,8 +38,8 @@ const AllOrders = () => {
   if (!Array.isArray(orders) || orders.length === 0) {
     return (
       <ErrorMessage
-        title="You don't have any orders yet"
-        description="Browse our products and place your first order to see it here."
+        title={t("empty.title")}
+        description={t("empty.description")}
       />
     );
   }
@@ -45,10 +47,7 @@ const AllOrders = () => {
   return (
     <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
       <div className="mb-6 sm:mb-8">
-        <Heading
-          title="Your Orders"
-          description="Review all your previous orders, their details, and status here."
-        />
+        <Heading title={t("title")} description={t("description")} />
       </div>
 
       <div className="space-y-6 sm:space-y-8">
@@ -68,12 +67,12 @@ const AllOrders = () => {
                   <div className="flex items-center gap-2">
                     <Package className="h-4 w-4 sm:h-5 sm:w-5 text-indigo-500 dark:text-indigo-400" />
                     <h3 className="text-sm sm:text-lg font-semibold text-gray-800 dark:text-white">
-                      Order #{order._id.substring(order._id.length - 6)}
+                      {t("order")} #{order._id.slice(-6)}
                     </h3>
                   </div>
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="px-2 sm:px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-zinc-800 text-gray-800 dark:text-zinc-200">
-                      {order.isPaid ? "Paid" : "Unpaid"}
+                      {order.isPaid ? t("paid") : t("unpaid")}
                     </span>
                     <span
                       className={`px-2 sm:px-3 py-1 rounded-full text-xs font-medium ${
@@ -82,7 +81,7 @@ const AllOrders = () => {
                           : "bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400"
                       }`}
                     >
-                      {order.isDelivered ? "Delivered" : "In Transit"}
+                      {order.isDelivered ? t("delivered") : t("inTransit")}{" "}
                     </span>
                     <span className="text-xs text-gray-500 dark:text-zinc-400 ml-auto sm:ml-0">
                       {new Date(order.createdAt).toLocaleDateString()}
@@ -100,7 +99,7 @@ const AllOrders = () => {
                     <div className="bg-gray-50 dark:bg-zinc-900 rounded-lg p-3 sm:p-4">
                       <h4 className="font-medium text-gray-800 dark:text-zinc-200 mb-2 flex items-center gap-1.5">
                         <MapPin className="h-3.5 w-3.5 text-gray-500 dark:text-zinc-400" />
-                        Shipping Address
+                        {t("shippingAddress")}
                       </h4>
                       {order.shippingAddress ? (
                         <div className="space-y-1 text-sm">
@@ -114,7 +113,7 @@ const AllOrders = () => {
                         </div>
                       ) : (
                         <p className="text-gray-500 dark:text-zinc-400 text-sm">
-                          No shipping address provided
+                          {t("noAddress")}
                         </p>
                       )}
                     </div>
@@ -125,7 +124,7 @@ const AllOrders = () => {
                         <div className="flex items-center gap-1.5 mb-1">
                           <CreditCard className="h-3.5 w-3.5 text-gray-500 dark:text-zinc-400" />
                           <h4 className="text-sm font-medium text-gray-800 dark:text-zinc-200">
-                            Payment
+                            {t("payment")}
                           </h4>
                         </div>
                         <span className="text-xs text-gray-700 dark:text-zinc-300 mt-auto">
@@ -137,7 +136,7 @@ const AllOrders = () => {
                         <div className="flex items-center gap-1.5 mb-1">
                           <Truck className="h-3.5 w-3.5 text-gray-500 dark:text-zinc-400" />
                           <h4 className="text-sm font-medium text-gray-800 dark:text-zinc-200">
-                            Delivery Status
+                            {t("deliveryStatus")}
                           </h4>
                         </div>
                         <span className="text-xs text-gray-700 dark:text-zinc-300 mt-auto">
@@ -150,12 +149,12 @@ const AllOrders = () => {
                   {/* Right Column - Price Summary */}
                   <div className="bg-gray-50 dark:bg-zinc-900 rounded-lg p-3 sm:p-4 order-1 md:order-2">
                     <h4 className="font-medium text-gray-800 dark:text-zinc-200 mb-3">
-                      Order Summary
+                      {t("summary")}
                     </h4>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-gray-600 dark:text-zinc-400">
-                          Subtotal
+                          {t("subtotal")}
                         </span>
                         <span className="text-gray-800 dark:text-zinc-200">
                           $
@@ -168,7 +167,7 @@ const AllOrders = () => {
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600 dark:text-zinc-400">
-                          Shipping
+                          {t("shipping")}
                         </span>
                         <span className="text-gray-800 dark:text-zinc-200">
                           ${order.shippingPrice.toFixed(2)}
@@ -176,7 +175,7 @@ const AllOrders = () => {
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600 dark:text-zinc-400">
-                          Tax
+                          {t("tax")}
                         </span>
                         <span className="text-gray-800 dark:text-zinc-200">
                           ${order.taxPrice.toFixed(2)}
@@ -185,7 +184,7 @@ const AllOrders = () => {
                       <div className="border-t border-gray-200 dark:border-zinc-700 pt-2 mt-2">
                         <div className="flex justify-between font-medium">
                           <span className="text-gray-800 dark:text-zinc-200">
-                            Total
+                            {t("total")}
                           </span>
                           <span className="text-gray-900 dark:text-white">
                             ${order.totalOrderPrice.toFixed(2)}
@@ -199,7 +198,7 @@ const AllOrders = () => {
                 {/* Order Items */}
                 <div className="mt-4 sm:mt-6">
                   <h4 className="font-medium text-gray-800 dark:text-zinc-200 mb-2 sm:mb-3">
-                    Items ({order.cartItems.length})
+                    {t("items")} ({order.cartItems.length})
                   </h4>
                   <div className="space-y-2 sm:space-y-3">
                     {order.cartItems.map((item: CartProduct) => (
@@ -222,7 +221,7 @@ const AllOrders = () => {
                             {item.product.title}
                           </p>
                           <p className="text-xs sm:text-sm text-gray-500 dark:text-zinc-400 mt-0.5 sm:mt-1">
-                            Qty: {item.count}
+                            {t("quantity")}: {item.count}
                           </p>
                         </div>
                         <div className="text-right">
