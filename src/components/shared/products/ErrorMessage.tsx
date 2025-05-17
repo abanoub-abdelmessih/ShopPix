@@ -5,13 +5,15 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 export const ErrorMessage = ({
-  title = "NoProductsFound",
+  title,
   description,
 }: {
   title?: string;
   description: string;
 }) => {
   const t = useTranslations("Common");
+  const defaultTitle = t("NoProductsFound");
+
   return (
     <div className="flex items-center justify-center flex-col px-4 mx-auto max-w-2xl flex-1">
       <div className="mb-6 text-gray-400">
@@ -32,7 +34,8 @@ export const ErrorMessage = ({
       </div>
 
       <h3 className="text-2xl md:text-3xl font-bold mb-3 text-center bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-        {t(title)}
+        {title || defaultTitle}
+        {/* Use provided title or fallback to translated default */}
       </h3>
 
       <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 mb-8 text-center max-w-md">
