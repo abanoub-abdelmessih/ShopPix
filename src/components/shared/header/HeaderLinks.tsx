@@ -26,7 +26,6 @@ export const HeaderLinks = () => {
   const currentLocale = useLocale();
   const t = useTranslations("Header");
 
-  // هنا بنشيل بادئة اللغة من المسار قبل المقارنة
   const cleanPathname = pathname.replace(/^\/(en|ar)/, "") || "/";
 
   const navLinks = [
@@ -64,7 +63,6 @@ export const HeaderLinks = () => {
     return (
       <ul className={className} role="list">
         {navLinks.map((link) => {
-          // مقارنة مع المسار المنظف بدون بادئة اللغة
           const isActive = cleanPathname === link.path;
 
           const LinkComponent = (

@@ -7,6 +7,7 @@ import {
   CreateOnlinePaymentOrderProps,
   GetAllOrders,
 } from "@/services/Orders";
+import { useTranslations } from "next-intl";
 
 export const useGetOrders = () => {
   return useQuery({
@@ -18,14 +19,15 @@ export const useGetOrders = () => {
 
 export const useCreateCashOrder = () => {
   const queryClient = useQueryClient();
+  const t = useTranslations("OrdersToasts");
 
   return useMutation({
     mutationFn: ({ data, cartId }: CreateCashOrderProps) =>
       CreateCashOrder({ data, cartId }),
     onSuccess: () => {
       toast({
-        title: "Success",
-        description: "Order Created successfully",
+        title: t("success"),
+        description: t("orderCreatedSuccessfully"),
         className: "bg-green-500",
       });
       queryClient.invalidateQueries({ queryKey: ["cart"] });
@@ -33,8 +35,8 @@ export const useCreateCashOrder = () => {
     },
     onError: (error: Error) => {
       toast({
-        title: "Failed",
-        description: error.message || "Error during create order",
+        title: t("failed"),
+        description: error.message || t("errorCreatingOrder"),
         variant: "destructive",
       });
     },
@@ -42,13 +44,15 @@ export const useCreateCashOrder = () => {
 };
 
 export const useCreateOnlinePaymentOrder = () => {
+  const t = useTranslations("OrdersToasts");
+
   return useMutation({
     mutationFn: ({ data, cartId, baseUrl }: CreateOnlinePaymentOrderProps) =>
       CreateOnlinePaymentOrder({ data, cartId, baseUrl }),
     onSuccess: (session) => {
       toast({
-        title: "Redirecting",
-        description: "You will be redirected to payment gateway",
+        title: t("redirecting"),
+        description: t("redirectingToPayment"),
         className: "bg-green-500",
       });
 
@@ -58,8 +62,8 @@ export const useCreateOnlinePaymentOrder = () => {
     },
     onError: (error: Error) => {
       toast({
-        title: "Failed",
-        description: error.message || "Error during online payment order",
+        title: t("failed"),
+        description: error.message || t("errorOnlinePayment"),
         variant: "destructive",
       });
     },

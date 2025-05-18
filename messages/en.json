@@ -274,5 +274,42 @@
     "NoProductsFound": "No products found",
     "BrowseAllProducts": "Browse All Products",
     "PleaseWait": "Please Wait"
+  },
+  "CartToasts": {
+    "success": "Success",
+    "failed": "Failed",
+    "productAddedToCartSuccessfully": "Product added to cart successfully",
+    "productCountUpdatedSuccessfully": "Product count updated successfully",
+    "productRemovedSuccessfully": "Product removed from cart successfully",
+    "cartClearedSuccessfully": "You cleared your cart successfully",
+    "errorAddingProduct": "Error during add product",
+    "errorUpdatingCount": "Error during update product count",
+    "errorRemovingProduct": "Error during removing product"
+  },
+  "AddressToasts": {
+    "success": "Success",
+    "failed": "Failed",
+    "addressAddedSuccessfully": "Address added successfully",
+    "addressRemovedSuccessfully": "Address removed successfully",
+    "errorAddingAddress": "Error during add address",
+    "errorRemovingAddress": "Error during remove address"
+  },
+  "OrdersToasts": {
+    "success": "Success",
+    "failed": "Failed",
+    "redirecting": "Redirecting",
+    "orderCreatedSuccessfully": "Order created successfully",
+    "errorCreatingOrder": "Error during create order",
+    "redirectingToPayment": "You will be redirected to payment gateway",
+    "errorOnlinePayment": "Error during online payment order"
+  },
+  "WishlistToasts": {
+    "success": "Success",
+    "failed": "Failed",
+    "removed": "Removed",
+    "productAddedToWishlist": "Product added successfully to your wishlist",
+    "errorAddProductToWishlist": "Error during add product to wishlist",
+    "productRemovedFromWishlist": "Product removed from wishlist",
+    "errorRemoveProductFromWishlist": "Error during removal from wishlist"
   }
 }

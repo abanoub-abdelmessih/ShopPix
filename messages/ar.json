@@ -274,5 +274,42 @@
     "NoProductsFound": "لم يتم العثور على منتجات",
     "BrowseAllProducts": "تصفح جميع المنتجات",
     "PleaseWait": "يرجى الانتظار"
+  },
+  "CartToasts": {
+    "success": "نجاح",
+    "failed": "فشل",
+    "productAddedToCartSuccessfully": "تمت إضافة المنتج إلى السلة بنجاح",
+    "productCountUpdatedSuccessfully": "تم تحديث عدد المنتج بنجاح",
+    "productRemovedSuccessfully": "تمت إزالة المنتج من السلة بنجاح",
+    "cartClearedSuccessfully": "تم مسح السلة بنجاح",
+    "errorAddingProduct": "حدث خطأ أثناء إضافة المنتج",
+    "errorUpdatingCount": "حدث خطأ أثناء تحديث عدد المنتج",
+    "errorRemovingProduct": "حدث خطأ أثناء إزالة المنتج"
+  },
+  "AddressToasts": {
+    "success": "نجاح",
+    "failed": "فشل",
+    "addressAddedSuccessfully": "تمت إضافة العنوان بنجاح",
+    "addressRemovedSuccessfully": "تمت إزالة العنوان بنجاح",
+    "errorAddingAddress": "حدث خطأ أثناء إضافة العنوان",
+    "errorRemovingAddress": "حدث خطأ أثناء إزالة العنوان"
+  },
+  "OrdersToasts": {
+    "success": "نجاح",
+    "failed": "فشل",
+    "redirecting": "جارٍ التحويل",
+    "orderCreatedSuccessfully": "تم إنشاء الطلب بنجاح",
+    "errorCreatingOrder": "حدث خطأ أثناء إنشاء الطلب",
+    "redirectingToPayment": "سيتم تحويلك إلى بوابة الدفع",
+    "errorOnlinePayment": "حدث خطأ أثناء إنشاء طلب الدفع الإلكتروني"
+  },
+  "WishlistToasts": {
+    "success": "نجاح",
+    "failed": "فشل",
+    "removed": "تم الإزالة",
+    "productAddedToWishlist": "تمت إضافة المنتج إلى قائمة المفضلات بنجاح",
+    "errorAddProductToWishlist": "حدث خطأ أثناء إضافة المنتج إلى المفضلات",
+    "productRemovedFromWishlist": "تمت إزالة المنتج من قائمة المفضلات",
+    "errorRemoveProductFromWishlist": "حدث خطأ أثناء إزالة المنتج من المفضلات"
   }
 }

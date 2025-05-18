@@ -8,6 +8,7 @@ import {
 import { CartData } from "@/types/CartType";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "./use-toast";
+import { useTranslations } from "next-intl";
 
 // GET CART
 export const useGetCart = () => {
@@ -21,6 +22,7 @@ export const useGetCart = () => {
 // ADD TO CART
 export const useAddToCart = () => {
   const queryClient = useQueryClient();
+  const t = useTranslations("CartToasts");
 
   return useMutation({
     mutationFn: (postId: string) => addProductCart(postId),
@@ -28,15 +30,15 @@ export const useAddToCart = () => {
       const data = await getCartFunction();
       queryClient.setQueryData(["cart"], data);
       toast({
-        title: "Success",
-        description: "product added to cart successfully",
+        title: t("success"),
+        description: t("productAddedToCartSuccessfully"),
         className: "bg-green-500",
       });
     },
     onError: (error: Error) => {
       toast({
-        title: "Failed",
-        description: error.message || "Error during add product",
+        title: t("failed"),
+        description: error.message || t("errorAddingProduct"),
         variant: "destructive",
       });
     },
@@ -46,6 +48,7 @@ export const useAddToCart = () => {
 // UPDATE PRODUCT COUNT
 export const useUpdateProductCount = () => {
   const queryClient = useQueryClient();
+  const t = useTranslations("CartToasts");
 
   return useMutation({
     mutationFn: ({ postId, count }: { postId: string; count: string }) =>
@@ -54,15 +57,15 @@ export const useUpdateProductCount = () => {
       const data = await getCartFunction();
       queryClient.setQueryData(["cart"], data);
       toast({
-        title: "Success",
-        description: "product count updated successfully",
+        title: t("success"),
+        description: t("productCountUpdatedSuccessfully"),
         className: "bg-green-500",
       });
     },
     onError: (error: Error) => {
       toast({
-        title: "Failed",
-        description: error.message || "Error during update product count",
+        title: t("failed"),
+        description: error.message || t("errorUpdatingCount"),
         variant: "destructive",
       });
     },
@@ -72,24 +75,23 @@ export const useUpdateProductCount = () => {
 // REMOVE FROM CART
 export const useRemoveFromCart = () => {
   const queryClient = useQueryClient();
+  const t = useTranslations("CartToasts");
 
   return useMutation({
     mutationFn: (postId: string) => removeProductCart(postId),
-
     onSuccess: async () => {
       const data = await getCartFunction();
       queryClient.setQueryData(["cart"], data);
-
       toast({
-        title: "Success",
-        description: "Product removed from cart successfully",
+        title: t("success"),
+        description: t("productRemovedSuccessfully"),
         className: "bg-green-500",
       });
     },
     onError: (error: Error) => {
       toast({
-        title: "Failed",
-        description: error.message || "Error during removing product",
+        title: t("failed"),
+        description: error.message || t("errorRemovingProduct"),
         variant: "destructive",
       });
     },
@@ -99,21 +101,22 @@ export const useRemoveFromCart = () => {
 // CLEAR CART
 export const useClearCart = () => {
   const queryClient = useQueryClient();
+  const t = useTranslations("CartToasts");
 
   return useMutation({
     mutationFn: clearUserCartFunction,
     onSuccess: () => {
       toast({
-        title: "Success",
-        description: "you cleared your cart successfully",
+        title: t("success"),
+        description: t("cartClearedSuccessfully"),
         className: "bg-green-500",
       });
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
     onError: (error: Error) => {
       toast({
-        title: "Failed",
-        description: error.message || "Error during add product",
+        title: t("failed"),
+        description: error.message || t("errorAddingProduct"),
         variant: "destructive",
       });
     },

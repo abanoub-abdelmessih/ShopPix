@@ -7,6 +7,7 @@ import {
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "./use-toast";
 import { ProductType } from "@/types/ProductType";
+import { useTranslations } from "next-intl";
 
 // GET WISHLIST
 export const useWishlist = () => {
@@ -20,6 +21,7 @@ export const useWishlist = () => {
 // ADD TO WISHLIST
 export const useAddWishlist = () => {
   const queryClient = useQueryClient();
+  const t = useTranslations("WishlistToasts");
 
   return useMutation({
     mutationFn: (postId: string) => addWishlistFunction({ postId }),
@@ -46,16 +48,16 @@ export const useAddWishlist = () => {
     },
     onSuccess: () => {
       toast({
-        title: "Success",
-        description: "Product added successfully to your wishlist",
+        title: t("success"),
+        description: t("productAddedToWishlist"),
         className: "bg-green-500",
       });
       queryClient.invalidateQueries({ queryKey: ["wishlist"] });
     },
     onError: (error: Error) => {
       toast({
-        title: "Failed",
-        description: error.message || "Error during add product",
+        title: t("failed"),
+        description: error.message || t("errorAddProductToWishlist"),
         variant: "destructive",
       });
     },
@@ -65,6 +67,7 @@ export const useAddWishlist = () => {
 // REMOVE FROM WISHLIST
 export const useRemoveWishlist = () => {
   const queryClient = useQueryClient();
+  const t = useTranslations("WishlistToasts");
 
   return useMutation({
     mutationFn: (postId: string) => removeWishListFunction({ postId }),
@@ -88,15 +91,15 @@ export const useRemoveWishlist = () => {
     },
     onSuccess: () => {
       toast({
-        title: "Removed",
-        description: "Product removed from wishlist.",
+        title: t("removed"),
+        description: t("productRemovedFromWishlist"),
         className: "bg-green-500",
       });
     },
     onError: (error: Error) => {
       toast({
-        title: "Failed",
-        description: error.message || "Error during removal",
+        title: t("failed"),
+        description: error.message || t("errorRemoveProductFromWishlist"),
         variant: "destructive",
       });
     },
