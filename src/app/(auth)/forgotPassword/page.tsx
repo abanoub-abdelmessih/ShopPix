@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -7,10 +9,6 @@ import {
 } from "@/components/ui/card";
 
 import { ForgotPasswordTabs } from "@/components/shared/auth/ForgotPasswordTabs";
-
-export const metadata = {
-  title: "Forgot Password",
-};
 
 const ForgotPassword = () => {
   return (

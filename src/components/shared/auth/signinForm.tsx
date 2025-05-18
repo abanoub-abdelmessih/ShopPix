@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { SignInSchema, signInSchema } from "@/schemas/signinSchema";
 import { FormInput } from "./FormInput";
 import { useMutation } from "@tanstack/react-query";
