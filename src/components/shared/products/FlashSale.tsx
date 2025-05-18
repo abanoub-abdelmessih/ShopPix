@@ -3,7 +3,7 @@
 import { ProductCard } from "./ProductCard";
 import { Button } from "../../ui/button";
 import { ChevronsRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Loader } from "@/components/Loader";
 import { useFlashSale } from "@/hooks/useProducts";
 import { Heading } from "@/components/Heading";

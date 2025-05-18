@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ChevronsRight } from "lucide-react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 export const ErrorMessage = ({
   title,

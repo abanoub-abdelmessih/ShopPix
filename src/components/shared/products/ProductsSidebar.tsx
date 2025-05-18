@@ -18,7 +18,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ChevronsRight, SlidersVertical } from "lucide-react";
 import React, { useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { PriceRange } from "./PriceRange";
 import { useTranslations } from "next-intl";
 

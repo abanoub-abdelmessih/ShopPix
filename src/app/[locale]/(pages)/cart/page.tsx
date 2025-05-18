@@ -16,7 +16,7 @@ import { CartCard } from "@/components/shared/cart/CartCard";
 import { Heading } from "@/components/Heading";
 import { Trash } from "lucide-react";
 import { CartDeleteDialog } from "@/components/shared/cart/CartDeleteDialog";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 
 const CartPage = () => {

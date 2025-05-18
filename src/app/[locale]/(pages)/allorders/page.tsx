@@ -6,7 +6,7 @@ import { useGetOrders } from "@/hooks/useOrders";
 import { CartProduct } from "@/types/CartType";
 import { OrderType } from "@/types/OrderType";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Package, CreditCard, Truck, MapPin, Phone } from "lucide-react";
 import { Heading } from "@/components/Heading";
 import { useTranslations } from "next-intl";

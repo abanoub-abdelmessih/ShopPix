@@ -9,7 +9,7 @@ import {
 } from "@/components/shared/auth/ForgotPasswordForm";
 import Cookies from "js-cookie";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 export const ForgotPasswordTabs = () => {
   const [tab, setTab] = useState("email");

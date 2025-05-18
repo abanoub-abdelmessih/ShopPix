@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import { Barcode, Heart, Home, LogOut, Menu, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { usePathname } from "next/navigation";
 import { UserMenu } from "./UserMenu";
 import { ThemeSwitcher } from "./ThemeSwitcher";

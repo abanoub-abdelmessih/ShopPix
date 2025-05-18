@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { HeaderLinks } from "./HeaderLinks";
 import { UserMenu } from "./UserMenu";
 import { ThemeSwitcher } from "./ThemeSwitcher";

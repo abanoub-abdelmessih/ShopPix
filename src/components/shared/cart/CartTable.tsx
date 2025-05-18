@@ -9,7 +9,7 @@ import {
 import { CartData } from "@/types/CartType";
 import { Star } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { MouseEvent } from "react";
 import { CartActionButtons } from "./CartActionButtons";
 import { CartQuantity } from "./CartQuantity";
