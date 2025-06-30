@@ -1,11 +1,11 @@
 const links = [
   {
     title: "LinkedIn",
-    href: "https://www.linkedin.com/in/abanoub-abd-elmessih/",
+    href: "https://www.linkedin.com/in/abanoub-abdelmessih/",
   },
   {
     title: "GitHub",
-    href: "https://github.com/Abanoub-Abd-Elmessih",
+    href: "https://github.com/Abanoub-Abdelmessih",
   },
   {
     title: "Gmail",
