@@ -92,7 +92,7 @@
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/Abanoub-Abd-Elmessih/ShopPix
+git clone https://github.com/Abanoub-Abdelmessih/ShopPix
 
 # 2. Navigate to the project directory
 cd ShopPix
