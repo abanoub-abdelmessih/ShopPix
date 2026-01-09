@@ -86,19 +86,3 @@
 | **Next-Intl**      | Internationalization + RTL support               |
 | **Dynamic Routes** | SEO-friendly and scalable navigation structure   |
 
----
-
-## 📦 Getting Started
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/Abanoub-Abd-Elmessih/ShopPix
-
-# 2. Navigate to the project directory
-cd ShopPix
-
-# 3. Install dependencies
-npm install
-
-# 4. Run the development server
-npm run dev
